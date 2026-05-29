@@ -32,6 +32,10 @@ body {
   line-height: 1.55;
 }
 
+.home-page {
+  background: #0d0d0b;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -416,6 +420,171 @@ dd {
   margin: 0;
 }
 
+.image-hero {
+  background: #080807;
+  height: 100vh;
+  min-height: 34rem;
+  overflow: hidden;
+  position: relative;
+  width: 100vw;
+}
+
+.image-hero::after {
+  background:
+    linear-gradient(90deg, rgba(8, 8, 7, 0.45), transparent 22%, transparent 78%, rgba(8, 8, 7, 0.42)),
+    linear-gradient(180deg, transparent 72%, rgba(8, 8, 7, 0.7));
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.marquee-track {
+  animation: heroMarquee 56s linear infinite;
+  display: flex;
+  height: 100%;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-panel {
+  flex: 0 0 clamp(20rem, var(--w), 68vw);
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-panel img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.marquee-panel:nth-child(3n) img {
+  object-position: 38% center;
+}
+
+.marquee-panel:nth-child(4n) img {
+  object-position: 70% center;
+}
+
+@keyframes heroMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.spaces-section {
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.spaces-grid {
+  display: grid;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.space-card {
+  align-items: end;
+  aspect-ratio: 1;
+  background:
+    linear-gradient(145deg, rgba(245, 239, 228, 0.1), rgba(245, 239, 228, 0.02)),
+    #161510;
+  border: 1px solid var(--line);
+  display: flex;
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  position: relative;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.space-card::before {
+  background:
+    linear-gradient(rgba(245, 239, 228, 0.18) 0 0) 18% 18% / 44% 1px no-repeat,
+    linear-gradient(rgba(245, 239, 228, 0.12) 0 0) 18% 28% / 66% 1px no-repeat,
+    linear-gradient(rgba(245, 239, 228, 0.1) 0 0) 18% 38% / 32% 1px no-repeat;
+  content: "";
+  inset: 0;
+  opacity: 0.55;
+  position: absolute;
+}
+
+.space-card:nth-child(2n) {
+  background:
+    linear-gradient(145deg, rgba(110, 145, 166, 0.22), rgba(245, 239, 228, 0.025)),
+    #11151b;
+}
+
+.space-card:nth-child(3n) {
+  background:
+    linear-gradient(145deg, rgba(154, 163, 111, 0.22), rgba(245, 239, 228, 0.025)),
+    #151711;
+}
+
+.space-card:nth-child(5n) {
+  background:
+    linear-gradient(145deg, rgba(200, 119, 71, 0.2), rgba(245, 239, 228, 0.025)),
+    #181410;
+}
+
+.space-card:hover {
+  border-color: rgba(245, 239, 228, 0.38);
+  transform: translateY(-3px);
+}
+
+.space-card span {
+  color: var(--cream);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.85rem, 3.35vw, 4.25rem);
+  line-height: 0.96;
+  max-width: 8ch;
+  overflow-wrap: anywhere;
+  position: relative;
+  z-index: 1;
+}
+
+.home-footer {
+  align-items: end;
+  background: #080807;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  min-height: 62vh;
+  padding: clamp(1rem, 4vw, 3.5rem);
+}
+
+.linkedin-link {
+  align-items: center;
+  border: 1px solid var(--line);
+  display: inline-flex;
+  height: 4.5rem;
+  justify-content: center;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  width: 4.5rem;
+}
+
+.linkedin-link:hover,
+.linkedin-link:focus-visible {
+  background: var(--cream);
+  color: var(--ink);
+  transform: translateY(-3px);
+}
+
+.linkedin-link svg {
+  fill: currentColor;
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
 .back-link {
   display: inline-block;
   margin-bottom: 2rem;
@@ -507,6 +676,10 @@ dd {
     transition-duration: 0.001ms !important;
     animation-duration: 0.001ms !important;
   }
+
+  .marquee-track {
+    animation-duration: 80s !important;
+  }
 }
 
 @media (max-width: 980px) {
@@ -524,7 +697,8 @@ dd {
   }
 
   .company-grid,
-  .project-grid {
+  .project-grid,
+  .spaces-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -549,8 +723,17 @@ dd {
     min-height: 22rem;
   }
 
+  .image-hero {
+    min-height: 28rem;
+  }
+
+  .marquee-panel {
+    flex-basis: clamp(18rem, 78vw, 28rem);
+  }
+
   .company-grid,
-  .project-grid {
+  .project-grid,
+  .spaces-grid {
     grid-template-columns: 1fr;
   }
 
