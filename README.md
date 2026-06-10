@@ -1,6 +1,6 @@
-# terminel Portfolio
+# Angelo Terminel Portfolio
 
-A static, GitHub Pages-friendly portfolio site for a creative director and hands-on creative professional. The homepage opens with a full-viewport visual reel, followed by square industry spaces and a tall footer.
+A static, GitHub Pages-friendly portfolio site based on the visual direction and public portfolio work from `terminel.com`. The site uses a full-bleed image hero, restrained typography, work cards, project pages, and local copies of selected portfolio visuals.
 
 ## Preview locally
 
@@ -14,12 +14,11 @@ Then visit `http://localhost:8000`.
 
 ## Replace placeholder content
 
-- Replace the homepage marquee images in `index.html`.
-- Adjust each marquee panel width by changing the inline `--w` value.
-- Update the eight industry spaces in `index.html`.
-- Update each company archive in `companies/company-one.html`, `companies/company-two.html`, and `companies/company-three.html`.
-- Replace `assets/editorial-work-collage.png` with real campaign imagery, web screenshots, or project visuals.
-- Replace the footer LinkedIn URL with the final profile URL.
+- Replace homepage hero images in `index.html`.
+- Update work cards in `index.html`.
+- Update project pages in `work/`.
+- Replace or add portfolio visuals in `assets/work/`.
+- Update the footer contact and LinkedIn links if they change.
 
 ## Deploy with GitHub Pages
 
@@ -35,8 +34,8 @@ The site uses relative asset and page paths, so it works from a project GitHub P
 
 ## Files
 
-- `index.html` - Homepage with full-viewport image reel, industry spaces, and footer.
-- `companies/` - Company detail pages with multiple project cards.
+- `index.html` - Homepage with full-bleed hero and selected work grid.
+- `work/` - Project pages for each portfolio category.
 - `style.css` - Shared responsive editorial design system.
 - `script.js` - Reveal animation and current year behavior.
-- `assets/editorial-work-collage.png` - Generated placeholder visual asset for the portfolio.
+- `assets/work/` - Local portfolio visuals gathered from the public `terminel.com` site.
