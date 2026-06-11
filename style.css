@@ -598,65 +598,190 @@ a {
   transform: translateY(0);
 }
 
-/* Figma-sourced work pages. Each page uses a section for vertical rhythm and
-   a container for horizontal rhythm, matching the shared page system. */
-.figma-work-page {
+.case-study-page {
   --bg: #101010;
   --text: #efeeec;
+  --case-gap: clamp(2rem, 2.35vw, 2.15rem);
   background: var(--bg);
   color: var(--text);
 }
 
-.figma-work-main {
-  background: var(--bg);
+.case-topbar {
+  align-items: flex-start;
+  display: grid;
+  font-family: Montserrat, Manrope, sans-serif;
+  font-size: clamp(0.7rem, 0.82vw, 0.86rem);
+  font-weight: 600;
+  gap: clamp(1.5rem, 8vw, 24rem);
+  grid-template-columns: max-content minmax(8rem, 10rem) max-content max-content;
+  left: 50%;
+  line-height: 1.4;
+  max-width: 1500px;
+  padding-block-start: clamp(1.35rem, 2.3vw, 2.35rem);
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+  transform: translateX(-50%);
+  width: min(calc(100% - var(--container-x) * 2), 1500px);
+  z-index: 3;
 }
 
-.figma-work-section {
-  padding-block: 0;
-}
-
-.figma-work-container {
-  max-width: 1647px;
-  padding-inline: 0;
-}
-
-.figma-frame {
-  background: #101010;
+.case-topbar p {
   margin: 0;
+}
+
+.case-container {
+  margin-inline: auto;
+  max-width: 1500px;
+  padding-inline: var(--container-x);
   width: 100%;
 }
 
-.figma-frame img {
-  height: auto;
+.case-landing {
+  padding-block: clamp(12rem, 22vw, 39.5rem) 0;
+  position: relative;
+}
+
+.case-landing h1 {
+  font-size: clamp(3.75rem, 5vw, 5.15rem);
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0 auto clamp(4.5rem, 7vw, 10rem);
+  max-width: 62rem;
+  text-align: center;
+}
+
+.case-meta-row {
+  display: flex;
+  font-family: Montserrat, Manrope, sans-serif;
+  font-size: clamp(0.75rem, 0.82vw, 0.86rem);
+  font-weight: 600;
+  gap: 2.7rem;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  text-transform: uppercase;
+  top: clamp(12.8rem, 18vw, 13.4rem);
+  transform: translateX(-50%);
+}
+
+.case-meta-row p {
+  margin: 0;
+}
+
+.case-hero-media,
+.case-media {
+  background: #efeeec;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.case-hero-media {
+  aspect-ratio: 1584 / 918;
+  border-radius: clamp(0.9rem, 1.65vw, 1.7rem);
+}
+
+.case-hero-media img,
+.case-media img {
+  height: 100%;
+  object-fit: cover;
   width: 100%;
 }
 
-.figma-project-nav {
-  background: #101010;
-  padding-block: clamp(2rem, 6vw, 5rem);
+.case-section {
+  padding-block: clamp(4rem, 8.9vw, 9.3rem) 0;
 }
 
-.figma-nav-container {
+.case-text-section + .case-text-section {
+  padding-block-start: clamp(2.5rem, 5vw, 5rem);
+}
+
+.case-copy {
+  font-size: clamp(1.25rem, 1.67vw, 1.72rem);
+  font-weight: 400;
+  line-height: 1.55;
+  margin-inline: auto;
+  max-width: 966px;
+}
+
+.case-copy p {
+  margin: 0;
+}
+
+.case-copy-center {
+  text-align: center;
+}
+
+.case-media {
+  aspect-ratio: 1500 / 777;
+}
+
+.case-media figcaption {
+  bottom: 1rem;
+  color: rgba(16, 16, 16, 0.7);
+  font-family: Montserrat, Manrope, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  left: 1rem;
+  position: absolute;
+  text-transform: uppercase;
+}
+
+.media-dark {
+  background: #242424;
+}
+
+.media-white {
+  background: #efeeec;
+}
+
+.media-white img,
+.media-dark img {
+  object-fit: contain;
+  padding: clamp(1rem, 3vw, 3rem);
+}
+
+.case-gallery {
+  display: grid;
+  gap: var(--case-gap);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-gallery .case-media {
+  aspect-ratio: 732 / 644;
+}
+
+.case-gallery-tall .case-media {
+  aspect-ratio: 732 / 1096;
+}
+
+.case-gallery-tall .case-media img {
+  object-position: top center;
+}
+
+.case-project-nav {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.case-nav-row {
   align-items: center;
   display: flex;
   font-family: Montserrat, Manrope, sans-serif;
   font-size: clamp(0.78rem, 1vw, 0.92rem);
   font-weight: 600;
   justify-content: space-between;
-  letter-spacing: 0;
-  max-width: 1500px;
   text-transform: uppercase;
 }
 
-.figma-nav-container a {
+.case-nav-row a {
   border-bottom: 1px solid currentColor;
   padding-block: 0.2rem;
-  transition: color 180ms ease, opacity 180ms ease;
 }
 
-.figma-nav-container a:hover,
-.figma-nav-container a:focus-visible {
-  color: #fff;
+.case-nav-row a:hover,
+.case-nav-row a:focus-visible {
   opacity: 0.65;
 }
 
@@ -737,7 +862,43 @@ a {
     justify-content: flex-start;
   }
 
-  .figma-project-nav {
-    padding-block: 2rem 3rem;
+  .case-topbar {
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .case-topbar p,
+  .case-topbar span {
+    display: none;
+  }
+
+  .case-topbar a:last-child {
+    text-align: right;
+  }
+
+  .case-landing {
+    padding-block-start: 8.5rem;
+  }
+
+  .case-landing h1 {
+    font-size: clamp(3rem, 14vw, 4.8rem);
+    margin-bottom: 3rem;
+  }
+
+  .case-meta-row {
+    top: 5.7rem;
+  }
+
+  .case-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .case-copy {
+    font-size: clamp(1.1rem, 5vw, 1.45rem);
+  }
+
+  .media-white img,
+  .media-dark img {
+    padding: 1rem;
   }
 }
