@@ -633,7 +633,7 @@ a {
 .case-container {
   margin-inline: auto;
   max-width: 1500px;
-  padding-inline: var(--container-x);
+  padding-inline: clamp(1.25rem, 2vw, 2.3rem);
   width: 100%;
 }
 
@@ -647,7 +647,7 @@ a {
   font-weight: 300;
   letter-spacing: 0;
   line-height: 1;
-  margin: 0 auto clamp(4.5rem, 7vw, 10rem);
+  margin: 0 auto clamp(6rem, 11vw, 10rem);
   max-width: 62rem;
   text-align: center;
 }
@@ -759,6 +759,82 @@ a {
 
 .case-gallery-tall .case-media img {
   object-position: top center;
+}
+
+.case-template-page .case-landing {
+  padding-block-start: clamp(12rem, 21vw, 39.35rem);
+}
+
+.case-media-band {
+  aspect-ratio: 1500 / 777;
+}
+
+.case-media-band img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.case-media-contain img {
+  object-fit: contain;
+  padding: clamp(1.2rem, 4vw, 4.25rem);
+}
+
+.case-grid-auto {
+  align-items: start;
+  display: grid;
+  gap: var(--case-gap);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-grid-auto .case-media {
+  aspect-ratio: auto;
+  min-height: 0;
+}
+
+.case-grid-auto .case-media img {
+  height: auto;
+  object-fit: contain;
+  width: 100%;
+}
+
+.case-grid-auto .media-dark,
+.case-grid-auto .media-white {
+  display: grid;
+  place-items: center;
+}
+
+.case-grid-auto .media-dark img,
+.case-grid-auto .media-white img {
+  padding: 0;
+}
+
+.case-grid-crop .case-media {
+  aspect-ratio: 732 / 644;
+}
+
+.case-grid-crop .case-media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-grid-tall-crop .case-media {
+  aspect-ratio: 732 / 1096;
+}
+
+.case-grid-tall-crop .case-media img {
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.case-section-label {
+  color: rgba(239, 238, 236, 0.62);
+  font-family: Montserrat, Manrope, sans-serif;
+  font-size: clamp(0.72rem, 0.9vw, 0.86rem);
+  font-weight: 600;
+  margin: 0 0 clamp(1rem, 2vw, 1.75rem);
+  text-transform: uppercase;
 }
 
 .case-project-nav {
@@ -890,6 +966,10 @@ a {
   }
 
   .case-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .case-grid-auto {
     grid-template-columns: 1fr;
   }
 
