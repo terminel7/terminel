@@ -315,7 +315,7 @@ a {
 
 .case-shell {
   margin-inline: auto;
-  max-width: 760px;
+  max-width: var(--container-max);
   width: 100%;
 }
 
@@ -344,11 +344,12 @@ a {
 
 .case-title {
   font-family: Manrope, system-ui, sans-serif;
-  font-size: clamp(2.4rem, 8vw, 5.6rem);
+  font-size: clamp(3.5rem, 9vw, 9.5rem);
   font-weight: 300;
   letter-spacing: -0.075em;
   line-height: 0.94;
   margin: 0;
+  max-width: 12ch;
   text-wrap: balance;
 }
 
@@ -371,7 +372,7 @@ a {
 
 .case-stack {
   display: grid;
-  gap: clamp(1rem, 2vw, 1.5rem);
+  gap: clamp(1rem, 2vw, 2rem);
 }
 
 .case-media {
@@ -389,7 +390,7 @@ a {
 
 .case-media-hero img,
 .case-media-wide img {
-  aspect-ratio: 1.25;
+  aspect-ratio: 16 / 9;
 }
 
 .case-grid {
@@ -398,12 +399,30 @@ a {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.case-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .case-grid .case-media img {
   aspect-ratio: 1;
 }
 
+.case-split {
+  align-items: stretch;
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+}
+
+.case-split-reverse {
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+}
+
 .case-copy {
   background: #121212;
+  display: flex;
+  min-height: clamp(16rem, 28vw, 28rem);
+  align-items: center;
   padding: clamp(1.5rem, 5vw, 3rem);
 }
 
@@ -420,6 +439,18 @@ a {
 
 .case-copy-light p {
   color: rgba(5, 5, 5, 0.72);
+}
+
+.case-caption-row {
+  color: var(--muted);
+  display: flex;
+  font-family: Montserrat, Manrope, sans-serif;
+  font-size: clamp(0.72rem, 1vw, 0.88rem);
+  font-weight: 600;
+  justify-content: space-between;
+  letter-spacing: -0.02em;
+  padding-block: 0.35rem 0;
+  text-transform: uppercase;
 }
 
 .project-title-block {
@@ -585,6 +616,10 @@ a {
   .project-title-block,
   .module-grid,
   .module-grid-3,
+  .case-grid,
+  .case-grid-3,
+  .case-split,
+  .case-split-reverse,
   .site-footer {
     grid-template-columns: 1fr;
   }
@@ -608,6 +643,15 @@ a {
 
   .project-title {
     font-size: clamp(3.5rem, 16vw, 6rem);
+  }
+
+  .case-title {
+    font-size: clamp(3.25rem, 17vw, 6.5rem);
+    max-width: 100%;
+  }
+
+  .case-copy {
+    min-height: auto;
   }
 
   .site-footer {
