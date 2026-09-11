@@ -1,0 +1,252 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import { sitePath } from "../lib/paths";
+
+const services = [
+  {
+    number: "01",
+    name: "Strategy",
+    description: "Clarity before expression. Research, structure, and a focused point of view establish where the work should go and what it needs to accomplish.",
+    items: ["Information Architecture", "Competitive Analysis", "Audience Segmentation + User Flows", "Brand + Digital Strategy", "UI/UX Strategy", "Multivariate Testing"],
+  },
+  {
+    number: "02",
+    name: "Creative",
+    description: "Ideas built to live in the real world. Direction and hands-on design connect every touchpoint, from an identity system to a campaign, product, or physical environment.",
+    items: ["Web + Product Design", "Art + Creative Direction", "UX/UI Design", "Event Support + Collateral", "Design Systems", "Presentations", "Motion Graphics + Animation", "3D"],
+  },
+  {
+    number: "03",
+    name: "Branding",
+    description: "Distinct identities with enough structure to stay coherent as they grow. Positioning, visual language, and practical systems make a brand easier to recognize and easier to use.",
+    items: ["Logo + Identity", "Brand Standards + Evolutions", "Brand Audits", "Brand Positioning"],
+  },
+  {
+    number: "04",
+    name: "Development",
+    description: "Digital experiences carried through to launch with thoughtful architecture, strong performance, and close attention to the original design intent.",
+    items: ["Headless CMS", "Webflow", "AI Workflow Implementation", "Marketing Automation Integration", "Analytics + Reporting", "Localization + Regionalization"],
+  },
+];
+
+// Three rows of three move down while three rows of two move up between them.
+// All artwork is taken from inside the case studies rather than homepage thumbnails.
+const showcaseArt = [
+  { src: "/images/work/streaming/image-02.webp", flow: "down", row: 0, column: -2 },
+  { src: "/images/work/retail/gallery-02-02.webp", flow: "down", row: 0, column: 0, center: "upper" },
+  { src: "/images/work/action-sports/image-04.webp", flow: "down", row: 0, column: 2 },
+  { src: "/images/work/fintech/gallery-02-03.webp", flow: "down", row: 1, column: -2 },
+  { src: "/images/work/apparel/image-05.webp", flow: "down", row: 1, column: 0, center: "lower" },
+  { src: "/images/work/auto-lending/image-06.webp", flow: "down", row: 1, column: 2 },
+  { src: "/images/work/private-equity/gallery-01-02.webp", flow: "down", row: 2, column: -2, leading: true },
+  { src: "/images/work/action-sports/gallery-01-03.webp", flow: "down", row: 2, column: 0, leading: true },
+  { src: "/images/work/fintech/image-07.webp", flow: "down", row: 2, column: 2, leading: true },
+  { src: "/images/work/streaming/gallery-01-02.webp", flow: "up", row: 0, column: -1, leading: true },
+  { src: "/images/work/apparel/gallery-02-03.webp", flow: "up", row: 0, column: 1, leading: true },
+  { src: "/images/work/retail/image-05.webp", flow: "up", row: 1, column: -1 },
+  { src: "/images/work/auto-lending/gallery-01-03.webp", flow: "up", row: 1, column: 1 },
+  { src: "/images/work/private-equity/gallery-01-05.webp", flow: "up", row: 2, column: -1 },
+  { src: "/images/work/fintech/image-03.webp", flow: "up", row: 2, column: 1 },
+];
+---
+
+<BaseLayout
+  title="Services — terminel"
+  description="Strategy, creative, branding, and development for brands and digital experiences."
+>
+  <section class="page-intro section">
+    <div class="container editorial-intro">
+      <h1 class="eyebrow">Services</h1>
+      <p>Strategy, creative, branding, and development working together from the first question through the final detail.</p>
+    </div>
+  </section>
+
+  <section class="services-showcase" data-services-showcase aria-labelledby="services-showcase-title">
+    <div class="services-showcase__sticky">
+      <div class="services-showcase__prompt" data-showcase-prompt>
+        <h2 class="services-showcase__title" id="services-showcase-title">One clear direction.</h2>
+        <p class="services-showcase__lede">A focused idea, carried consistently from strategy through every expression.</p>
+      </div>
+
+      <div class="services-showcase__art" aria-hidden="true">
+        <div class="services-showcase__grid" data-showcase-grid>
+          {showcaseArt.map((image, index) => (
+            <figure
+              class="services-showcase__tile"
+              data-showcase-tile
+              data-flow={image.flow}
+              data-row={image.row}
+              data-column={image.column}
+              data-leading={image.leading ? "true" : undefined}
+              data-center={image.center}
+            >
+              <img
+                src={sitePath(image.src)}
+                alt=""
+                width="800"
+                height="1024"
+                loading="eager"
+                decoding="async"
+                fetchpriority={index < 4 ? "high" : "auto"}
+                draggable="false"
+              />
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <p class="services-showcase__result" data-showcase-result>
+        A connected<br />body of work.
+      </p>
+      <span class="services-showcase__cue" aria-hidden="true">↓</span>
+    </div>
+  </section>
+
+  <div class="services-list">
+    {services.map((service) => (
+      <section class="service section" data-reveal>
+        <div class="container service__grid">
+          <div class="service__title">
+            <span>{service.number}</span>
+            <h2>{service.name}</h2>
+          </div>
+          <div class="service__body">
+            <p>{service.description}</p>
+            <ul>
+              {service.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const showcase = document.querySelector<HTMLElement>("[data-services-showcase]");
+
+  if (showcase) {
+    const prompt = showcase.querySelector<HTMLElement>("[data-showcase-prompt]");
+    const result = showcase.querySelector<HTMLElement>("[data-showcase-result]");
+    const cue = showcase.querySelector<HTMLElement>(".services-showcase__cue");
+    const grid = showcase.querySelector<HTMLElement>("[data-showcase-grid]");
+    const tiles = Array.from(showcase.querySelectorAll<HTMLElement>("[data-showcase-tile]"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let currentProgress = 0;
+    let targetProgress = 0;
+    let frame = 0;
+
+    const clamp = (value: number) => Math.min(1, Math.max(0, value));
+    const mix = (from: number, to: number, amount: number) => from + ((to - from) * amount);
+    const smooth = (value: number) => {
+      const amount = clamp(value);
+      return amount * amount * (3 - (2 * amount));
+    };
+
+    const phase = (progress: number, start: number, end: number) => (
+      smooth((progress - start) / (end - start))
+    );
+
+    const render = (progress: number) => {
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const mobile = viewportWidth < 700;
+      const tablet = viewportWidth < 1000;
+      const tileWidth = Math.min(220, Math.max(58, viewportWidth * 0.135));
+      const tileHeight = tileWidth * 1.28;
+      const columnStep = tileWidth * 1.3;
+      const rowStep = tileHeight * (mobile ? 1.28 : 1.24);
+      const entryTravel = rowStep * 2.55;
+      const entry = phase(progress, 0.07, 0.55);
+      const leadingExit = phase(progress, 0.34, 0.58);
+      const zoom = phase(progress, 0.61, 0.83);
+      const split = phase(progress, 0.79, 0.95);
+      const baseScale = mobile ? 0.94 : 0.92;
+      const finalScale = mobile ? 2.3 : tablet ? 1.84 : 1.58;
+      const gridScale = mix(baseScale, finalScale, zoom);
+      const offscreenCenter = (viewportHeight / (2 * baseScale)) + tileHeight;
+      const leadingExtra = Math.max(0, offscreenCenter - (rowStep * 1.5));
+      const splitDistance = tileHeight * (mobile ? 0.72 : 0.64);
+
+      if (grid) {
+        grid.style.setProperty("--tile-width", `${tileWidth}px`);
+        grid.style.setProperty("--tile-height", `${tileHeight}px`);
+        grid.style.setProperty("--grid-scale", String(gridScale));
+      }
+
+      if (prompt) {
+        const promptProgress = phase(progress, 0.05, 0.2);
+        prompt.style.opacity = String(1 - promptProgress);
+        prompt.style.transform = `translateY(${-28 * promptProgress}px)`;
+      }
+
+      if (cue) cue.style.opacity = String(0.55 * (1 - phase(progress, 0.01, 0.11)));
+
+      tiles.forEach((tile) => {
+        const flow = tile.dataset.flow === "up" ? "up" : "down";
+        const row = Number(tile.dataset.row ?? 0);
+        const column = Number(tile.dataset.column ?? 0);
+        const finalRow = flow === "down" ? row - 0.5 : row - 1.5;
+        const entryOffset = flow === "down" ? -entryTravel : entryTravel;
+        let tileY = (finalRow * rowStep) + (entryOffset * (1 - entry));
+
+        if (tile.dataset.leading === "true") {
+          tileY += (flow === "down" ? leadingExtra : -leadingExtra) * leadingExit;
+        }
+
+        if (tile.dataset.center === "upper") tileY -= splitDistance * split;
+        if (tile.dataset.center === "lower") tileY += splitDistance * split;
+
+        tile.style.setProperty("--tile-x", `${column * columnStep}px`);
+        tile.style.setProperty("--tile-y", `${tileY}px`);
+        tile.style.setProperty("--tile-opacity", "1");
+      });
+
+      if (result) {
+        const resultProgress = phase(progress, 0.85, 0.97);
+        result.style.opacity = String(resultProgress);
+        result.style.setProperty("--result-y", `${20 * (1 - resultProgress)}px`);
+      }
+    };
+
+    const readProgress = () => {
+      const distance = Math.max(showcase.offsetHeight - window.innerHeight, 1);
+      return clamp(-showcase.getBoundingClientRect().top / distance);
+    };
+
+    const animate = () => {
+      const difference = targetProgress - currentProgress;
+      currentProgress = Math.abs(difference) < 0.0005
+        ? targetProgress
+        : currentProgress + (difference * 0.14);
+      render(currentProgress);
+
+      if (currentProgress !== targetProgress) {
+        frame = window.requestAnimationFrame(animate);
+      } else {
+        frame = 0;
+      }
+    };
+
+    const requestRender = () => {
+      targetProgress = reduceMotion.matches ? 1 : readProgress();
+      if (!frame) frame = window.requestAnimationFrame(animate);
+    };
+
+    const handleResize = () => {
+      targetProgress = reduceMotion.matches ? 1 : readProgress();
+      currentProgress = targetProgress;
+      render(currentProgress);
+    };
+
+    targetProgress = reduceMotion.matches ? 1 : readProgress();
+    currentProgress = targetProgress;
+    render(currentProgress);
+    window.addEventListener("scroll", requestRender, { passive: true });
+    window.addEventListener("resize", handleResize);
+    reduceMotion.addEventListener("change", handleResize);
+  }
+</script>

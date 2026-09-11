@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const year = new Date().getFullYear();
+---
+
+<BaseLayout
+  title="Contact — terminel"
+  description="Start a conversation about brand, creative, or digital work."
+>
+  <section class="contact-page section">
+    <div class="container contact-page__inner">
+      <p class="eyebrow">Contact</p>
+      <h1>Start with a conversation.</h1>
+      <a class="contact-page__email" href="mailto:angelo@terminel.com?subject=Hello">angelo@terminel.com ↗</a>
+      <div class="contact-page__meta">
+        <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn ↗</a>
+        <span>© {year}</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

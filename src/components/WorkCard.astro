@@ -1,0 +1,31 @@
+---
+import type { Project } from "../lib/projects";
+import { sitePath } from "../lib/paths";
+
+type Props = {
+  project: Project;
+  eager?: boolean;
+};
+
+const { project, eager = false } = Astro.props;
+---
+
+<article class="work-card" data-reveal>
+  <a class="work-card__link" href={sitePath(`/work/${project.slug}/`)}>
+    <div class="work-card__media">
+      <img
+        src={sitePath(project.thumbnail)}
+        alt=""
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+      />
+    </div>
+    <div class="work-card__content">
+      <h2>{project.name}</h2>
+      <ul aria-label="Services">
+        {project.services.map((service) => <li>{service}</li>)}
+      </ul>
+      <span class="work-card__arrow" aria-hidden="true">↗</span>
+    </div>
+  </a>
+</article>

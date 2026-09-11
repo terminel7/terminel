@@ -1,0 +1,121 @@
+{
+  "slug": "retail",
+  "order": 3,
+  "name": "Retail",
+  "year": "2011",
+  "title": "Leveraging Music and Pop Culture to Engage Consumers",
+  "summary": "Leveraging Music and Pop Culture to Engage Consumers",
+  "services": [
+    "Creative Direction",
+    "Campaigns",
+    "Art Direction"
+  ],
+  "thumbnail": "/images/work/retail/thumbnail.webp",
+  "hero": "/images/work/retail/hero.jpeg",
+  "intro": null,
+  "sections": [
+    {
+      "type": "copy",
+      "text": "Many brands go through identity crises, and Hot Topic was no exception. Thought to be a brand for goths and emos, it actually reaches a much broader audience. The challenge was to stay true to its DNA while evolving how it presented itself — creating campaigns that felt on brand while appealing to a large music fan base."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-01.jpeg",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/retail/gallery-01-01.webp",
+          "alt": "Retail project detail 1"
+        },
+        {
+          "src": "/images/work/retail/gallery-01-02.webp",
+          "alt": "Retail project detail 2"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-02.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "copy",
+      "text": "Hot Topic's long-standing relationships across music became the backbone of several initiatives, including the Rude and Lovesick denim launches. Both campaigns remained part of the brand for years."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-03.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-04.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-05.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "copy",
+      "text": "Beyond music, Hot Topic’s pop culture assortment created opportunities for impactful campaigns, including initiatives like promoting a seasonal Halloween collection that gave consumers a chance to see themselves represented and encouraged them to “join the party!”"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-06.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-07.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-08.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "copy",
+      "text": "Photography brought many of these initiatives to life. Direction across each shoot established a cohesive visual language for music-led denim, pop-culture merchandise, and the evolving brand identity."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/retail/image-09.webp",
+      "alt": "Retail project image"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/retail/gallery-02-01.jpeg",
+          "alt": "Retail project detail 1"
+        },
+        {
+          "src": "/images/work/retail/gallery-02-02.webp",
+          "alt": "Retail project detail 2"
+        },
+        {
+          "src": "/images/work/retail/gallery-02-03.jpeg",
+          "alt": "Retail project detail 3"
+        },
+        {
+          "src": "/images/work/retail/gallery-02-04.jpeg",
+          "alt": "Retail project detail 4"
+        },
+        {
+          "src": "/images/work/retail/gallery-02-05.jpeg",
+          "alt": "Retail project detail 5"
+        },
+        {
+          "src": "/images/work/retail/gallery-02-06.jpeg",
+          "alt": "Retail project detail 6"
+        }
+      ]
+    }
+  ]
+}

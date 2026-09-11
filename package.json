@@ -1,0 +1,21 @@
+{
+  "name": "terminel-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "import:work": "ruby scripts/import_work.rb"
+  },
+  "dependencies": {
+    "astro": "^7.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^22.20.2",
+    "typescript": "^6.0.3"
+  }
+}

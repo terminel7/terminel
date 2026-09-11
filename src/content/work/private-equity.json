@@ -1,0 +1,47 @@
+{
+  "slug": "private-equity",
+  "order": 4,
+  "name": "Private Equity",
+  "year": "2025",
+  "title": "Crafting Digital Experiences That Inspire Investors",
+  "summary": "Crafting Digital Experiences That Inspire Investors",
+  "services": [
+    "Web Design",
+    "Digital Strategy",
+    "Development"
+  ],
+  "thumbnail": "/images/work/private-equity/thumbnail.webp",
+  "hero": "/images/work/private-equity/hero.webp",
+  "intro": null,
+  "sections": [
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/private-equity/gallery-01-01.webp",
+          "alt": "Private Equity project detail 1"
+        },
+        {
+          "src": "/images/work/private-equity/gallery-01-02.webp",
+          "alt": "Private Equity project detail 2"
+        },
+        {
+          "src": "/images/work/private-equity/gallery-01-03.webp",
+          "alt": "Private Equity project detail 3"
+        },
+        {
+          "src": "/images/work/private-equity/gallery-01-04.webp",
+          "alt": "Private Equity project detail 4"
+        },
+        {
+          "src": "/images/work/private-equity/gallery-01-05.webp",
+          "alt": "Private Equity project detail 5"
+        },
+        {
+          "src": "/images/work/private-equity/gallery-01-06.webp",
+          "alt": "Private Equity project detail 6"
+        }
+      ]
+    }
+  ]
+}

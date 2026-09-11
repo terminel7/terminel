@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/Footer.astro";
+import ProjectNav from "../../components/ProjectNav.astro";
+import ProjectSection from "../../components/ProjectSection.astro";
+import { adjacentProjects, projects, type Project } from "../../lib/projects";
+import { sitePath } from "../../lib/paths";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+type Props = { project: Project };
+const { project } = Astro.props;
+const { previous, next } = adjacentProjects(project.slug);
+---
+
+<BaseLayout
+  title={`${project.name} — terminel`}
+  description={project.summary}
+  bodyClass="case-page"
+>
+  <article class="case-study" data-case-transition>
+    <header class="case-hero section">
+      <div class="container">
+        <div class="case-hero__meta">
+          <span>{project.name}</span>
+          <span>{project.year}</span>
+        </div>
+        <h1>{project.title}</h1>
+        <ProjectNav previous={previous} next={next} compact />
+      </div>
+    </header>
+
+    <section class="case-lead-media section section--compact" data-reveal>
+      <div class="container">
+        <img src={sitePath(project.hero)} alt={`${project.name}: ${project.title}`} decoding="async" />
+      </div>
+    </section>
+
+    {project.intro && (
+      <section class="case-copy section" data-reveal>
+        <div class="case-copy__inner"><p>{project.intro}</p></div>
+      </section>
+    )}
+
+    {project.sections.map((section, index) => (
+      <ProjectSection section={section} index={index} />
+    ))}
+
+    <section class="case-end section">
+      <div class="container">
+        <ProjectNav previous={previous} next={next} />
+      </div>
+    </section>
+  </article>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const caseStudy = document.querySelector<HTMLElement>("[data-case-transition]");
+
+  if (caseStudy) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const renderCaseTheme = () => {
+      frame = 0;
+      const transitionDistance = Math.max(window.innerHeight * 1.35, 1);
+      const progress = reduceMotion.matches
+        ? Math.min(1, window.scrollY > 0 ? 1 : 0)
+        : Math.min(1, Math.max(0, window.scrollY / transitionDistance));
+      const mix = (start: number, end: number) => Math.round(start + ((end - start) * progress));
+
+      caseStudy.style.setProperty("--case-bg", `rgb(${mix(246, 9)} ${mix(246, 9)} ${mix(243, 9)})`);
+      caseStudy.style.setProperty("--case-text", `rgb(${mix(17, 250)} ${mix(17, 250)} ${mix(17, 247)})`);
+      caseStudy.style.setProperty("--case-line", `rgb(${mix(201, 61)} ${mix(201, 61)} ${mix(194, 57)})`);
+    };
+
+    const requestRender = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(renderCaseTheme);
+    };
+
+    renderCaseTheme();
+    window.addEventListener("scroll", requestRender, { passive: true });
+    window.addEventListener("resize", requestRender);
+    reduceMotion.addEventListener("change", requestRender);
+  }
+</script>

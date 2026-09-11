@@ -1,0 +1,69 @@
+{
+  "slug": "streaming",
+  "order": 1,
+  "name": "Streaming",
+  "year": "2025",
+  "title": "Blending Art and Strategy to Shape a Platform",
+  "summary": "Blending Art and Strategy to Shape a Platform",
+  "services": [
+    "Product Design",
+    "Design Systems",
+    "Content"
+  ],
+  "thumbnail": "/images/work/streaming/thumbnail.webp",
+  "hero": "/images/work/streaming/hero.webp",
+  "intro": null,
+  "sections": [
+    {
+      "type": "image",
+      "src": "/images/work/streaming/image-01.webp",
+      "alt": "Streaming project image"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/streaming/gallery-01-01.webp",
+          "alt": "Streaming project detail 1"
+        },
+        {
+          "src": "/images/work/streaming/gallery-01-02.webp",
+          "alt": "Streaming project detail 2"
+        },
+        {
+          "src": "/images/work/streaming/gallery-01-03.webp",
+          "alt": "Streaming project detail 3"
+        },
+        {
+          "src": "/images/work/streaming/gallery-01-04.webp",
+          "alt": "Streaming project detail 4"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/work/streaming/image-02.webp",
+      "alt": "Streaming project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/streaming/image-03.webp",
+      "alt": "Streaming project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/streaming/image-04.webp",
+      "alt": "Streaming project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/streaming/image-05.webp",
+      "alt": "Streaming project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/streaming/image-06.webp",
+      "alt": "Streaming project image"
+    }
+  ]
+}

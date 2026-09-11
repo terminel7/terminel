@@ -1,41 +1,57 @@
-# Angelo Terminel Portfolio
+# terminel
 
-A static, GitHub Pages-friendly portfolio site based on the visual direction and public portfolio work from `terminel.com`. The site uses a full-bleed image hero, restrained typography, work cards, project pages, and local copies of selected portfolio visuals.
+An Astro portfolio for creative direction, brand systems, campaigns, product design, and digital experiences. Seven case studies are generated from structured content and use locally stored project imagery.
 
-## Preview locally
+## Local development
 
-Open `index.html` directly in a browser, or run a tiny local server from the repo root:
+Install dependencies and start Astro:
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
 
-Then visit `http://localhost:8000`.
+Open the local URL printed by Astro, normally `http://localhost:4321/`.
 
-## Replace placeholder content
+Create a production build with:
 
-- Replace homepage hero images in `index.html`.
-- Update work cards in `index.html`.
-- Update project pages in `work/`.
-- Replace or add portfolio visuals in `assets/work/`.
-- Update the footer contact and LinkedIn links if they change.
+```bash
+npm run build
+npm run preview
+```
+
+## Content
+
+- `src/content/work/` contains one JSON record per case study.
+- `public/images/work/` contains each project's local image set.
+- `src/pages/index.astro` displays the complete seven-project grid.
+- `src/pages/work/[slug].astro` is the shared case-study template.
+- `src/components/` contains the reusable site and project components.
+- `src/styles/global.css` contains the responsive design system.
+- `data/works.csv` preserves the original Webflow collection export.
+
+To regenerate the project content and images from a compatible Webflow CSV export:
+
+```bash
+npm run import:work -- data/works.csv
+```
+
+## Deploy with Vercel
+
+1. Import the GitHub repository into Vercel.
+2. Keep the framework preset set to **Astro**.
+3. Use `npm run build` as the build command and `dist` as the output directory.
+4. Deploy the `main` branch.
+
+No additional environment variables are required for a root-domain deployment. Set `SITE_URL` to the final production URL when attaching a different domain.
 
 ## Deploy with GitHub Pages
 
-1. Push this repo to GitHub.
-2. In the GitHub repository, open **Settings**.
-3. Go to **Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select the branch that contains this site, usually `main`.
-6. Select the root folder `/`.
-7. Save the settings.
+The included `.github/workflows/deploy.yml` workflow builds the Astro project with the repository subpath and publishes `dist` to GitHub Pages.
 
-The site uses relative asset and page paths, so it works from a project GitHub Pages URL like `https://username.github.io/repository-name/` without extra build steps.
+1. Push the repository to GitHub.
+2. Open **Settings → Pages** in the repository.
+3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+4. Run the **Deploy Astro to GitHub Pages** workflow or push to `main`.
 
-## Files
-
-- `index.html` - Homepage with full-bleed hero and selected work grid.
-- `work/` - Project pages for each portfolio category.
-- `style.css` - Shared responsive editorial design system.
-- `script.js` - Reveal animation and current year behavior.
-- `assets/work/` - Local portfolio visuals gathered from the public `terminel.com` site.
+All internal links and local image paths respect Astro's configured base path, so both root-domain and project-path deployments work.

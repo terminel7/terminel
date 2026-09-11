@@ -1,0 +1,36 @@
+---
+import { sitePath } from "../lib/paths";
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === sitePath("/");
+
+const links = [
+  ...(!isHome ? [{ href: "/#work", label: "Work" }] : []),
+  { href: "/services/", label: "Services" },
+  { href: "/contact/", label: "Contact" },
+];
+
+const isCurrent = (href: string) => href === "/#work"
+  ? currentPath.includes(sitePath("/work/"))
+  : currentPath.includes(sitePath(href));
+---
+
+<header class="site-header" id="top">
+  <div class="container site-header__inner">
+    <a class="wordmark" href={sitePath("/")} aria-label="Angelo Terminel home">Angelo Terminel</a>
+    <nav aria-label="Primary navigation">
+      <ul class="site-nav">
+        {links.map((link) => (
+          <li>
+            <a
+              href={sitePath(link.href)}
+              aria-current={isCurrent(link.href) ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,121 @@
+{
+  "slug": "fintech",
+  "order": 2,
+  "name": "Fintech",
+  "year": "2019",
+  "title": "Evolving a Brand for the Future of Fintech",
+  "summary": "Evolving a Brand for the Future of Fintech",
+  "services": [
+    "Creative Direction",
+    "Web Design",
+    "Brand Systems"
+  ],
+  "thumbnail": "/images/work/fintech/thumbnail.webp",
+  "hero": "/images/work/fintech/hero.webp",
+  "intro": null,
+  "sections": [
+    {
+      "type": "copy",
+      "text": "As CU Direct expanded beyond automotive lending into mortgages and other financial services, it faced the challenge of redefining its image as a future-forward fintech SaaS. The solution centered on a bold evolution of CU Direct’s visual framework, evoking technology, security, and leadership in the financial ecosystem of tomorrow."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-01.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/fintech/gallery-01-01.webp",
+          "alt": "Fintech project detail 1"
+        },
+        {
+          "src": "/images/work/fintech/gallery-01-02.webp",
+          "alt": "Fintech project detail 2"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-02.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-03.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "copy",
+      "text": "The digital footprint grew in importance, with the aesthetic applied across online campaigns, corporate communications, and even the company’s annual report."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-04.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-05.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "copy",
+      "text": "Industry conventions remained essential touchpoints. CU Direct’s presence at NADA and GAC showcased the evolved identity at scale."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-06.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-07.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-08.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "copy",
+      "text": "CU Direct's annual conference created a stage for thought leadership, extending the visual system through a new theme and experience each year."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/fintech/image-09.webp",
+      "alt": "Fintech project image"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/fintech/gallery-02-01.webp",
+          "alt": "Fintech project detail 1"
+        },
+        {
+          "src": "/images/work/fintech/gallery-02-02.webp",
+          "alt": "Fintech project detail 2"
+        },
+        {
+          "src": "/images/work/fintech/gallery-02-03.webp",
+          "alt": "Fintech project detail 3"
+        },
+        {
+          "src": "/images/work/fintech/gallery-02-04.webp",
+          "alt": "Fintech project detail 4"
+        },
+        {
+          "src": "/images/work/fintech/gallery-02-05.webp",
+          "alt": "Fintech project detail 5"
+        },
+        {
+          "src": "/images/work/fintech/gallery-02-06.webp",
+          "alt": "Fintech project detail 6"
+        }
+      ]
+    }
+  ]
+}

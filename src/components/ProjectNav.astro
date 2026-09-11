@@ -1,0 +1,24 @@
+---
+import type { Project } from "../lib/projects";
+import { sitePath } from "../lib/paths";
+
+type Props = {
+  previous: Project;
+  next: Project;
+  compact?: boolean;
+};
+
+const { previous, next, compact = false } = Astro.props;
+---
+
+<nav class:list={["project-nav", { "project-nav--compact": compact }]} aria-label="Project navigation">
+  <a href={sitePath(`/work/${previous.slug}/`)} aria-label={`Previous project: ${previous.name}`}>
+    <span class="project-nav__chevron project-nav__chevron--previous" aria-hidden="true"></span>
+    {!compact && <span>{previous.name}</span>}
+  </a>
+  <a href={sitePath("/#work")} class="project-nav__all">All work</a>
+  <a href={sitePath(`/work/${next.slug}/`)} aria-label={`Next project: ${next.name}`}>
+    {!compact && <span>{next.name}</span>}
+    <span class="project-nav__chevron project-nav__chevron--next" aria-hidden="true"></span>
+  </a>
+</nav>

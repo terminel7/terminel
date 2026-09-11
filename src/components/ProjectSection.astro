@@ -1,0 +1,44 @@
+---
+import type { ProjectSection } from "../lib/projects";
+import { sitePath } from "../lib/paths";
+
+type Props = {
+  section: ProjectSection;
+  index: number;
+};
+
+const { section, index } = Astro.props;
+---
+
+{section.type === "copy" && (
+  <section class="case-copy section" data-reveal>
+    <div class="case-copy__inner">
+      <p>{section.text}</p>
+    </div>
+  </section>
+)}
+
+{section.type === "image" && (
+  <section class="case-media section section--compact" data-reveal>
+    <div class="container">
+      <img
+        src={sitePath(section.src)}
+        alt={section.alt}
+        loading={index < 2 ? "eager" : "lazy"}
+        decoding="async"
+      />
+    </div>
+  </section>
+)}
+
+{section.type === "gallery" && (
+  <section class="case-gallery section section--compact" data-reveal>
+    <div class="container case-gallery__grid">
+      {section.images.map((image) => (
+        <figure>
+          <img src={sitePath(image.src)} alt={image.alt} loading="lazy" decoding="async" />
+        </figure>
+      ))}
+    </div>
+  </section>
+)}

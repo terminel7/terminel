@@ -1,0 +1,18 @@
+---
+import { sitePath } from "../lib/paths";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__meta">
+      <a href={sitePath("/")} class="wordmark">terminel</a>
+      <a href="mailto:angelo@terminel.com?subject=Hello">angelo@terminel.com</a>
+      <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn ↗</a>
+      <ThemeToggle />
+      <span>© {year}</span>
+    </div>
+  </div>
+</footer>

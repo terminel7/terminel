@@ -1,0 +1,108 @@
+{
+  "slug": "auto-lending",
+  "order": 6,
+  "name": "Auto Lending",
+  "year": "2016",
+  "title": "Setting a New Visual Standard for the Industry",
+  "summary": "Setting a New Visual Standard for the Industry",
+  "services": [
+    "Brand Systems",
+    "Campaigns",
+    "Environmental Design"
+  ],
+  "thumbnail": "/images/work/auto-lending/thumbnail.webp",
+  "hero": "/images/work/auto-lending/hero.webp",
+  "intro": null,
+  "sections": [
+    {
+      "type": "copy",
+      "text": "Taking a traditionally overlooked industry like automotive lending and making it breathtaking was no small task. The goal was to capture the right audience, set the right tone, and help CU Direct hold its own in the automotive landscape. The first step was defining the visual framework. At its core was an angular structure representing energy and future-forward effort, which we coined the Performance Pattern."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-01.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/auto-lending/gallery-01-01.webp",
+          "alt": "Auto Lending project detail 1"
+        },
+        {
+          "src": "/images/work/auto-lending/gallery-01-02.webp",
+          "alt": "Auto Lending project detail 2"
+        },
+        {
+          "src": "/images/work/auto-lending/gallery-01-03.webp",
+          "alt": "Auto Lending project detail 3"
+        },
+        {
+          "src": "/images/work/auto-lending/gallery-01-04.webp",
+          "alt": "Auto Lending project detail 4"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-02.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "copy",
+      "text": "Print advertising was a crucial part of CU Direct’s marketing initiatives. From magazine spreads to collateral for the sales team, the visual identity was applied with consistency and boldness."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-03.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-04.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-05.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "copy",
+      "text": "That distinction carried through to large-scale event displays. Trade show graphics and branded environments extended the Performance Pattern into dynamic, immersive formats, ensuring CU Direct stood out in crowded convention halls."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-06.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-07.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "copy",
+      "text": "Yearly industry conventions like NADA and GAC provided opportunities to make a statement. CU Direct’s large booths showcased the refined visual system at scale."
+    },
+    {
+      "type": "image",
+      "src": "/images/work/auto-lending/image-08.webp",
+      "alt": "Auto Lending project image"
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/work/auto-lending/gallery-02-01.webp",
+          "alt": "Auto Lending project detail 1"
+        },
+        {
+          "src": "/images/work/auto-lending/gallery-02-02.webp",
+          "alt": "Auto Lending project detail 2"
+        }
+      ]
+    }
+  ]
+}
