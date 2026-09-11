@@ -55,6 +55,7 @@ main {
 
 h1,
 h2 {
+  text-wrap: balance;
   text-wrap: pretty;
 }
 
@@ -330,10 +331,6 @@ html[data-theme="dark"] .theme-toggle__moon {
   z-index: 1;
   display: grid;
   gap: 46px;
-}
-
-.home-hero .eyebrow {
-  color: var(--accent);
 }
 
 .home-hero h1 {
@@ -791,12 +788,33 @@ html[data-theme="dark"] .theme-toggle__moon {
 
 .contact-page {
   min-height: calc(100svh - 88px);
+  position: relative;
+  overflow: hidden;
   background: var(--paper);
   color: var(--ink);
+  isolation: isolate;
   transition: background-color 320ms ease, color 320ms ease;
 }
 
+.contact-page__media {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.contact-page__gradient {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .contact-page__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   min-height: calc(100svh - 88px - (var(--section-space) * 2));
   flex-direction: column;

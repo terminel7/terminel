@@ -19,9 +19,10 @@ const { previous, next } = adjacentProjects(project.slug);
 ---
 
 <BaseLayout
-  title={`${project.name} — terminel`}
+  title={`${project.name} | Angelo Terminel`}
   description={project.summary}
   bodyClass="case-page"
+  ogImage={project.thumbnail}
 >
   <article class="case-study" data-case-transition>
     <header class="case-hero section">

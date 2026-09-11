@@ -1,13 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactGradient from "../components/ContactGradient.astro";
 const year = new Date().getFullYear();
 ---
 
 <BaseLayout
-  title="Contact — terminel"
+  title="Contact | Angelo Terminel"
   description="Start a conversation about brand, creative, or digital work."
 >
   <section class="contact-page section">
+    <div class="contact-page__media" aria-hidden="true">
+      <ContactGradient />
+    </div>
     <div class="container contact-page__inner">
       <p class="eyebrow">Contact</p>
       <h1>Start with a conversation.</h1>

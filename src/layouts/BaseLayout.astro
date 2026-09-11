@@ -6,13 +6,19 @@ type Props = {
   title?: string;
   description?: string;
   bodyClass?: string;
+  ogImage?: string;
 };
 
 const {
-  title = "terminel — Creative direction, design, and development",
+  title = "Angelo Terminel | Creative, Development, and Strategy",
   description = "Building brands and intelligent digital experiences that move hearts—and move the needle.",
   bodyClass,
+  ogImage = "/images/work/streaming/thumbnail.webp",
 } = Astro.props;
+
+const siteOrigin = Astro.site ?? Astro.url.origin;
+const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const ogImageUrl = new URL(ogImage, siteOrigin).toString();
 ---
 
 <!doctype html>
@@ -40,6 +46,18 @@ const {
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f6f6f3" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Angelo Terminel" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content="Selected work by Angelo Terminel" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23090909%22/><text x=%2250%22 y=%2268%22 text-anchor=%22middle%22 font-size=%2264%22 fill=%22white%22 font-family=%22Arial%22>t</text></svg>" />
     <title>{title}</title>
     <script is:inline>

@@ -36,7 +36,7 @@ const showcaseArt = [
   { src: "/images/work/streaming/image-02.webp", flow: "down", row: 0, column: -2 },
   { src: "/images/work/retail/gallery-02-02.webp", flow: "down", row: 0, column: 0, center: "upper" },
   { src: "/images/work/action-sports/image-04.webp", flow: "down", row: 0, column: 2 },
-  { src: "/images/work/fintech/gallery-02-03.webp", flow: "down", row: 1, column: -2 },
+  { src: "/images/work/fintech/gallery-02-04.webp", flow: "down", row: 1, column: -2 },
   { src: "/images/work/apparel/image-05.webp", flow: "down", row: 1, column: 0, center: "lower" },
   { src: "/images/work/auto-lending/image-06.webp", flow: "down", row: 1, column: 2 },
   { src: "/images/work/private-equity/gallery-01-02.webp", flow: "down", row: 2, column: -2, leading: true },
@@ -46,13 +46,13 @@ const showcaseArt = [
   { src: "/images/work/apparel/gallery-02-03.webp", flow: "up", row: 0, column: 1, leading: true },
   { src: "/images/work/retail/image-05.webp", flow: "up", row: 1, column: -1 },
   { src: "/images/work/auto-lending/gallery-01-03.webp", flow: "up", row: 1, column: 1 },
-  { src: "/images/work/private-equity/gallery-01-05.webp", flow: "up", row: 2, column: -1 },
+  { src: "/images/work/private-equity/gallery-01-04.webp", flow: "up", row: 2, column: -1 },
   { src: "/images/work/fintech/image-03.webp", flow: "up", row: 2, column: 1 },
 ];
 ---
 
 <BaseLayout
-  title="Services — terminel"
+  title="Services | Angelo Terminel"
   description="Strategy, creative, branding, and development for brands and digital experiences."
 >
   <section class="page-intro section">
@@ -155,17 +155,21 @@ const showcaseArt = [
       const viewportHeight = window.innerHeight;
       const mobile = viewportWidth < 700;
       const tablet = viewportWidth < 1000;
-      const tileWidth = Math.min(220, Math.max(58, viewportWidth * 0.135));
+      const tileWidth = mobile
+        ? Math.min(104, Math.max(86, viewportWidth * 0.235))
+        : tablet
+          ? Math.min(190, Math.max(148, viewportWidth * 0.18))
+          : Math.min(282, Math.max(232, viewportWidth * 0.16));
       const tileHeight = tileWidth * 1.28;
-      const columnStep = tileWidth * 1.3;
-      const rowStep = tileHeight * (mobile ? 1.28 : 1.24);
+      const columnStep = tileWidth * (mobile ? 1.18 : 1.2);
+      const rowStep = tileHeight * (mobile ? 1.2 : 1.18);
       const entryTravel = rowStep * 2.55;
       const entry = phase(progress, 0.07, 0.55);
       const leadingExit = phase(progress, 0.34, 0.58);
       const zoom = phase(progress, 0.61, 0.83);
       const split = phase(progress, 0.79, 0.95);
-      const baseScale = mobile ? 0.94 : 0.92;
-      const finalScale = mobile ? 2.3 : tablet ? 1.84 : 1.58;
+      const baseScale = mobile ? 0.98 : 0.94;
+      const finalScale = mobile ? 2.06 : tablet ? 1.64 : 1.48;
       const gridScale = mix(baseScale, finalScale, zoom);
       const offscreenCenter = (viewportHeight / (2 * baseScale)) + tileHeight;
       const leadingExtra = Math.max(0, offscreenCenter - (rowStep * 1.5));
