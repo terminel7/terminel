@@ -1,6 +1,7 @@
 ---
 import { sitePath } from "../lib/paths";
 import ThemeToggle from "./ThemeToggle.astro";
+import OutboundArrow from "./OutboundArrow.astro";
 
 const year = new Date().getFullYear();
 ---
@@ -10,7 +11,7 @@ const year = new Date().getFullYear();
     <div class="site-footer__meta">
       <a href={sitePath("/")} class="wordmark">terminel</a>
       <a href="mailto:angelo@terminel.com?subject=Hello">angelo@terminel.com</a>
-      <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn ↗</a>
+      <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn <OutboundArrow /></a>
       <ThemeToggle />
       <span>© {year}</span>
     </div>

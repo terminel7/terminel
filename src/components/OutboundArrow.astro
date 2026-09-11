@@ -1,0 +1,9 @@
+---
+type Props = {
+  className?: string;
+};
+
+const { className } = Astro.props;
+---
+
+<span class:list={["outbound-arrow", className]} aria-hidden="true"></span>

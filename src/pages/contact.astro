@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactGradient from "../components/ContactGradient.astro";
+import OutboundArrow from "../components/OutboundArrow.astro";
 const year = new Date().getFullYear();
 ---
 
@@ -15,9 +16,9 @@ const year = new Date().getFullYear();
     <div class="container contact-page__inner">
       <p class="eyebrow">Contact</p>
       <h1>Start with a conversation.</h1>
-      <a class="contact-page__email" href="mailto:angelo@terminel.com?subject=Hello">angelo@terminel.com ↗</a>
+      <a class="contact-page__email" href="mailto:angelo@terminel.com?subject=Hello">angelo@terminel.com <OutboundArrow /></a>
       <div class="contact-page__meta">
-        <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn ↗</a>
+        <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn <OutboundArrow /></a>
         <span>© {year}</span>
       </div>
     </div>

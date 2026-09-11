@@ -102,6 +102,8 @@
         float entry = smoothstep(-0.9, 0.56, field + 0.2);
         float edge = smoothstep(-1.15, -0.08, point.x + (point.y * 0.32));
         float alpha = mix(0.03, 0.72, entry) * mix(0.35, 1.0, edge);
+        float verticalFade = smoothstep(0.0, 0.16, uv.y) * smoothstep(0.0, 0.16, 1.0 - uv.y);
+        alpha *= verticalFade;
         alpha *= mix(1.0, 0.78, uDark);
 
         color += (dither(gl_FragCoord.xy) - 0.5) / 255.0;
