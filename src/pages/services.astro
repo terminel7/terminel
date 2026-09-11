@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactGradient from "../components/ContactGradient.astro";
 import Footer from "../components/Footer.astro";
 import { sitePath } from "../lib/paths";
 
@@ -56,6 +57,9 @@ const showcaseArt = [
   description="Strategy, creative, branding, and development for brands and digital experiences."
 >
   <section class="page-intro services-intro section">
+    <div class="services-intro__media" aria-hidden="true">
+      <ContactGradient variant="services" />
+    </div>
     <div class="container editorial-intro">
       <h1 class="eyebrow">Services</h1>
       <p>Strategy, creative, branding, and development working together from the first question through the final detail.</p>
@@ -97,7 +101,7 @@ const showcaseArt = [
       </div>
 
       <p class="services-showcase__result" data-showcase-result>
-        A connected<br />body of work.
+        Creative guidance,<br />for AI and for you.
       </p>
       <span class="services-showcase__cue" aria-hidden="true">↓</span>
     </div>
