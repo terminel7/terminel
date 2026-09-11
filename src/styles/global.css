@@ -191,7 +191,8 @@ a {
   transition: background-color 320ms ease, color 320ms ease;
 }
 
-.home-page .site-header {
+.home-page .site-header,
+.gradient-header-page .site-header {
   position: absolute;
   top: 0;
   right: 0;
@@ -476,7 +477,7 @@ html[data-theme="dark"] .theme-toggle__moon {
 .services-intro {
   position: relative;
   display: flex;
-  min-height: calc(100svh - 88px);
+  min-height: 100svh;
   align-items: center;
   overflow: hidden;
   isolation: isolate;
@@ -851,7 +852,7 @@ html[data-theme="dark"] .theme-toggle__moon {
 }
 
 .contact-page {
-  min-height: calc(100svh - 88px);
+  min-height: 100svh;
   position: relative;
   overflow: hidden;
   background: var(--paper);
@@ -880,7 +881,7 @@ html[data-theme="dark"] .theme-toggle__moon {
   position: relative;
   z-index: 1;
   display: flex;
-  min-height: calc(100svh - 88px - (var(--section-space) * 2));
+  min-height: calc(100svh - (var(--section-space) * 2));
   flex-direction: column;
 }
 
@@ -1082,7 +1083,7 @@ html[data-theme="dark"] .theme-toggle__moon {
   }
 
   .services-intro {
-    min-height: calc(100svh - 70px);
+    min-height: 100svh;
   }
 
   .site-footer__inner {
@@ -1198,11 +1199,11 @@ html[data-theme="dark"] .theme-toggle__moon {
   }
 
   .contact-page {
-    min-height: calc(100svh - 70px);
+    min-height: 100svh;
   }
 
   .contact-page__inner {
-    min-height: calc(100svh - 70px - (var(--section-space) * 2));
+    min-height: calc(100svh - (var(--section-space) * 2));
   }
 
   .contact-page h1 {
