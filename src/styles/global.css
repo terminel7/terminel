@@ -478,6 +478,12 @@ html[data-theme="dark"] .theme-toggle__moon {
   padding-bottom: 160px;
 }
 
+.services-intro {
+  display: flex;
+  min-height: calc(100svh - 88px);
+  align-items: center;
+}
+
 .site-footer {
   background: var(--night);
   color: var(--white);
@@ -845,13 +851,9 @@ html[data-theme="dark"] .theme-toggle__moon {
 .contact-page__media {
   position: absolute;
   z-index: 0;
-  top: 52%;
-  right: 0;
-  left: 0;
-  height: clamp(190px, 22vw, 310px);
+  inset: 0;
   overflow: hidden;
   pointer-events: none;
-  transform: translateY(-50%);
 }
 
 .contact-page__gradient {
@@ -1065,6 +1067,10 @@ html[data-theme="dark"] .theme-toggle__moon {
   .page-intro {
     padding-top: 72px;
     padding-bottom: 112px;
+  }
+
+  .services-intro {
+    min-height: calc(100svh - 70px);
   }
 
   .site-footer__inner {
