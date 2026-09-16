@@ -1004,6 +1004,10 @@ html[data-theme="dark"] .theme-toggle__moon {
 }
 
 @media (max-width: 700px) {
+  .mobile-hidden-word {
+    display: none;
+  }
+
   :root {
     --section-space: 76px;
     --section-space-compact: 18px;
