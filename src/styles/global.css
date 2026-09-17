@@ -787,11 +787,11 @@ html[data-theme="dark"] .theme-toggle__moon {
 }
 
 .project-nav--compact .project-nav__chevron--previous {
-  transform: translateX(-1px) rotate(135deg);
+  transform: translateX(1px) rotate(135deg);
 }
 
 .project-nav--compact .project-nav__chevron--next {
-  transform: translateX(1px) rotate(-45deg);
+  transform: translateX(-1px) rotate(-45deg);
 }
 
 .project-nav--compact > a:first-child,
