@@ -664,9 +664,14 @@ html[data-theme="dark"] .theme-toggle__moon {
   gap: 70px;
 }
 
+.service__title {
+  position: relative;
+}
+
 .service__title span {
+  position: absolute;
+  top: -30px;
   display: block;
-  margin-bottom: 26px;
   font-size: 14px;
 }
 
