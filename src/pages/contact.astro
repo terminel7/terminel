@@ -16,12 +16,101 @@ const year = new Date().getFullYear();
     </div>
     <div class="container contact-page__inner">
       <p class="eyebrow">Contact</p>
-      <h1>Start with a conversation.</h1>
-      <a class="contact-page__email" href="mailto:angelo@terminel.com?subject=Hello">angelo@terminel.com <OutboundArrow /></a>
+      <div class="contact-page__body">
+        <h1>Start with a conversation.</h1>
+        <form class="contact-form" action="/api/contact" method="post" data-contact-form novalidate>
+          <div class="contact-form__row">
+            <div class="contact-form__field">
+              <label for="contact-name">Name</label>
+              <input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required />
+            </div>
+            <div class="contact-form__field">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required />
+            </div>
+          </div>
+          <div class="contact-form__field">
+            <label for="contact-subject">Subject</label>
+            <input id="contact-subject" name="subject" type="text" maxlength="160" required />
+          </div>
+          <div class="contact-form__field">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" maxlength="5000" required></textarea>
+          </div>
+          <div class="contact-form__trap" aria-hidden="true">
+            <label for="contact-company">Company website</label>
+            <input id="contact-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="contact-form__footer">
+            <button type="submit" data-contact-submit>Send Message</button>
+            <p class="contact-form__status" role="status" aria-live="polite" data-contact-status></p>
+          </div>
+        </form>
+      </div>
       <div class="contact-page__meta">
         <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn <OutboundArrow /></a>
         <span>© {year}</span>
       </div>
     </div>
   </section>
+
+  <script>
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-contact-form]");
+
+  forms.forEach((form) => {
+    const submit = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
+    const status = form.querySelector<HTMLElement>("[data-contact-status]");
+    let startedAt = Date.now();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!submit || !status) return;
+
+      submit.disabled = true;
+      submit.textContent = "Sending...";
+      form.setAttribute("aria-busy", "true");
+      status.dataset.state = "";
+      status.textContent = "";
+
+      const payload = {
+        ...Object.fromEntries(new FormData(form).entries()),
+        startedAt: String(startedAt),
+      };
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) throw new Error(result.message || "Unable to send your message.");
+
+        form.reset();
+        startedAt = Date.now();
+        status.dataset.state = "success";
+        status.textContent = result.message || "Thanks. Your message is on its way.";
+      } catch (error) {
+        status.dataset.state = "error";
+        status.textContent = error instanceof Error
+          ? error.message
+          : "Unable to send your message. Please try again.";
+      } finally {
+        submit.disabled = false;
+        submit.textContent = "Send Message";
+        form.removeAttribute("aria-busy");
+      }
+    });
+  });
+  </script>
 </BaseLayout>

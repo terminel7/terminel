@@ -41,9 +41,20 @@ npm run import:work -- data/works.csv
 1. Import the GitHub repository into Vercel.
 2. Keep the framework preset set to **Astro**.
 3. Use `npm run build` as the build command and `dist` as the output directory.
-4. Deploy the `main` branch.
+4. Add the contact-form environment variables described below.
+5. Deploy the `main` branch.
 
-No additional environment variables are required for a root-domain deployment. Set `SITE_URL` to the final production URL when attaching a different domain.
+Set `SITE_URL` to the final production URL when attaching a different domain.
+
+### Contact form
+
+The contact form submits to the Vercel Function at `api/contact.ts` and sends through Resend. Add these variables to the Vercel project for Production, Preview, and Development as needed:
+
+- `RESEND_API_KEY`: Resend API key with permission to send email.
+- `CONTACT_TO_EMAIL`: Private address that receives form submissions.
+- `CONTACT_FROM_EMAIL`: Sender on a domain verified in Resend, including an optional display name.
+
+The recipient address and API key must never be committed to the repository. Static GitHub Pages deployments can display the site, but the contact form requires a function-capable host such as Vercel.
 
 ## Deploy with GitHub Pages
 

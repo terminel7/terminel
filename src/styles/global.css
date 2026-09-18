@@ -514,7 +514,7 @@ html[data-theme="dark"] .theme-toggle__moon {
 
 .site-footer__meta {
   display: grid;
-  grid-template-columns: 1fr auto auto auto auto;
+  grid-template-columns: 1fr auto auto auto;
   gap: 34px;
   align-items: end;
   font-size: 14px;
@@ -864,8 +864,12 @@ html[data-theme="dark"] .theme-toggle__moon {
 }
 
 .contact-page {
+  --contact-padding-top: clamp(118px, 15svh, 158px);
+  --contact-padding-bottom: 42px;
   min-height: 100svh;
   position: relative;
+  padding-top: var(--contact-padding-top);
+  padding-bottom: var(--contact-padding-bottom);
   overflow: hidden;
   background: var(--paper);
   color: var(--ink);
@@ -892,36 +896,129 @@ html[data-theme="dark"] .theme-toggle__moon {
 .contact-page__inner {
   position: relative;
   z-index: 1;
-  display: flex;
-  min-height: calc(100svh - (var(--section-space) * 2));
-  flex-direction: column;
+  display: grid;
+  min-height: calc(100svh - var(--contact-padding-top) - var(--contact-padding-bottom));
+  grid-template-rows: auto 1fr auto;
+  gap: 34px;
+}
+
+.contact-page__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.72fr);
+  gap: clamp(64px, 8vw, 132px);
+  align-items: center;
 }
 
 .contact-page h1 {
   max-width: 1100px;
-  margin-top: auto;
   font-family: var(--serif);
   font-size: 102px;
   font-weight: 400;
   line-height: 0.94;
 }
 
-.contact-page__email {
-  width: fit-content;
-  margin-top: 48px;
-  border-bottom: 1px solid var(--accent);
-  font-size: 24px;
-  transition: color 200ms ease;
+.contact-form {
+  position: relative;
+  display: grid;
+  gap: 22px;
 }
 
-.contact-page__email:hover {
-  color: var(--accent);
+.contact-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.contact-form__field {
+  display: grid;
+  gap: 6px;
+}
+
+.contact-form label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 42%, transparent);
+  border-radius: 0;
+  padding: 9px 0 11px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  transition: border-color 180ms ease;
+}
+
+.contact-form textarea {
+  min-height: 116px;
+  resize: vertical;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover,
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+}
+
+.contact-form__trap {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.contact-form__footer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.contact-form button {
+  flex: 0 0 auto;
+  min-width: 126px;
+  border: 1px solid var(--accent);
+  padding: 12px 18px;
+  background: var(--accent);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+.contact-form button:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.contact-form__status {
+  min-height: 1.45em;
+  font-size: 14px;
+}
+
+.contact-form__status[data-state="success"] {
+  color: var(--ink);
+}
+
+.contact-form__status[data-state="error"] {
+  color: #b52f1c;
 }
 
 .contact-page__meta {
   display: flex;
   justify-content: space-between;
-  margin-top: 96px;
   font-size: 14px;
 }
 
@@ -1215,18 +1312,36 @@ html[data-theme="dark"] .theme-toggle__moon {
   }
 
   .contact-page {
+    --contact-padding-top: 104px;
+    --contact-padding-bottom: 28px;
     min-height: 100svh;
   }
 
   .contact-page__inner {
-    min-height: calc(100svh - (var(--section-space) * 2));
+    min-height: calc(100svh - var(--contact-padding-top) - var(--contact-padding-bottom));
+    gap: 44px;
+  }
+
+  .contact-page__body {
+    grid-template-columns: 1fr;
+    gap: 52px;
   }
 
   .contact-page h1 {
     font-size: 58px;
   }
 
-  .contact-page__email {
-    font-size: 19px;
+  .contact-form__row {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .contact-form textarea {
+    min-height: 140px;
+  }
+
+  .contact-form__footer {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
