@@ -28,6 +28,7 @@ const { variant = "contact" } = Astro.props;
       if (!context) return;
       const bounds = canvas.getBoundingClientRect();
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      const portrait = bounds.width / Math.max(bounds.height, 1) < 0.72;
       canvas.width = Math.round(bounds.width * pixelRatio);
       canvas.height = Math.round(bounds.height * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
@@ -40,11 +41,11 @@ const { variant = "contact" } = Astro.props;
       fallbackColors.forEach((color, index) => {
         const position = index / (fallbackColors.length - 1);
         const startX = isServices
-          ? 0.02 + (position * 0.42)
-          : 0.62 + (position * 0.42);
+          ? (portrait ? -0.08 : 0.02) + (position * (portrait ? 0.62 : 0.42))
+          : (portrait ? 0.46 : 0.62) + (position * (portrait ? 0.62 : 0.42));
         const endX = isServices
-          ? 0.5 + (position * 0.32)
-          : 0.3 + (position * 0.32);
+          ? (portrait ? 0.34 : 0.5) + (position * (portrait ? 0.5 : 0.32))
+          : (portrait ? 0.34 : 0.3) + (position * (portrait ? 0.5 : 0.32));
         context.beginPath();
         context.moveTo(bounds.width * startX, -bounds.height * 0.08);
         context.bezierCurveTo(
@@ -57,7 +58,7 @@ const { variant = "contact" } = Astro.props;
         );
         context.strokeStyle = color;
         context.globalAlpha = 0.38;
-        context.lineWidth = Math.max(bounds.width * 0.12, 60);
+        context.lineWidth = Math.max(bounds.width * (portrait ? 0.28 : 0.12), 60);
         context.stroke();
       });
       context.globalAlpha = 1;
@@ -118,17 +119,24 @@ const { variant = "contact" } = Astro.props;
         uv.y = 1.0 - uv.y;
 
         float time = uTime * 0.22;
+        float viewportAspect = uResolution.x / max(uResolution.y, 1.0);
+        float portrait = 1.0 - smoothstep(0.62, 0.95, viewportAspect);
         float pointerInfluence = (uPointer.x - 0.5) * 0.055;
-        float path = uVariant < 0.5
+        float desktopPath = uVariant < 0.5
           ? 0.84 - (uv.y * 0.32)
           : 0.12 + (uv.y * 0.52);
+        float portraitPath = uVariant < 0.5
+          ? 0.78 - (uv.y * 0.18)
+          : 0.18 + (uv.y * 0.3);
+        float path = mix(desktopPath, portraitPath, portrait);
         float primaryCenter = path
           + sin((uv.y * 3.7) + time) * 0.026
           + sin((uv.y * 8.0) - (time * 0.62)) * 0.008
           + pointerInfluence * (0.35 + uv.y);
-        float primaryWidth = 0.265
+        float primaryWidth = (0.265
           - (uv.y * 0.028)
-          + sin((uv.y * 3.1) - (time * 0.45)) * 0.016;
+          + sin((uv.y * 3.1) - (time * 0.45)) * 0.016)
+          * mix(1.0, 1.62, portrait);
         float primaryCoordinate = (uv.x - primaryCenter) / primaryWidth;
         float primary = ribbonMask(primaryCoordinate, 0.35);
 

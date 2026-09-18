@@ -334,7 +334,7 @@ html[data-theme="dark"] .theme-toggle__moon {
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: 92svh;
+  min-height: 100svh;
   padding-top: 72px;
   overflow: hidden;
   background: var(--paper);
@@ -1140,7 +1140,7 @@ html[data-theme="dark"] .theme-toggle__moon {
   }
 
   .home-hero {
-    min-height: 92svh;
+    min-height: 100svh;
     padding-top: 40px;
   }
 
