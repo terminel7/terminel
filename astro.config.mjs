@@ -5,4 +5,7 @@ export default defineConfig({
   trailingSlash: "always",
   site: process.env.SITE_URL || "https://www.terminel.com",
   base: process.env.BASE_PATH || "/",
+  redirects: {
+    "/services": "/capabilities",
+  },
 });
