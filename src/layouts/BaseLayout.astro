@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import FloatingNav from "../components/FloatingNav.astro";
 import "../styles/global.css";
 
 type Props = {
@@ -107,6 +108,7 @@ const ogImageUrl = new URL(ogImage, siteOrigin).toString();
   <body class={bodyClass}>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
+    <FloatingNav />
     <main id="main">
       <slot />
     </main>

@@ -167,17 +167,20 @@ const showcaseArt = [
           : Math.min(282, Math.max(232, viewportWidth * 0.16));
       const tileHeight = tileWidth * 1.28;
       const columnStep = tileWidth * (mobile ? 1.18 : 1.2);
-      const rowStep = tileHeight * (mobile ? 1.2 : 1.18);
+      const initialRowStep = tileHeight * (mobile ? 2.05 : tablet ? 2.16 : 2.28);
+      const settledRowStep = tileHeight * (mobile ? 1.2 : 1.18);
       const baseScale = mobile ? 0.98 : 0.94;
       const offscreenCenter = (viewportHeight / (2 * baseScale)) + tileHeight;
-      const entryTravel = offscreenCenter + (rowStep * 1.5);
+      const entryTravel = offscreenCenter + (initialRowStep * 1.5);
       const entry = phase(progress, 0.07, 0.55);
+      const compression = phase(progress, 0.2, 0.66);
       const leadingExit = phase(progress, 0.34, 0.58);
-      const zoom = phase(progress, 0.42, 0.84);
+      const zoom = phase(progress, 0.34, 0.88);
       const split = phase(progress, 0.79, 0.95);
       const finalScale = mobile ? 2.06 : tablet ? 1.64 : 1.48;
       const gridScale = mix(baseScale, finalScale, zoom);
-      const leadingExtra = Math.max(0, offscreenCenter - (rowStep * 1.5));
+      const rowStep = mix(initialRowStep, settledRowStep, compression);
+      const leadingExtra = Math.max(0, offscreenCenter - (settledRowStep * 1.5));
       const splitDistance = tileHeight * (mobile ? 0.72 : 0.64);
 
       if (grid) {

@@ -1,0 +1,109 @@
+---
+import { sitePath } from "../lib/paths";
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === sitePath("/");
+const links = [
+  ...(!isHome ? [{ href: "/#work", label: "Work" }] : []),
+  { href: "/capabilities/", label: "Capabilities" },
+  { href: "/contact/", label: "Contact" },
+];
+
+const isCurrent = (href: string) => href === "/#work"
+  ? currentPath.includes(sitePath("/work/"))
+  : currentPath.includes(sitePath(href));
+---
+
+<div
+  class:list={["floating-nav", `floating-nav--${links.length}`]}
+  data-floating-nav
+  data-visible="false"
+  data-open="false"
+>
+  <div class="floating-nav__surface">
+    <button
+      class="floating-nav__toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="floating-nav-panel"
+      data-floating-nav-toggle
+    >
+      <span class="floating-nav__icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <nav
+      class="floating-nav__panel"
+      id="floating-nav-panel"
+      aria-label="Sticky navigation"
+      aria-hidden="true"
+      data-floating-nav-panel
+      inert
+    >
+      <ul>
+        {links.map((link) => (
+          <li>
+            <a
+              href={sitePath(link.href)}
+              aria-current={isCurrent(link.href) ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const floatingNav = document.querySelector<HTMLElement>("[data-floating-nav]");
+  const siteHeader = document.querySelector<HTMLElement>(".site-header");
+
+  if (floatingNav && siteHeader) {
+    const toggle = floatingNav.querySelector<HTMLButtonElement>("[data-floating-nav-toggle]");
+    const panel = floatingNav.querySelector<HTMLElement>("[data-floating-nav-panel]");
+    const links = Array.from(floatingNav.querySelectorAll<HTMLAnchorElement>("a"));
+    let isOpen = false;
+
+    const setOpen = (open: boolean, returnFocus = false) => {
+      if (!toggle || !panel) return;
+      isOpen = open;
+      floatingNav.dataset.open = String(open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+      panel.setAttribute("aria-hidden", String(!open));
+      panel.inert = !open;
+      if (!open && returnFocus) toggle.focus({ preventScroll: true });
+    };
+
+    const setVisible = (visible: boolean) => {
+      floatingNav.dataset.visible = String(visible);
+      if (!visible && isOpen) setOpen(false);
+    };
+
+    setOpen(false);
+
+    toggle?.addEventListener("click", () => setOpen(!isOpen));
+    links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+
+    document.addEventListener("pointerdown", (event) => {
+      if (!isOpen || floatingNav.contains(event.target as Node)) return;
+      setOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && isOpen) setOpen(false, true);
+    });
+
+    const headerObserver = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting),
+      { threshold: 0 },
+    );
+
+    headerObserver.observe(siteHeader);
+  }
+</script>
