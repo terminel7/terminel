@@ -331,7 +331,7 @@ html[data-theme="dark"] .theme-toggle__moon {
 }
 
 .floating-nav {
-  --floating-nav-open-height: 164px;
+  --floating-nav-open-height: 140px;
   position: fixed;
   top: 18px;
   right: 18px;
@@ -345,10 +345,6 @@ html[data-theme="dark"] .theme-toggle__moon {
   transition:
     opacity 180ms ease,
     transform 480ms cubic-bezier(0.2, 1.18, 0.32, 1);
-}
-
-.floating-nav--2 {
-  --floating-nav-open-height: 122px;
 }
 
 .floating-nav[data-visible="true"] {
@@ -495,7 +491,7 @@ html[data-theme="dark"] .floating-nav__surface {
   display: block;
   width: fit-content;
   padding-block: 5px;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.15;
   transition: color 180ms ease;
@@ -1329,10 +1325,6 @@ html[data-theme="dark"] .floating-nav__surface {
 
   .floating-nav[data-open="true"] .floating-nav__surface {
     width: min(268px, calc(100vw - 24px));
-  }
-
-  .floating-nav__panel a {
-    font-size: 22px;
   }
 
   .home-hero {

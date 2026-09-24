@@ -2,20 +2,19 @@
 import { sitePath } from "../lib/paths";
 
 const currentPath = Astro.url.pathname;
-const isHome = currentPath === sitePath("/");
 const links = [
-  ...(!isHome ? [{ href: "/#work", label: "Work" }] : []),
+  { href: "/#work", label: "Work" },
   { href: "/capabilities/", label: "Capabilities" },
   { href: "/contact/", label: "Contact" },
 ];
 
 const isCurrent = (href: string) => href === "/#work"
-  ? currentPath.includes(sitePath("/work/"))
+  ? currentPath === sitePath("/") || currentPath.includes(sitePath("/work/"))
   : currentPath.includes(sitePath(href));
 ---
 
 <div
-  class:list={["floating-nav", `floating-nav--${links.length}`]}
+  class="floating-nav"
   data-floating-nav
   data-visible="false"
   data-open="false"
