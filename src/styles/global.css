@@ -26,6 +26,7 @@ html {
   color: var(--ink);
   color-scheme: light;
   font-family: var(--sans);
+  overscroll-behavior-y: none;
   scroll-behavior: smooth;
   text-size-adjust: 100%;
 }
@@ -47,6 +48,7 @@ body {
   font-size: 16px;
   line-height: 1.45;
   letter-spacing: 0;
+  overscroll-behavior-y: none;
   text-wrap: pretty;
   -webkit-font-smoothing: antialiased;
   transition: background-color 320ms ease, color 320ms ease;
@@ -682,8 +684,10 @@ html[data-theme="dark"] .floating-nav__surface {
 }
 
 .site-footer {
-  background: var(--night);
-  color: var(--white);
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  transition: background-color 320ms ease, border-color 320ms ease, color 320ms ease;
 }
 
 .site-footer__inner {
