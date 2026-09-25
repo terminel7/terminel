@@ -1410,6 +1410,11 @@ html[data-theme="dark"] .floating-nav__surface {
     gap: 34px;
   }
 
+  .site-footer__meta > .wordmark,
+  .site-footer__social {
+    justify-self: center;
+  }
+
   .site-footer__social ul {
     gap: 24px;
   }
