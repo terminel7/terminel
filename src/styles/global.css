@@ -688,17 +688,26 @@ html[data-theme="dark"] .floating-nav__surface {
 
 .site-footer__meta {
   display: grid;
-  grid-template-columns: 1fr auto auto auto;
+  grid-template-columns: 1fr auto auto;
   gap: 34px;
-  align-items: end;
+  align-items: center;
   font-size: 14px;
 }
 
-.site-footer__meta a {
+.site-footer__social ul,
+.site-footer__utility {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.site-footer__meta a,
+.contact-page__social a {
   transition: color 200ms ease;
 }
 
-.site-footer__meta a:hover {
+.site-footer__meta a:hover,
+.contact-page__social a:hover {
   color: var(--accent);
 }
 
@@ -1196,6 +1205,11 @@ html[data-theme="dark"] .floating-nav__surface {
   font-size: 14px;
 }
 
+.contact-page__social {
+  display: flex;
+  gap: 28px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .has-js [data-reveal] {
     opacity: 0;
@@ -1388,16 +1402,25 @@ html[data-theme="dark"] .floating-nav__surface {
   }
 
   .site-footer__inner {
-    padding-block: 30px;
+    padding-block: 36px;
   }
 
   .site-footer__meta {
-    grid-template-columns: 1fr auto;
-    gap: 18px;
+    grid-template-columns: 1fr;
+    gap: 34px;
   }
 
-  .site-footer__meta > :nth-child(even) {
-    justify-self: end;
+  .site-footer__social ul {
+    gap: 24px;
+  }
+
+  .site-footer__utility {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .site-footer__utility > span {
+    order: -1;
   }
 
   .services-showcase {

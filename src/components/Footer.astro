@@ -10,9 +10,16 @@ const year = new Date().getFullYear();
   <div class="container site-footer__inner">
     <div class="site-footer__meta">
       <a href={sitePath("/")} class="wordmark">terminel</a>
-      <a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn <OutboundArrow /></a>
-      <ThemeToggle />
-      <span>© {year}</span>
+      <nav class="site-footer__social" aria-label="Social links">
+        <ul>
+          <li><a href="https://www.linkedin.com/in/angeloterminel/" rel="noreferrer">LinkedIn <OutboundArrow /></a></li>
+          <li><a href="https://www.instagram.com/terminel_/" rel="noreferrer">Instagram <OutboundArrow /></a></li>
+        </ul>
+      </nav>
+      <div class="site-footer__utility">
+        <ThemeToggle />
+        <span>© {year}</span>
+      </div>
     </div>
   </div>
 </footer>
