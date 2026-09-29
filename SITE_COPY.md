@@ -43,12 +43,6 @@ This inventory includes user-facing HTML copy, metadata, navigation labels, form
 
 The project names and service labels shown in the homepage cards are listed under Case Studies below.
 
-### Capabilities prompt
-
-- Expertise
-- Strategy, creative, branding, and development shaped as one connected system.
-- Explore Capabilities
-
 ## Capabilities
 
 ### Page introduction

@@ -1,10 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
-import OutboundArrow from "../components/OutboundArrow.astro";
 import WorkCard from "../components/WorkCard.astro";
 import { projects } from "../lib/projects";
-import { sitePath } from "../lib/paths";
 ---
 
 <BaseLayout bodyClass="home-page">
@@ -26,16 +24,6 @@ import { sitePath } from "../lib/paths";
       </div>
       <div class="work-grid">
         {projects.map((project, index) => <WorkCard project={project} eager={index < 2} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="capabilities-prompt section section--dark" data-reveal>
-    <div class="container capabilities-prompt__grid">
-      <p class="eyebrow">Expertise</p>
-      <div>
-        <p class="display-copy">Strategy, creative, branding, and development shaped as one connected system.</p>
-        <a class="text-link text-link--light" href={sitePath("/capabilities/")}>Explore Capabilities <OutboundArrow /></a>
       </div>
     </div>
   </section>
