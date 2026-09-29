@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
+import OutboundArrow from "../components/OutboundArrow.astro";
 import WorkCard from "../components/WorkCard.astro";
 import { projects } from "../lib/projects";
+import { sitePath } from "../lib/paths";
 ---
 
 <BaseLayout bodyClass="home-page">
@@ -24,6 +26,16 @@ import { projects } from "../lib/projects";
       </div>
       <div class="work-grid">
         {projects.map((project, index) => <WorkCard project={project} eager={index < 2} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="capabilities-prompt section section--dark" data-reveal>
+    <div class="container capabilities-prompt__grid">
+      <p class="eyebrow">Expertise</p>
+      <div>
+        <p class="capabilities-prompt__copy">With over 15 years of experience, plenty of tools have come and gone. The fundamentals haven’t: taste, an understanding of human behavior, design principles, and the judgment to apply them across strategy, design, development, and ongoing support.</p>
+        <a class="capabilities-prompt__link" href={sitePath("/capabilities/")}>Explore Capabilities <OutboundArrow /></a>
       </div>
     </div>
   </section>
