@@ -46,7 +46,7 @@ The project names and service labels shown in the homepage cards are listed unde
 ### Capabilities prompt
 
 - Expertise
-- With over 15 years of experience, plenty of tools have come and gone. The fundamentals haven’t: taste, an understanding of human behavior, design principles, and the judgment to apply them across strategy, design, development, and ongoing support.
+- With over 15 years of experience, plenty of tools have come and gone. The fundamentals have not: taste, design principles, an understanding of human behavior, and the judgment to apply them across strategy, design, and development.
 - Explore Capabilities
 
 ## Capabilities
