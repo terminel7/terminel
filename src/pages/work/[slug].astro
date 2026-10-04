@@ -29,7 +29,7 @@ const { previous, next } = adjacentProjects(project.slug);
       <div class="container">
         <div class="case-hero__meta">
           <span>{project.name}</span>
-          <span>{project.year}</span>
+          <span>{project.services[0]}</span>
         </div>
         <h1>{project.title}</h1>
         <ProjectNav previous={previous} next={next} compact />

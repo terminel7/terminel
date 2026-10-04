@@ -148,14 +148,12 @@ Digital experiences carried through to launch with thoughtful architecture, stro
 
 ### Streaming
 
-- Year: 2025
 - Headline: Blending Art and Strategy to Shape a Platform
-- Services: Product Design / Design Systems / Content
+- Services: Digital Direction / Design Systems / Content
 - Body copy: None
 
 ### Fintech
 
-- Year: 2019
 - Headline: Evolving a Brand for the Future of Fintech
 - Services: Creative Direction / Web Design / Brand Systems
 
@@ -169,7 +167,6 @@ CU Direct's annual conference created a stage for thought leadership, extending 
 
 ### Retail
 
-- Year: 2011
 - Headline: Leveraging Music and Pop Culture to Engage Consumers
 - Services: Creative Direction / Campaigns / Art Direction
 
@@ -183,21 +180,18 @@ Photography brought many of these initiatives to life. Direction across each sho
 
 ### Private Equity
 
-- Year: 2025
 - Headline: Crafting Digital Experiences That Inspire Investors
 - Services: Web Design / Digital Strategy / Development
 - Body copy: None
 
 ### Action Sports
 
-- Year: 2018
 - Headline: High-End Creative for a High-End Surf Shop
 - Services: Creative Direction / Web Design / Brand Systems
 - Body copy: None
 
 ### Auto Lending
 
-- Year: 2016
 - Headline: Setting a New Visual Standard for the Industry
 - Services: Brand Systems / Campaigns / Environmental Design
 
@@ -211,7 +205,6 @@ Yearly industry conventions like NADA and GAC provided opportunities to make a s
 
 ### Apparel
 
-- Year: 2014
 - Headline: Refined Visuals to Elevate Brand Image
 - Services: Creative Direction / Campaigns / Art Direction
 - Body copy: None

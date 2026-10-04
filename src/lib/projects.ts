@@ -12,7 +12,6 @@ export type Project = {
   slug: string;
   order: number;
   name: string;
-  year: string;
   title: string;
   summary: string;
   services: string[];
