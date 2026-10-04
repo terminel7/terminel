@@ -168,7 +168,7 @@ CU Direct's annual conference created a stage for thought leadership, extending 
 ### Retail
 
 - Headline: Leveraging Music and Pop Culture to Engage Consumers
-- Services: Creative Direction / Campaigns / Art Direction
+- Services: Art Direction / Campaigns / Creative Direction
 
 Many brands go through identity crises, and Hot Topic was no exception. Thought to be a brand for goths and emos, it actually reaches a much broader audience. The challenge was to stay true to its DNA while evolving how it presented itself — creating campaigns that felt on brand while appealing to a large music fan base.
 
