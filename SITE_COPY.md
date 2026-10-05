@@ -149,7 +149,7 @@ Digital experiences carried through to launch with thoughtful architecture, stro
 ### Streaming
 
 - Headline: Blending Art and Strategy to Shape a Platform
-- Services: Digital Direction / Design Systems / Content
+- Services: Digital Strategy / Design Systems / Content
 - Body copy: None
 
 ### Fintech
