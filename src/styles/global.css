@@ -1,3 +1,131 @@
+@font-face {
+  font-family: "Emilio";
+  src: url("/fonts/EmilioTrial-Extralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Emilio";
+  src: url("/fonts/EmilioTrial-ExtralightItalic.otf") format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Emilio";
+  src: url("/fonts/EmilioTrial-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Emilio";
+  src: url("/fonts/EmilioTrial-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Emilio";
+  src: url("/fonts/EmilioTrial-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Emilio";
+  src: url("/fonts/EmilioTrial-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-SemiboldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Systemia";
+  src: url("/fonts/SystemiaTest-ThinItalic.otf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --paper: #f6f6f3;
   --ink: #111111;
@@ -11,8 +139,8 @@
   --section-space-compact: 40px;
   --page-gutter: 40px;
   --container: 1500px;
-  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --serif: "Libre Caslon Text", Georgia, serif;
+  --sans: "Systemia", sans-serif;
+  --serif: "Emilio", serif;
 }
 
 *,
@@ -38,6 +166,13 @@ html[data-theme="dark"] {
   --line: #393936;
   --browser-chrome: #0d0d0c;
   color-scheme: dark;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 body {
@@ -1394,8 +1529,8 @@ html[data-theme="dark"] .floating-nav__surface {
   }
 
   .capabilities-prompt__copy {
-    font-size: 30px;
-    line-height: 1.14;
+    font-size: 24px;
+    line-height: 1.25;
   }
 
   .editorial-intro > p {
