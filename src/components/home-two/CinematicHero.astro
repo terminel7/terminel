@@ -1,0 +1,40 @@
+---
+import { projects } from "../../lib/projects";
+import { sitePath } from "../../lib/paths";
+import OutboundArrow from "../OutboundArrow.astro";
+
+// Change this selection to feature another project only on /home-2.
+const project = projects.find((item) => item.slug === "streaming")!;
+---
+
+<section class="cinematic-hero section" data-cinematic-hero aria-labelledby="home-two-title">
+  <div class="cinematic-hero__media">
+    <img
+      class="cinematic-hero__image"
+      data-cinematic-image
+      src={sitePath(project.hero)}
+      alt="Streaming platform design displayed across a collection of mobile screens."
+      width="3167"
+      height="1834"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
+
+  <div class="container cinematic-hero__content">
+    <div class="cinematic-hero__copy">
+      <p class="eyebrow">Creative Direction / Design / Development</p>
+      <h1 id="home-two-title">Building brands and intelligent <span class="mobile-hidden-word">digital </span>experiences that move hearts—and move the needle.</h1>
+    </div>
+    <div class="cinematic-hero__caption">
+      <p>{project.name} <span aria-hidden="true">/</span> {project.services[0]}</p>
+      <a href={sitePath(`/work/${project.slug}/`)}>View Project <OutboundArrow /></a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { mountCinematicHero } from "../../scripts/cinematic-hero";
+  const hero = document.querySelector<HTMLElement>("[data-cinematic-hero]");
+  if (hero) mountCinematicHero(hero);
+</script>

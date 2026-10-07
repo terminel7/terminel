@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import OutboundArrow from "../components/OutboundArrow.astro";
+import CinematicHero from "../components/home-two/CinematicHero.astro";
+import WorkCard from "../components/WorkCard.astro";
+import { projects } from "../lib/projects";
+import { sitePath } from "../lib/paths";
+import "../styles/home-two.css";
+---
+
+<BaseLayout bodyClass="home-two-page">
+  <CinematicHero />
+
+  <section class="home-two-work work-preview section" id="work" aria-labelledby="home-two-work-title">
+    <div class="container">
+      <div class="section-heading">
+        <h2 class="eyebrow" id="home-two-work-title">Selected Work</h2>
+        <p class="section-heading__meta">Case Studies</p>
+      </div>
+      <div class="work-grid">
+        {projects.slice(0, 6).map((project) => <WorkCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="capabilities-prompt section section--dark" data-reveal>
+    <div class="container capabilities-prompt__grid">
+      <p class="eyebrow">Expertise</p>
+      <div>
+        <p class="capabilities-prompt__copy">With over 15 years of experience, plenty of tools have come and gone. The fundamentals have not: taste, design principles, an understanding of human behavior, and the judgment to apply them across strategy, design, and development.</p>
+        <a class="capabilities-prompt__link" href={sitePath("/capabilities/")}>Explore Capabilities <OutboundArrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
