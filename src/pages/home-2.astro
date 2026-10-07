@@ -7,6 +7,7 @@ import WorkCard from "../components/WorkCard.astro";
 import { projects } from "../lib/projects";
 import { sitePath } from "../lib/paths";
 import "../styles/home-two.css";
+import "../styles/work-grid.css";
 ---
 
 <BaseLayout bodyClass="home-two-page">
@@ -18,7 +19,7 @@ import "../styles/home-two.css";
         <h2 class="eyebrow" id="home-two-work-title">Selected Work</h2>
         <p class="section-heading__meta">Case Studies</p>
       </div>
-      <div class="work-grid">
+      <div class="work-grid work-grid--compact">
         {projects.slice(0, 6).map((project) => <WorkCard project={project} />)}
       </div>
     </div>

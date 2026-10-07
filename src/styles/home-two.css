@@ -94,17 +94,9 @@
 
 .home-two-work { padding-top: 32px; }
 .home-two-work .section-heading { margin-bottom: 48px; }
-.home-two-work .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 62px; }
-.home-two-work .work-card__content { grid-template-columns: 1fr 28px; gap: 12px; }
-.home-two-work .work-card__content ul { grid-column: 1 / -1; grid-row: 2; }
-.home-two-work .work-card__arrow { grid-column: 2; grid-row: 1; }
 
 @media (max-width: 1100px) {
   .cinematic-hero h1 { font-size: 62px; }
-}
-
-@media (max-width: 1000px) {
-  .home-two-work .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 700px) {
@@ -118,12 +110,8 @@
   .cinematic-hero__caption { font-size: 12px; gap: 12px; padding-top: 12px; }
   .cinematic-hero__caption p { max-width: 190px; }
   .cinematic-hero__caption p span { margin-inline: 4px; }
-  .home-two-work .work-grid { column-gap: 16px; row-gap: 36px; }
   .home-two-work { padding-top: 28px; }
   .home-two-work .section-heading { margin-bottom: 32px; }
-  .home-two-work .work-card__content { gap: 8px; grid-template-columns: 1fr 18px; }
-  .home-two-work .work-card__content h2 { font-size: 20px; }
-  .home-two-work .work-card__content ul { font-size: 12px; }
 }
 
 @media (max-width: 360px) {
@@ -131,7 +119,6 @@
   .home-two-page .site-nav { gap: 12px; }
   .home-two-page .wordmark { font-size: 14px; }
   .home-two-page .site-nav a { font-size: 12px; }
-  .home-two-work .work-card__content h2 { font-size: 18px; }
 }
 
 @media (max-height: 750px) and (min-width: 701px) {

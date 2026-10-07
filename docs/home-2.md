@@ -1,7 +1,7 @@
 # Home 2 Experiment
 
-`/home-2/` is an isolated Astro experiment, absent from the public navigation.
-The published homepage, shared components, and project pages are unchanged.
+`/home-2/` is an Astro experiment, absent from the public navigation. Its cinematic
+header stays isolated; the compact project grid is now shared with the homepage.
 
 ## Header
 
@@ -22,8 +22,10 @@ stops when the image settles, the header leaves view, or the tab is hidden.
 - `src/scripts/cinematic-hero.ts`: pointer response and entrance motion.
 - `src/pages/home-2.astro`: normal six-project grid, Expertise section, and footer.
 
-The grid uses the first six existing projects, with three columns on desktop and
-two on smaller screens. The original homepage still includes all seven projects.
+The experimental grid uses the first six existing projects. Both homepages use
+the shared `src/styles/work-grid.css` layout: three columns on desktop and two on
+smaller screens. The main homepage includes all projects except Private Equity;
+its case study remains accessible through the project navigation.
 
 Run `npm run dev` and open `/home-2/`. Run `npm run check` and `npm run build`
 before publishing. Run `node --test tests/home-two/cinematic-hero.test.mjs` for
