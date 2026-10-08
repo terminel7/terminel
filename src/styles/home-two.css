@@ -1,139 +1,154 @@
-/* Scoped to the experimental route; shared pages retain their existing styles. */
+/* Only the experiment uses these rules. The published homepage is unchanged. */
 .home-two-page .site-header {
   position: absolute;
   top: 0;
   inset-inline: 0;
   background: transparent;
-  color: #fff;
 }
 
-.cinematic-hero {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  min-height: max(600px, calc(100svh - 96px));
-  padding-block: 170px 30px;
+.ring-hero {
+  display: grid;
+  grid-template-rows: auto minmax(250px, 1fr) auto;
+  min-height: max(700px, calc(100svh - 80px));
+  padding-block: 126px 22px;
+  row-gap: 26px;
   overflow: hidden;
-  isolation: isolate;
-  background: #18181b;
-  color: #fff;
+  background: var(--paper);
+  color: var(--ink);
 }
 
-.cinematic-hero__media {
-  position: absolute;
-  z-index: -2;
-  inset: -24px;
-  pointer-events: none;
+.ring-hero__intro {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+  text-align: center;
 }
 
-.cinematic-hero__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 44%;
-  transform: translate3d(var(--pan-x, 0px), var(--pan-y, 0px), 0) scale(var(--image-scale, 1));
-}
-
-.cinematic-hero[data-motion="active"] .cinematic-hero__image {
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) and (min-width: 701px) {
-  .cinematic-hero__image { --image-scale: 1.035; }
-}
-
-/* Keep the artwork clear in the upper field and add contrast only behind copy. */
-.cinematic-hero::after {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-  background: linear-gradient(180deg, rgb(0 0 0 / 65%) 0%, transparent 23%, rgb(0 0 0 / 10%) 35%, rgb(0 0 0 / 76%) 76%, rgb(0 0 0 / 88%) 100%);
-}
-
-.cinematic-hero__content { display: grid; gap: 46px; }
-.cinematic-hero__copy { display: grid; gap: 26px; }
-
-.cinematic-hero h1 {
-  max-width: 1300px;
-  font-size: 76px;
+.ring-hero h1 {
+  max-width: 1100px;
+  font-size: 58px;
   font-weight: 400;
-  line-height: 1.02;
+  line-height: 1.04;
   letter-spacing: 0;
 }
 
-.cinematic-hero__caption {
+.ring-hero__stage {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ring-hero__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+
+.ring-hero[data-ready] .ring-hero__canvas { opacity: 1; }
+.ring-hero[data-ready] .ring-hero__fallback { opacity: 0; }
+
+.ring-hero__fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 400ms ease;
+}
+
+.ring-hero__fallback img {
+  flex: 0 0 31%;
+  width: 31%;
+  height: 85%;
+  object-fit: cover;
+}
+
+.ring-hero__fallback img:nth-child(n + 4) { display: none; }
+
+.ring-hero__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding-top: 18px;
-  border-top: 1px solid rgb(255 255 255 / 32%);
   font-size: 14px;
 }
 
-.cinematic-hero__caption p span { margin-inline: 10px; opacity: 0.6; }
+.ring-hero__footer > p { color: var(--muted); }
+.ring-hero__actions { display: flex; gap: 28px; align-items: center; }
+.ring-hero__actions a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; }
+.ring-hero__actions a:hover { color: var(--accent); }
 
-.cinematic-hero__caption a {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  gap: 12px;
-  min-height: 44px;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 6px;
-  transition: text-decoration-color 200ms ease;
+.ring-hero__pause {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: color 180ms ease, background-color 180ms ease;
 }
 
-.cinematic-hero__caption a:hover { color: #fff; text-decoration-color: currentColor; }
-
-.home-two-page .site-header a:focus-visible,
-.cinematic-hero a:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+.ring-hero__pause[hidden] { display: none; }
+.ring-hero__pause:hover { color: var(--paper); background: var(--ink); }
+.ring-hero__pause .ring-hero__play-icon { display: none; margin-left: 2px; }
+.ring-hero__pause[aria-pressed="true"] .ring-hero__play-icon { display: block; }
+.ring-hero__pause[aria-pressed="true"] .ring-hero__pause-icon { display: none; }
 
 .home-two-work { padding-top: 32px; }
 .home-two-work .section-heading { margin-bottom: 48px; }
 
-@media (max-width: 1100px) {
-  .cinematic-hero h1 { font-size: 62px; }
+@media (max-width: 1000px) {
+  .ring-hero h1 { font-size: 46px; max-width: 840px; }
 }
 
 @media (max-width: 700px) {
-  .cinematic-hero { min-height: max(580px, calc(100svh - 80px)); padding-block: 170px 22px; }
-  .cinematic-hero__media { inset: 0; }
-  .cinematic-hero__image { object-position: 53% 38%; }
-  .cinematic-hero__content { gap: 32px; }
-  .cinematic-hero__copy { gap: 22px; }
-  .cinematic-hero .eyebrow { max-width: 270px; font-size: 12px; line-height: 1.5; }
-  .cinematic-hero h1 { font-size: 42px; }
-  .cinematic-hero__caption { font-size: 12px; gap: 12px; padding-top: 12px; }
-  .cinematic-hero__caption p { max-width: 190px; }
-  .cinematic-hero__caption p span { margin-inline: 4px; }
+  .ring-hero {
+    min-height: max(630px, calc(100svh - 76px));
+    grid-template-rows: auto minmax(240px, 1fr) auto;
+    padding-block: 108px 16px;
+    row-gap: 14px;
+  }
+  .ring-hero__intro { gap: 20px; }
+  .ring-hero .eyebrow { font-size: 11px; line-height: 1.5; }
+  .ring-hero h1 { font-size: 36px; max-width: 520px; }
+  .ring-hero__footer { font-size: 12px; }
+  .ring-hero__actions { gap: 18px; }
+  .ring-hero__fallback img { flex-basis: 75%; width: 75%; }
   .home-two-work { padding-top: 28px; }
   .home-two-work .section-heading { margin-bottom: 32px; }
 }
 
 @media (max-width: 360px) {
-  .cinematic-hero h1 { font-size: 36px; }
+  .ring-hero h1 { font-size: 30px; }
   .home-two-page .site-nav { gap: 12px; }
   .home-two-page .wordmark { font-size: 14px; }
   .home-two-page .site-nav a { font-size: 12px; }
 }
 
-@media (max-height: 750px) and (min-width: 701px) {
-  .cinematic-hero h1 { font-size: 60px; }
-  .cinematic-hero__content { gap: 30px; }
+@media (max-height: 800px) and (min-width: 701px) {
+  .ring-hero { min-height: max(600px, calc(100svh - 64px)); padding-top: 106px; row-gap: 18px; grid-template-rows: auto minmax(210px, 1fr) auto; }
+  .ring-hero__intro { gap: 18px; }
+  .ring-hero h1 { font-size: 44px; max-width: 1040px; }
 }
 
 @media (max-height: 650px) and (max-width: 700px) {
-  .cinematic-hero { min-height: calc(100svh - 64px); padding-block: 120px 14px; }
-  .cinematic-hero h1 { font-size: 32px; }
-  .cinematic-hero__content { gap: 20px; }
-  .cinematic-hero__copy { gap: 16px; }
+  .ring-hero { min-height: calc(100svh - 62px); grid-template-rows: auto minmax(170px, 1fr) auto; padding-top: 88px; row-gap: 12px; }
+  .ring-hero h1 { font-size: 28px; }
+  .ring-hero__intro { gap: 12px; }
   .home-two-work { padding-top: 22px; }
 }
 
-@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
-  .cinematic-hero__image { transform: none; will-change: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .ring-hero__canvas, .ring-hero__fallback { transition: none; }
 }
