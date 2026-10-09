@@ -2,8 +2,8 @@
 
 `/home-2/` is isolated from the main homepage and absent from public navigation.
 
-The header uses four full-bleed portfolio images, gentle camera drift, and a
-1.2-second dissolve on a 5.6-second cycle. The headline and subtle gradient wash
+The full-viewport header uses four full-bleed portfolio images, gentle camera drift, and a
+1.2-second dissolve on a 5.6-second cycle. The headline and upper gradient wash
 stay stationary. This is animated photography, not video or a WebGL scene.
 
 Edit artwork, captions, and desktop/mobile focal points in

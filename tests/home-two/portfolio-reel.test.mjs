@@ -7,6 +7,12 @@ import ts from "typescript";
 const source = readFileSync(new URL("../../src/scripts/portfolio-reel.ts", import.meta.url), "utf8");
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
 
+/**
+ * @typedef {{ style: Record<string, string>, hidden: boolean, attributes: Record<string, string>,
+ * addEventListener(name: string, callback: () => void): void,
+ * setAttribute(name: string, value: string): void, emit(name: string): void }} MockElement
+ */
+/** @returns {MockElement} */
 function element() {
   const events = new Map();
   return {
@@ -17,23 +23,35 @@ function element() {
   };
 }
 
+/** @param {{reduced?: boolean, failed?: number[]}} options */
 async function setup({ reduced = false, failed = [] } = {}) {
   const images = Array.from({ length: 4 }, (_, i) => ({ ...element(), decode: () => failed.includes(i) ? Promise.reject() : Promise.resolve() }));
   const captions = images.map((_, i) => ({ ...element(), hidden: i !== 0 }));
   const selectors = Object.fromEntries(["controls", "pause", "count", "previous", "next"].map(name => [`[data-reel-${name}]`, element()]));
   selectors[".portfolio-reel__captions"] = element();
   const root = {
+    /** @param {string} selector */
     querySelectorAll: selector => selector === "[data-reel-image]" ? images : captions,
+    /** @param {string} selector */
     querySelector: selector => selectors[selector],
   };
   const document = { ...element(), hidden: false };
   const media = { ...element(), matches: reduced };
   const frames = new Map();
-  let id = 0, now = 0, intersection;
-  const context = { exports: {}, document, matchMedia: () => media, AbortController,
+  let id = 0, now = 0;
+  /** @type {(entries: {isIntersecting: boolean}[]) => void} */
+  let intersection;
+  const context = { exports: /** @type {{mountPortfolioReel(element: typeof root): void}} */ ({}), document, matchMedia: () => media, AbortController,
+    /** @param {(time: number) => void} callback */
     requestAnimationFrame(callback) { frames.set(++id, callback); return id; },
+    /** @param {number} id */
     cancelAnimationFrame(id) { frames.delete(id); },
-    IntersectionObserver: class { constructor(callback) { intersection = callback; } observe() {} disconnect() {} },
+    IntersectionObserver: class {
+      /** @param {(entries: {isIntersecting: boolean}[]) => void} callback */
+      constructor(callback) { intersection = callback; }
+      observe() {}
+      disconnect() {}
+    },
   };
   vm.runInNewContext(compiled, context);
   context.exports.mountPortfolioReel(root);
@@ -41,8 +59,11 @@ async function setup({ reduced = false, failed = [] } = {}) {
   await Promise.resolve();
   return {
     images, captions, document, selectors, frames,
+    /** @param {string} name */
     click(name) { selectors[`[data-reel-${name}]`].emit("click"); },
+    /** @param {boolean} value */
     visible(value) { intersection([{ isIntersecting: value }]); },
+    /** @param {number} ms */
     step(ms) {
       for (let elapsed = 0; elapsed < ms; elapsed += 16) {
         now += 16;
