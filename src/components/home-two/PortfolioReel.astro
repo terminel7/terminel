@@ -5,10 +5,10 @@ import OutboundArrow from "../OutboundArrow.astro";
 
 // Keep image selection, responsive focal points, and captions together.
 const slides = [
-  { slug: "action-sports", name: "Action Sports", image: "image-01.webp", description: "An independent spirit, expressed from identity to environment.", position: "50% 45%", mobile: "39% 40%" },
-  { slug: "fintech", name: "Fintech", image: "image-01.webp", description: "A connected brand and digital experience for a changing industry.", position: "50% 42%", mobile: "52% 35%" },
-  { slug: "apparel", name: "Apparel", image: "image-03.webp", description: "A distinct point of view, brought to life in print and digital.", position: "50% 42%", mobile: "46% 40%" },
-  { slug: "streaming", name: "Streaming", image: "image-06.webp", description: "Digital experiences that bring content and community together.", position: "50% 35%", mobile: "52% 30%" },
+  { name: "3D / AI", image: "Header_Image_1", description: "Emerging technology shaped into expressive, human-centered experiences.", href: "/capabilities/", cta: "Explore Capabilities", position: "50% 45%", mobile: "44% 50%" },
+  { name: "Streaming", image: "Header_Image_2", description: "Digital strategy and design for a platform built around meaningful content.", href: "/work/streaming/", cta: "View Project", position: "50% 46%", mobile: "76% 50%" },
+  { name: "Fintech", image: "Header_Image_3", description: "A connected brand experience brought to life on an industry stage.", href: "/work/fintech/", cta: "View Project", position: "50% 48%", mobile: "50% 50%" },
+  { name: "Private Equity", image: "Header_Image_4", description: "A digital experience designed to inspire investor confidence.", href: "/work/private-equity/", cta: "View Project", position: "50% 48%", mobile: "78% 50%" },
 ];
 const headline = "Building brands and intelligent digital experiences that move hearts—and move the needle.";
 const headlineWords = headline.split(" ");
@@ -17,7 +17,18 @@ const headlineWords = headline.split(" ");
 <section class="portfolio-reel" data-portfolio-reel aria-labelledby="home-two-title" aria-roledescription="carousel">
   <div class="portfolio-reel__images" aria-hidden="true">
     {slides.map((slide, index) => (
-      <img class="portfolio-reel__image" data-reel-image src={sitePath(`/images/work/${slide.slug}/${slide.image}`)} alt="" decoding="async" loading={index === 0 ? "eager" : "lazy"} fetchpriority={index === 0 ? "high" : "auto"} style={`--image-position:${slide.position};--mobile-position:${slide.mobile};opacity:${index === 0 ? 1 : 0}`} />
+      <img
+        class="portfolio-reel__image"
+        data-reel-image
+        src={sitePath(`/images/${slide.image}-2200.webp`)}
+        srcset={`${sitePath(`/images/${slide.image}-1000.webp`)} 1000w, ${sitePath(`/images/${slide.image}-2200.webp`)} 2200w`}
+        sizes="100vw"
+        alt=""
+        decoding="async"
+        loading={index === 0 ? "eager" : "lazy"}
+        fetchpriority={index === 0 ? "high" : "auto"}
+        style={`--image-position:${slide.position};--mobile-position:${slide.mobile};opacity:${index === 0 ? 1 : 0}`}
+      />
     ))}
   </div>
   <div class="portfolio-reel__shade" aria-hidden="true"></div>
@@ -40,7 +51,7 @@ const headlineWords = headline.split(" ");
           <div data-reel-caption data-entering={index === 0 ? "" : undefined} hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${slides.length}: ${slide.name}`}>
             <p class="portfolio-reel__name">{slide.name}</p>
             <p class="portfolio-reel__description">{slide.description}</p>
-            <a href={sitePath(`/work/${slide.slug}/`)}>View Project <OutboundArrow /></a>
+            <a href={sitePath(slide.href)}>{slide.cta} <OutboundArrow /></a>
           </div>
         ))}
       </div>

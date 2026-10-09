@@ -104,6 +104,15 @@ test("pause holds the image and manual navigation wraps without restarting autop
   assert.equal(reel.frames.size, 0);
 });
 
+test("pausing during a dissolve settles on one image and its matching caption", async () => {
+  const reel = await setup();
+  reel.step(5200);
+  reel.click("pause");
+  assert.equal(reel.captions[1].hidden, false);
+  assert.equal(reel.images[1].style.opacity, "1");
+  assert.equal(reel.images[0].style.opacity, "0");
+});
+
 test("hidden tabs, offscreen content, and focused captions suspend playback", async () => {
   const reel = await setup();
   reel.visible(false);

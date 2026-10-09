@@ -75,6 +75,16 @@ export function mountPortfolioReel(root: HTMLElement) {
     if (running() && !frame) frame = requestAnimationFrame(tick);
     if (!running() && frame) { cancelAnimationFrame(frame); frame = 0; previous = 0; }
   }
+  function settleTransition() {
+    const next = nextIndex();
+    const progress = Math.max(0, Math.min(1, (elapsed - DURATION + DISSOLVE) / DISSOLVE));
+    if (next !== current && progress >= .5) {
+      current = next;
+      updateCaption();
+    }
+    elapsed = 0;
+    render();
+  }
   function select(direction: number) {
     paused = true;
     current = nextIndex(direction);
@@ -83,7 +93,11 @@ export function mountPortfolioReel(root: HTMLElement) {
     render();
     sync();
   }
-  pause.addEventListener("click", () => { paused = !paused; sync(); }, options);
+  pause.addEventListener("click", () => {
+    if (!paused) settleTransition();
+    paused = !paused;
+    sync();
+  }, options);
   root.querySelector("[data-reel-previous]")!.addEventListener("click", () => select(-1), options);
   root.querySelector("[data-reel-next]")!.addEventListener("click", () => select(1), options);
   const captionArea = root.querySelector<HTMLElement>(".portfolio-reel__captions")!;
