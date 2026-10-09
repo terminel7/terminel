@@ -1,0 +1,52 @@
+---
+import { ChevronLeft, ChevronRight, Pause, Play } from "@lucide/astro";
+import { sitePath } from "../../lib/paths";
+import OutboundArrow from "../OutboundArrow.astro";
+
+// Keep image selection, responsive focal points, and captions together.
+const slides = [
+  { slug: "action-sports", name: "Action Sports", image: "image-01.webp", description: "An independent spirit, expressed from identity to environment.", position: "50% 45%", mobile: "39% 40%" },
+  { slug: "fintech", name: "Fintech", image: "image-01.webp", description: "A connected brand and digital experience for a changing industry.", position: "50% 42%", mobile: "52% 35%" },
+  { slug: "apparel", name: "Apparel", image: "image-03.webp", description: "A distinct point of view, brought to life in print and digital.", position: "50% 42%", mobile: "46% 40%" },
+  { slug: "streaming", name: "Streaming", image: "image-06.webp", description: "Digital experiences that bring content and community together.", position: "50% 35%", mobile: "52% 30%" },
+];
+---
+
+<section class="portfolio-reel" data-portfolio-reel aria-labelledby="home-two-title" aria-roledescription="carousel">
+  <div class="portfolio-reel__images" aria-hidden="true">
+    {slides.map((slide, index) => (
+      <img class="portfolio-reel__image" data-reel-image src={sitePath(`/images/work/${slide.slug}/${slide.image}`)} alt="" decoding="async" loading={index === 0 ? "eager" : "lazy"} fetchpriority={index === 0 ? "high" : "auto"} style={`--image-position:${slide.position};--mobile-position:${slide.mobile};opacity:${index === 0 ? 1 : 0}`} />
+    ))}
+  </div>
+  <div class="portfolio-reel__wash" aria-hidden="true"></div>
+  <div class="portfolio-reel__shade" aria-hidden="true"></div>
+  <div class="container portfolio-reel__content">
+    <div class="portfolio-reel__intro">
+      <p class="eyebrow">Creative Direction / Design / Development</p>
+      <h1 id="home-two-title">Building brands and intelligent <span class="mobile-hidden-word">digital </span>experiences that move hearts—and move the needle.</h1>
+    </div>
+    <div class="portfolio-reel__footer">
+      <div class="portfolio-reel__captions">
+        {slides.map((slide, index) => (
+          <div data-reel-caption hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${slides.length}: ${slide.name}`}>
+            <p class="portfolio-reel__name">{slide.name}</p>
+            <p class="portfolio-reel__description">{slide.description}</p>
+            <a href={sitePath(`/work/${slide.slug}/`)}>View Project <OutboundArrow /></a>
+          </div>
+        ))}
+      </div>
+      <div class="portfolio-reel__controls" data-reel-controls hidden>
+        <span class="portfolio-reel__count" data-reel-count aria-hidden="true">01 / 04</span>
+        <button type="button" data-reel-previous aria-label="Previous project" title="Previous project"><ChevronLeft size={18} aria-hidden="true" /></button>
+        <button type="button" data-reel-pause aria-label="Pause slideshow" title="Pause slideshow" aria-pressed="false"><Pause class="reel-pause-icon" size={16} aria-hidden="true" /><Play class="reel-play-icon" size={16} aria-hidden="true" /></button>
+        <button type="button" data-reel-next aria-label="Next project" title="Next project"><ChevronRight size={18} aria-hidden="true" /></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { mountPortfolioReel } from "../../scripts/portfolio-reel";
+  const reel = document.querySelector<HTMLElement>("[data-portfolio-reel]");
+  if (reel) mountPortfolioReel(reel);
+</script>

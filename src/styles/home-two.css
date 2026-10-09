@@ -1,154 +1,65 @@
-/* Only the experiment uses these rules. The published homepage is unchanged. */
-.home-two-page .site-header {
-  position: absolute;
-  top: 0;
-  inset-inline: 0;
-  background: transparent;
-}
-
-.ring-hero {
-  display: grid;
-  grid-template-rows: auto minmax(250px, 1fr) auto;
-  min-height: max(700px, calc(100svh - 80px));
-  padding-block: 126px 22px;
-  row-gap: 26px;
-  overflow: hidden;
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.ring-hero__intro {
-  display: grid;
-  justify-items: center;
-  gap: 24px;
-  text-align: center;
-}
-
-.ring-hero h1 {
-  max-width: 1100px;
-  font-size: 58px;
-  font-weight: 400;
-  line-height: 1.04;
-  letter-spacing: 0;
-}
-
-.ring-hero__stage {
-  position: relative;
-  min-width: 0;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.ring-hero__canvas {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 400ms ease;
-  pointer-events: none;
-}
-
-.ring-hero[data-ready] .ring-hero__canvas { opacity: 1; }
-.ring-hero[data-ready] .ring-hero__fallback { opacity: 0; }
-
-.ring-hero__fallback {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  transition: opacity 400ms ease;
-}
-
-.ring-hero__fallback img {
-  flex: 0 0 31%;
-  width: 31%;
-  height: 85%;
-  object-fit: cover;
-}
-
-.ring-hero__fallback img:nth-child(n + 4) { display: none; }
-
-.ring-hero__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  font-size: 14px;
-}
-
-.ring-hero__footer > p { color: var(--muted); }
-.ring-hero__actions { display: flex; gap: 28px; align-items: center; }
-.ring-hero__actions a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; }
-.ring-hero__actions a:hover { color: var(--accent); }
-
-.ring-hero__pause {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  transition: color 180ms ease, background-color 180ms ease;
-}
-
-.ring-hero__pause[hidden] { display: none; }
-.ring-hero__pause:hover { color: var(--paper); background: var(--ink); }
-.ring-hero__pause .ring-hero__play-icon { display: none; margin-left: 2px; }
-.ring-hero__pause[aria-pressed="true"] .ring-hero__play-icon { display: block; }
-.ring-hero__pause[aria-pressed="true"] .ring-hero__pause-icon { display: none; }
-
+/* All header overrides belong exclusively to /home-2/. */
+.home-two-page .site-header { position: absolute; top: 0; inset-inline: 0; background: transparent; color: #fff; }
+.portfolio-reel { position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: max(680px, calc(100svh - 80px)); overflow: hidden; background: #171817; color: #fff; }
+.portfolio-reel__images, .portfolio-reel__image, .portfolio-reel__wash, .portfolio-reel__shade { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.portfolio-reel__images { z-index: -3; }
+.portfolio-reel__image { object-fit: cover; object-position: var(--image-position); will-change: transform, opacity; }
+.portfolio-reel__wash { z-index: -2; opacity: .18; background: linear-gradient(135deg, transparent 25%, #f86443 48%, #dd558d 62%, #967ff1 76%, #75bacb 94%); mask-image: linear-gradient(160deg, #000 5%, #000 30%, transparent 72%); }
+.portfolio-reel__shade { z-index: -1; background: linear-gradient(180deg, rgb(0 0 0 / 62%), transparent 22%, rgb(0 0 0 / 45%) 36%, rgb(0 0 0 / 72%) 72%, rgb(0 0 0 / 86%) 100%), linear-gradient(90deg, rgb(0 0 0 / 15%), transparent 85%); }
+.portfolio-reel__content { padding-top: 260px; padding-bottom: 30px; }
+.portfolio-reel__intro { max-width: 1150px; }
+.portfolio-reel .eyebrow { margin-bottom: 22px; color: #fff; }
+.portfolio-reel h1 { font-size: 66px; font-weight: 400; line-height: 1.05; letter-spacing: 0; }
+.portfolio-reel__footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-top: 42px; padding-top: 24px; border-top: 1px solid rgb(255 255 255 / 30%); }
+.portfolio-reel__captions { min-height: 102px; max-width: 620px; }
+.portfolio-reel__name { font-size: 15px; font-weight: 500; margin-bottom: 7px; }
+.portfolio-reel__description { font-size: 14px; line-height: 1.5; color: #dededc; }
+.portfolio-reel__captions a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 13px; }
+.portfolio-reel__captions a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.portfolio-reel__controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.portfolio-reel__count { font-size: 12px; font-variant-numeric: tabular-nums; margin-right: 18px; }
+.portfolio-reel__controls button { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgb(255 255 255 / 45%); border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
+.portfolio-reel__controls button:hover { background: #fff; color: #111; }
+.portfolio-reel :focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+.portfolio-reel__controls[hidden], .portfolio-reel [data-reel-caption][hidden], .portfolio-reel .reel-play-icon { display: none; }
+.portfolio-reel [aria-pressed="true"] .reel-play-icon { display: block; }
+.portfolio-reel [aria-pressed="true"] .reel-pause-icon { display: none; }
 .home-two-work { padding-top: 32px; }
 .home-two-work .section-heading { margin-bottom: 48px; }
-
 @media (max-width: 1000px) {
-  .ring-hero h1 { font-size: 46px; max-width: 840px; }
+  .portfolio-reel h1 { font-size: 52px; }
+  .portfolio-reel__intro { max-width: 850px; }
 }
-
 @media (max-width: 700px) {
-  .ring-hero {
-    min-height: max(630px, calc(100svh - 76px));
-    grid-template-rows: auto minmax(240px, 1fr) auto;
-    padding-block: 108px 16px;
-    row-gap: 14px;
-  }
-  .ring-hero__intro { gap: 20px; }
-  .ring-hero .eyebrow { font-size: 11px; line-height: 1.5; }
-  .ring-hero h1 { font-size: 36px; max-width: 520px; }
-  .ring-hero__footer { font-size: 12px; }
-  .ring-hero__actions { gap: 18px; }
-  .ring-hero__fallback img { flex-basis: 75%; width: 75%; }
+  .portfolio-reel { min-height: max(650px, calc(100svh - 70px)); }
+  .portfolio-reel__image { object-position: var(--mobile-position); }
+  .portfolio-reel__content { padding-top: 230px; padding-bottom: 22px; }
+  .portfolio-reel h1 { font-size: 36px; max-width: 540px; }
+  .portfolio-reel .eyebrow { font-size: 10px; margin-bottom: 18px; }
+  .portfolio-reel__footer { margin-top: 28px; padding-top: 18px; gap: 16px; flex-wrap: wrap; }
+  .portfolio-reel__captions { min-height: 120px; width: 100%; }
+  .portfolio-reel__controls { width: 100%; }
+  .portfolio-reel__count { margin-right: auto; }
+  .portfolio-reel__description { font-size: 13px; max-width: 360px; }
   .home-two-work { padding-top: 28px; }
   .home-two-work .section-heading { margin-bottom: 32px; }
 }
-
 @media (max-width: 360px) {
-  .ring-hero h1 { font-size: 30px; }
+  .portfolio-reel h1 { font-size: 32px; }
   .home-two-page .site-nav { gap: 12px; }
   .home-two-page .wordmark { font-size: 14px; }
   .home-two-page .site-nav a { font-size: 12px; }
 }
-
-@media (max-height: 800px) and (min-width: 701px) {
-  .ring-hero { min-height: max(600px, calc(100svh - 64px)); padding-top: 106px; row-gap: 18px; grid-template-rows: auto minmax(210px, 1fr) auto; }
-  .ring-hero__intro { gap: 18px; }
-  .ring-hero h1 { font-size: 44px; max-width: 1040px; }
+@media (max-height: 750px) and (min-width: 701px) {
+  .portfolio-reel { min-height: max(560px, calc(100svh - 64px)); }
+  .portfolio-reel__content { padding-top: 190px; }
+  .portfolio-reel h1 { font-size: 48px; max-width: 960px; }
+  .portfolio-reel__footer { margin-top: 28px; }
 }
-
-@media (max-height: 650px) and (max-width: 700px) {
-  .ring-hero { min-height: calc(100svh - 62px); grid-template-rows: auto minmax(170px, 1fr) auto; padding-top: 88px; row-gap: 12px; }
-  .ring-hero h1 { font-size: 28px; }
-  .ring-hero__intro { gap: 12px; }
-  .home-two-work { padding-top: 22px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ring-hero__canvas, .ring-hero__fallback { transition: none; }
+@media (max-height: 700px) and (max-width: 700px) {
+  .portfolio-reel { min-height: calc(100svh - 50px); }
+  .portfolio-reel__content { padding-top: 112px; padding-bottom: 16px; }
+  .portfolio-reel h1 { font-size: 30px; }
+  .portfolio-reel__footer { margin-top: 20px; gap: 8px; }
+  .portfolio-reel__captions { min-height: 106px; }
 }

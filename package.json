@@ -12,13 +12,11 @@
   },
   "dependencies": {
     "@lucide/astro": "^1.52.0",
-    "astro": "^7.3.2",
-    "three": "^0.186.1"
+    "astro": "^7.3.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/node": "^22.20.2",
-    "@types/three": "^0.186.0",
     "typescript": "^6.0.3"
   }
 }

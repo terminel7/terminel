@@ -1,31 +1,19 @@
 # Home 2 Experiment
 
-`/home-2/` is an Astro experiment, absent from the public navigation. Its header
-stays isolated; the compact project grid is shared with the main homepage.
+`/home-2/` is isolated from the main homepage and absent from public navigation.
 
-## Circulating Gallery
+The header uses four full-bleed portfolio images, gentle camera drift, and a
+1.2-second dissolve on a 5.6-second cycle. The headline and subtle gradient wash
+stay stationary. This is animated photography, not video or a WebGL scene.
 
-Fourteen inward-facing image planes form a complete ring around the viewer.
-The seven portfolio hero images repeat twice, with shared textures and materials.
-The camera sits inside the ring, slightly off-center. The ring moves continuously
-in one direction; pointer movement only adjusts the viewing angle a few degrees.
-Text and navigation are normal, stationary HTML outside the canvas.
+Edit artwork, captions, and desktop/mobile focal points in
+`src/components/home-two/PortfolioReel.astro`. Timing and playback live in
+`src/scripts/portfolio-reel.ts`; scoped styling lives in `src/styles/home-two.css`.
 
-The pause button stops circulation. Reduced-motion preferences start paused.
-Mobile uses a closer viewpoint and narrower field of view. Animation pauses when
-offscreen or in a hidden tab. Without WebGL or JavaScript, a static image strip
-remains, with ordinary project links in the grid below.
+Playback pauses offscreen, in hidden tabs, and while a project link has focus.
+Manual navigation pauses autoplay. Reduced-motion preferences start paused and
+disable camera movement. Without JavaScript, the first image and link remain.
+Failed images are skipped; the outgoing image stays opaque during dissolves to
+avoid a dark flash between slides. Controls have accessible names and titles.
 
-## Editing
-
-- `src/components/home-two/RingHero.astro`: artwork sources, copy, and controls.
-- `src/scripts/ring-gallery.ts`: Three.js scene and interaction lifecycle.
-- `src/scripts/ring-gallery-layout.ts`: radius, panel dimensions, speed, and framing.
-- `src/styles/home-two.css`: isolated header styles and responsive layout.
-
-Three.js loads only on `/home-2/`. No shared project data or live homepage behavior
-is changed. The main homepage still excludes Private Equity; the project remains
-available through case-study navigation.
-
-Run `npm run dev` and open `/home-2/`. Verify with `npm run check`, `npm run build`,
-and `node --test tests/home-two/ring-gallery.test.mjs`.
+Run `npm run check`, `npm run build`, and `node --test tests/home-two/portfolio-reel.test.mjs`.
