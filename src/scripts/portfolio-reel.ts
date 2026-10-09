@@ -32,7 +32,15 @@ export function mountPortfolioReel(root: HTMLElement) {
     return current;
   }
   function updateCaption() {
-    captions.forEach((caption, index) => { caption.hidden = index !== current; });
+    captions.forEach((caption, index) => {
+      caption.hidden = index !== current;
+      caption.removeAttribute("data-entering");
+    });
+    const activeCaption = captions[current];
+    if (activeCaption && !reducedMotion.matches) {
+      void activeCaption.offsetWidth;
+      activeCaption.setAttribute("data-entering", "");
+    }
     counter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(images.length).padStart(2, "0")}`;
   }
   function render() {

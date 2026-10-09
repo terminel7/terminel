@@ -10,15 +10,17 @@ const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.Modu
 /**
  * @typedef {{ style: Record<string, string>, hidden: boolean, attributes: Record<string, string>,
  * addEventListener(name: string, callback: () => void): void,
- * setAttribute(name: string, value: string): void, emit(name: string): void }} MockElement
+ * setAttribute(name: string, value: string): void, removeAttribute(name: string): void,
+ * offsetWidth: number, emit(name: string): void }} MockElement
  */
 /** @returns {MockElement} */
 function element() {
   const events = new Map();
   return {
-    style: {}, hidden: false, attributes: {},
+    style: {}, hidden: false, attributes: {}, offsetWidth: 100,
     addEventListener(name, callback) { events.set(name, callback); },
     setAttribute(name, value) { this.attributes[name] = value; },
+    removeAttribute(name) { delete this.attributes[name]; },
     emit(name) { events.get(name)?.(); },
   };
 }
@@ -83,6 +85,7 @@ test("dissolve keeps the outgoing frame opaque, then updates the matching captio
   assert.ok(Number(reel.images[1].style.opacity) < .7);
   reel.step(800);
   assert.equal(reel.captions[1].hidden, false);
+  assert.equal(reel.captions[1].attributes["data-entering"], "");
   assert.equal(reel.captions[0].hidden, true);
   assert.equal(reel.images[1].style.opacity, "1");
 });
