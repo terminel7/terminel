@@ -29,7 +29,7 @@ function element() {
 async function setup({ reduced = false, failed = [] } = {}) {
   const images = Array.from({ length: 4 }, (_, i) => ({ ...element(), decode: () => failed.includes(i) ? Promise.reject() : Promise.resolve() }));
   const captions = images.map((_, i) => ({ ...element(), hidden: i !== 0 }));
-  const selectors = Object.fromEntries(["controls", "pause", "count", "previous", "next"].map(name => [`[data-reel-${name}]`, element()]));
+  const selectors = Object.fromEntries(["controls", "count", "previous", "next"].map(name => [`[data-reel-${name}]`, element()]));
   selectors[".portfolio-reel__captions"] = element();
   const root = {
     /** @param {string} selector */
@@ -90,27 +90,16 @@ test("dissolve keeps the outgoing frame opaque, then updates the matching captio
   assert.equal(reel.images[1].style.opacity, "1");
 });
 
-test("pause holds the image and manual navigation wraps without restarting autoplay", async () => {
+test("manual navigation wraps and restarts the autoplay cycle", async () => {
   const reel = await setup();
   reel.step(1000);
-  reel.click("pause");
-  const transform = reel.images[0].style.transform;
-  reel.step(7000);
-  assert.equal(reel.images[0].style.transform, transform);
   reel.click("previous");
   assert.equal(reel.captions[3].hidden, false);
   reel.click("next");
   assert.equal(reel.captions[0].hidden, false);
-  assert.equal(reel.frames.size, 0);
-});
-
-test("pausing during a dissolve settles on one image and its matching caption", async () => {
-  const reel = await setup();
-  reel.step(5200);
-  reel.click("pause");
+  assert.equal(reel.frames.size, 1);
+  reel.step(5800);
   assert.equal(reel.captions[1].hidden, false);
-  assert.equal(reel.images[1].style.opacity, "1");
-  assert.equal(reel.images[0].style.opacity, "0");
 });
 
 test("hidden tabs, offscreen content, and focused captions suspend playback", async () => {

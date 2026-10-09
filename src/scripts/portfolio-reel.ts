@@ -5,7 +5,6 @@ export function mountPortfolioReel(root: HTMLElement) {
   const images = [...root.querySelectorAll<HTMLImageElement>("[data-reel-image]")];
   const captions = [...root.querySelectorAll<HTMLElement>("[data-reel-caption]")];
   const controls = root.querySelector<HTMLElement>("[data-reel-controls]")!;
-  const pause = root.querySelector<HTMLButtonElement>("[data-reel-pause]")!;
   const counter = root.querySelector<HTMLElement>("[data-reel-count]")!;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const abort = new AbortController();
@@ -13,7 +12,6 @@ export function mountPortfolioReel(root: HTMLElement) {
   const ready = new Set<number>();
   let current = 0;
   let elapsed = 0;
-  let paused = reducedMotion.matches;
   let visible = true;
   let focused = false;
   let frame = 0;
@@ -58,7 +56,7 @@ export function mountPortfolioReel(root: HTMLElement) {
       image.style.transform = `translateX(${drift}%) scale(${scale})`;
     });
   }
-  function running() { return !paused && visible && !focused && !document.hidden; }
+  function running() { return !reducedMotion.matches && visible && !focused && !document.hidden; }
   function tick(now: number) {
     if (!running()) { frame = 0; previous = 0; return; }
     if (previous && ready.has(current) && nextIndex() !== current) elapsed += Math.min(now - previous, 64);
@@ -68,43 +66,23 @@ export function mountPortfolioReel(root: HTMLElement) {
     frame = requestAnimationFrame(tick);
   }
   function sync() {
-    pause.setAttribute("aria-pressed", String(paused));
-    const label = paused ? "Play slideshow" : "Pause slideshow";
-    pause.setAttribute("aria-label", label);
-    pause.title = label;
     if (running() && !frame) frame = requestAnimationFrame(tick);
     if (!running() && frame) { cancelAnimationFrame(frame); frame = 0; previous = 0; }
   }
-  function settleTransition() {
-    const next = nextIndex();
-    const progress = Math.max(0, Math.min(1, (elapsed - DURATION + DISSOLVE) / DISSOLVE));
-    if (next !== current && progress >= .5) {
-      current = next;
-      updateCaption();
-    }
-    elapsed = 0;
-    render();
-  }
   function select(direction: number) {
-    paused = true;
     current = nextIndex(direction);
     elapsed = 0;
     updateCaption();
     render();
     sync();
   }
-  pause.addEventListener("click", () => {
-    if (!paused) settleTransition();
-    paused = !paused;
-    sync();
-  }, options);
   root.querySelector("[data-reel-previous]")!.addEventListener("click", () => select(-1), options);
   root.querySelector("[data-reel-next]")!.addEventListener("click", () => select(1), options);
   const captionArea = root.querySelector<HTMLElement>(".portfolio-reel__captions")!;
   captionArea.addEventListener("focusin", () => { focused = true; sync(); }, options);
   captionArea.addEventListener("focusout", () => { focused = false; sync(); }, options);
   document.addEventListener("visibilitychange", sync, options);
-  reducedMotion.addEventListener("change", () => { paused = reducedMotion.matches; elapsed = 0; render(); sync(); }, options);
+  reducedMotion.addEventListener("change", () => { elapsed = 0; render(); sync(); }, options);
   const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
   observer.observe(root);
   controls.hidden = false;

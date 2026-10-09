@@ -14,8 +14,8 @@ Edit reel artwork, captions, links, and desktop/mobile focal points in
 `src/scripts/portfolio-reel.ts`; scoped styling lives in `src/styles/home-two.css`.
 
 Playback pauses offscreen, in hidden tabs, and while a project link has focus.
-Manual navigation pauses autoplay. Reduced-motion preferences start paused and
-disable camera movement. Without JavaScript, the first image and link remain.
+Manual navigation restarts the cycle from the selected image. Reduced-motion
+preferences disable autoplay and camera movement. Without JavaScript, the first image and link remain.
 Failed images are skipped; the outgoing image stays opaque during dissolves to
 avoid a dark flash between slides. Controls have accessible names and titles.
 

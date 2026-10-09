@@ -1,5 +1,5 @@
 ---
-import { ChevronLeft, ChevronRight, Pause, Play } from "@lucide/astro";
+import { ChevronLeft, ChevronRight } from "@lucide/astro";
 import { sitePath } from "../../lib/paths";
 import OutboundArrow from "../OutboundArrow.astro";
 
@@ -58,7 +58,6 @@ const headlineWords = headline.split(" ");
       <div class="portfolio-reel__controls" data-reel-controls hidden>
         <span class="portfolio-reel__count" data-reel-count aria-hidden="true">01 / 04</span>
         <button type="button" data-reel-previous aria-label="Previous project" title="Previous project"><ChevronLeft size={18} aria-hidden="true" /></button>
-        <button type="button" data-reel-pause aria-label="Pause slideshow" title="Pause slideshow" aria-pressed="false"><Pause class="reel-pause-icon" size={16} aria-hidden="true" /><Play class="reel-play-icon" size={16} aria-hidden="true" /></button>
         <button type="button" data-reel-next aria-label="Next project" title="Next project"><ChevronRight size={18} aria-hidden="true" /></button>
       </div>
     </div>
