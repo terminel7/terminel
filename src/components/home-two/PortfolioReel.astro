@@ -18,7 +18,6 @@ const slides = [
       <img class="portfolio-reel__image" data-reel-image src={sitePath(`/images/work/${slide.slug}/${slide.image}`)} alt="" decoding="async" loading={index === 0 ? "eager" : "lazy"} fetchpriority={index === 0 ? "high" : "auto"} style={`--image-position:${slide.position};--mobile-position:${slide.mobile};opacity:${index === 0 ? 1 : 0}`} />
     ))}
   </div>
-  <div class="portfolio-reel__wash" aria-hidden="true"></div>
   <div class="portfolio-reel__shade" aria-hidden="true"></div>
   <div class="container portfolio-reel__content">
     <div class="portfolio-reel__intro">
