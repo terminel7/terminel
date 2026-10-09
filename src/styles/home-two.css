@@ -6,7 +6,7 @@
 .portfolio-reel__image { object-fit: cover; object-position: var(--image-position); will-change: transform, opacity; }
 .portfolio-reel__shade { z-index: -1; background: linear-gradient(180deg, rgb(0 0 0 / 62%), transparent 22%, rgb(0 0 0 / 45%) 36%, rgb(0 0 0 / 72%) 72%, rgb(0 0 0 / 86%) 100%), linear-gradient(90deg, rgb(0 0 0 / 15%), transparent 85%); }
 .portfolio-reel__content { padding-top: 260px; padding-bottom: 30px; }
-.portfolio-reel__intro { max-width: 1150px; }
+.portfolio-reel__intro { max-width: 1030px; }
 .portfolio-reel .eyebrow { margin-bottom: 22px; color: #fff; }
 .portfolio-reel h1 { font-size: 66px; font-weight: 400; line-height: 1.05; letter-spacing: 0; }
 .portfolio-reel__headline-words { display: block; }
