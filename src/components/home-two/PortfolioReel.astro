@@ -49,7 +49,6 @@ const headlineWords = headline.split(" ");
       <div class="portfolio-reel__captions">
         {slides.map((slide, index) => (
           <div data-reel-caption data-entering={index === 0 ? "" : undefined} hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${slides.length}: ${slide.name}`}>
-            <p class="portfolio-reel__name">{slide.name}</p>
             <p class="portfolio-reel__description">{slide.description}</p>
             <a href={sitePath(slide.href)}>{slide.cta} <OutboundArrow /></a>
           </div>
