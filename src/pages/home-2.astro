@@ -2,47 +2,191 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
 import OutboundArrow from "../components/OutboundArrow.astro";
-import WorkCard from "../components/WorkCard.astro";
 import { projects } from "../lib/projects";
 import { sitePath } from "../lib/paths";
-import "../styles/work-grid.css";
+import "../styles/home-two-concept.css";
 
-const homepageOrder = ["streaming", "fintech", "action-sports", "auto-lending", "retail", "apparel"];
+const projectOrder = ["streaming", "fintech", "action-sports", "auto-lending", "retail", "apparel"];
 const featuredProjects = projects
-  .filter((project) => homepageOrder.includes(project.slug))
-  .sort((a, b) => homepageOrder.indexOf(a.slug) - homepageOrder.indexOf(b.slug));
+  .filter((project) => projectOrder.includes(project.slug))
+  .sort((a, b) => projectOrder.indexOf(a.slug) - projectOrder.indexOf(b.slug));
+
+const capabilities = [
+  {
+    number: "01",
+    name: "Strategy",
+    description: "Clarity before expression. Research, structure, and a focused point of view establish where the work should go and what it needs to accomplish.",
+    items: ["Information Architecture", "Competitive Analysis", "Audience Segmentation + User Flows", "Brand + Digital Strategy", "UI/UX Strategy", "Multivariate Testing"],
+  },
+  {
+    number: "02",
+    name: "Creative",
+    description: "Ideas built to live in the real world. Direction and hands-on design connect every touchpoint, from an identity system to a campaign, product, or physical environment.",
+    items: ["Web + Product Design", "Art + Creative Direction", "UX/UI Design", "Event Support + Collateral", "Design Systems", "Presentations", "Motion Graphics + Animation", "3D"],
+  },
+  {
+    number: "03",
+    name: "Branding",
+    description: "Distinct identities with enough structure to stay coherent as they grow. Positioning, visual language, and practical systems make a brand easier to recognize and easier to use.",
+    items: ["Logo + Identity", "Brand Standards + Evolutions", "Brand Audits", "Brand Positioning"],
+  },
+  {
+    number: "04",
+    name: "Development",
+    description: "Digital experiences carried through to launch with thoughtful architecture, strong performance, and close attention to the original design intent.",
+    items: ["Headless CMS", "Webflow", "AI Workflow Implementation", "Marketing Automation Integration", "Analytics + Reporting", "Localization + Regionalization"],
+  },
+];
 ---
 
-<BaseLayout bodyClass="home-page">
-  <section class="home-hero section">
-    <div class="home-hero__media" aria-hidden="true">
-      <canvas class="home-hero__gradient" data-hero-gradient></canvas>
+<BaseLayout
+  bodyClass="home-two-concept-page"
+  title="Angelo Terminel | One-page Portfolio Concept"
+  description="Creative direction, design, strategy, and development across brands and digital experiences."
+  hideGlobalNavigation
+>
+  <header class="concept-header" data-concept-header data-scrolled="false">
+    <div class="container concept-header__inner">
+      <a class="concept-header__wordmark" href="#top" aria-label="Angelo Terminel, back to top">Angelo Terminel</a>
+      <nav aria-label="One-page navigation">
+        <ul>
+          <li><a href="#work" data-section-link="work">Work</a></li>
+          <li><a href="#capabilities" data-section-link="capabilities">Capabilities</a></li>
+          <li><a href="#contact" data-section-link="contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="container home-hero__inner">
-      <p class="eyebrow">Creative Direction / Design / Development</p>
-      <h1>Building brands and intelligent <span class="mobile-hidden-word">digital </span>experiences that move hearts—and move the needle.</h1>
+  </header>
+
+  <section class="concept-hero" id="top" aria-labelledby="concept-hero-title" data-concept-hero>
+    <div class="concept-hero__media" aria-hidden="true" data-concept-hero-media>
+      <img
+        src={sitePath("/images/Header_Image_3-2200.webp")}
+        srcset={`${sitePath("/images/Header_Image_3-1000.webp")} 1000w, ${sitePath("/images/Header_Image_3-2200.webp")} 2200w`}
+        sizes="100vw"
+        alt=""
+        width="2200"
+        height="1354"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+    <div class="concept-hero__shade" aria-hidden="true"></div>
+    <div class="container concept-hero__content">
+      <div class="concept-hero__title">
+        <p class="eyebrow">Creative Direction / Design / Development</p>
+        <h1 id="concept-hero-title">Building brands and intelligent experiences that move hearts—and move the needle.</h1>
+      </div>
+      <div class="concept-hero__footer">
+        <p>Over 15 years of creative guidance across strategy, design, technology, and the spaces between them.</p>
+        <a href="#work">Selected Work <span aria-hidden="true">↓</span></a>
+      </div>
     </div>
   </section>
 
-  <section class="work-preview section section--rule" id="work">
+  <section class="concept-work" id="work" aria-labelledby="concept-work-title">
     <div class="container">
-      <div class="section-heading">
+      <header class="concept-section-intro">
         <p class="eyebrow">Selected Work</p>
-        <p class="section-heading__meta">Case Studies</p>
-      </div>
-      <div class="work-grid work-grid--compact">
-        {featuredProjects.map((project, index) => <WorkCard project={project} eager={index < 3} />)}
+        <div>
+          <h2 id="concept-work-title">A collection shaped across industries, audiences, and mediums.</h2>
+          <p>Brand systems, websites, campaigns, events, and products brought together by a clear idea and careful execution.</p>
+        </div>
+      </header>
+
+      <div class="concept-work__grid">
+        {featuredProjects.map((project, index) => (
+          <article class="concept-work-card" data-reveal>
+            <a href={sitePath(`/work/${project.slug}/`)}>
+              <figure class="concept-work-card__media">
+                <img
+                  src={sitePath(project.thumbnail)}
+                  alt=""
+                  loading={index < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </figure>
+              <div class="concept-work-card__content">
+                <span class="concept-work-card__number">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <p class="concept-work-card__industry">{project.name}</p>
+                  <h3>{project.title}</h3>
+                  <ul aria-label="Services">
+                    {project.services.map((service) => <li>{service}</li>)}
+                  </ul>
+                </div>
+                <OutboundArrow className="concept-work-card__arrow" />
+              </div>
+            </a>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="capabilities-prompt section section--dark" data-reveal>
-    <div class="container capabilities-prompt__grid">
-      <p class="eyebrow">Expertise</p>
-      <div>
-        <p class="capabilities-prompt__copy">With over 15 years of experience, plenty of tools have come and gone. The fundamentals have not: taste, design principles, an understanding of human behavior, and the judgment to apply them across strategy, design, and development.</p>
-        <a class="capabilities-prompt__link" href={sitePath("/capabilities/")}>Explore Capabilities <OutboundArrow /></a>
+  <section class="concept-capabilities" id="capabilities" aria-labelledby="concept-capabilities-title">
+    <div class="container concept-capabilities__layout">
+      <header class="concept-capabilities__intro">
+        <p class="eyebrow">Capabilities</p>
+        <h2 id="concept-capabilities-title">A connected practice from first question to final expression.</h2>
+        <p>Disciplines overlap by design, creating continuity from the thinking behind the work to the details that make it perform.</p>
+      </header>
+
+      <div class="concept-capabilities__list">
+        {capabilities.map((capability) => (
+          <article class="concept-capability" data-reveal>
+            <div class="concept-capability__heading">
+              <span>{capability.number}</span>
+              <h3>{capability.name}</h3>
+            </div>
+            <div class="concept-capability__body">
+              <p>{capability.description}</p>
+              <ul>
+                {capability.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
       </div>
+    </div>
+  </section>
+
+  <section class="concept-contact" id="contact" aria-labelledby="concept-contact-title">
+    <div class="container concept-contact__layout">
+      <header class="concept-contact__intro">
+        <p class="eyebrow">Contact</p>
+        <h2 id="concept-contact-title">Start with a conversation.</h2>
+        <p>Share what is taking shape, what needs to change, or where the next move still feels unclear.</p>
+      </header>
+
+      <form class="contact-form concept-contact__form" action="/api/contact" method="post" data-contact-form novalidate>
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label for="home-two-name">Name</label>
+            <input id="home-two-name" name="name" type="text" autocomplete="name" maxlength="100" required />
+          </div>
+          <div class="contact-form__field">
+            <label for="home-two-email">Email</label>
+            <input id="home-two-email" name="email" type="email" autocomplete="email" maxlength="254" required />
+          </div>
+        </div>
+        <div class="contact-form__field">
+          <label for="home-two-subject">Subject</label>
+          <input id="home-two-subject" name="subject" type="text" maxlength="160" required />
+        </div>
+        <div class="contact-form__field">
+          <label for="home-two-message">Message</label>
+          <textarea id="home-two-message" name="message" rows="6" maxlength="5000" required></textarea>
+        </div>
+        <div class="contact-form__trap" aria-hidden="true">
+          <label for="home-two-company">Company website</label>
+          <input id="home-two-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <div class="contact-form__footer">
+          <button type="submit" data-contact-submit>Send Message</button>
+          <p class="contact-form__status" role="status" aria-live="polite" data-contact-status></p>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -50,239 +194,112 @@ const featuredProjects = projects
 </BaseLayout>
 
 <script>
-  const canvas = document.querySelector<HTMLCanvasElement>("[data-hero-gradient]");
+  const conceptHeader = document.querySelector<HTMLElement>("[data-concept-header]");
+  const conceptHero = document.querySelector<HTMLElement>("[data-concept-hero]");
+  const conceptHeroMedia = document.querySelector<HTMLElement>("[data-concept-hero-media]");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (canvas) {
-    const gl = canvas.getContext("webgl", {
-      alpha: true,
-      antialias: false,
-      powerPreference: "high-performance",
-      premultipliedAlpha: true,
+  const updatePageMotion = () => {
+    const scrollTop = window.scrollY;
+    const heroHeight = conceptHero?.offsetHeight ?? window.innerHeight;
+
+    if (conceptHeader) {
+      conceptHeader.dataset.scrolled = String(scrollTop > Math.max(80, heroHeight * 0.72));
+    }
+
+    if (conceptHeroMedia && !reduceMotion.matches) {
+      const progress = Math.min(1, Math.max(0, scrollTop / Math.max(heroHeight, 1)));
+      conceptHeroMedia.style.setProperty("--hero-shift", `${progress * 5}%`);
+    }
+  };
+
+  let motionFrame = 0;
+  const requestPageMotion = () => {
+    if (motionFrame) return;
+    motionFrame = window.requestAnimationFrame(() => {
+      updatePageMotion();
+      motionFrame = 0;
     });
+  };
 
-    const drawFallback = () => {
-      const context = canvas.getContext("2d");
-      if (!context) return;
-      const bounds = canvas.getBoundingClientRect();
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      const portrait = bounds.width / Math.max(bounds.height, 1) < 0.72;
-      canvas.width = Math.round(bounds.width * pixelRatio);
-      canvas.height = Math.round(bounds.height * pixelRatio);
-      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      context.clearRect(0, 0, bounds.width, bounds.height);
-      context.lineCap = "round";
+  updatePageMotion();
+  window.addEventListener("scroll", requestPageMotion, { passive: true });
+  window.addEventListener("resize", requestPageMotion, { passive: true });
 
-      const fallbackColors = ["#6886ff", "#8f62ef", "#dc59d8", "#ff5f99", "#ff6644", "#ffbb45"];
-      fallbackColors.forEach((color, index) => {
-        const position = index / (fallbackColors.length - 1);
-        context.beginPath();
-        context.moveTo(bounds.width * ((portrait ? 0.2 : 0.38) + (position * (portrait ? 0.62 : 0.5))), -bounds.height * 0.1);
-        context.bezierCurveTo(
-          bounds.width * ((portrait ? 0.34 : 0.46) + (position * (portrait ? 0.4 : 0.28))),
-          bounds.height * 0.2,
-          bounds.width * ((portrait ? 0.5 : 0.68) + (position * (portrait ? 0.36 : 0.24))),
-          bounds.height * 0.5,
-          bounds.width * ((portrait ? 0.68 : 0.9) + (position * (portrait ? 0.3 : 0.22))),
-          bounds.height,
-        );
-        context.strokeStyle = color;
-        context.globalAlpha = 0.38;
-        context.lineWidth = Math.max(bounds.width * (portrait ? 0.28 : 0.12), 60);
-        context.stroke();
+  const sectionLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"));
+  const sections = sectionLinks
+    .map((link) => document.getElementById(link.dataset.sectionLink ?? ""))
+    .filter((section): section is HTMLElement => Boolean(section));
+
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+      sectionLinks.forEach((link) => {
+        const current = link.dataset.sectionLink === visible.target.id;
+        if (current) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       });
-      context.globalAlpha = 1;
-    };
+    }, { rootMargin: "-25% 0px -55%", threshold: [0, 0.2, 0.5] });
 
-    if (!gl) {
-      drawFallback();
-      new ResizeObserver(drawFallback).observe(canvas);
-    } else {
-      const vertexSource = `
-        attribute vec2 aPosition;
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
 
-        void main() {
-          gl_Position = vec4(aPosition, 0.0, 1.0);
-        }
-      `;
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-contact-form]");
 
-      const fragmentSource = `
-        precision highp float;
+  forms.forEach((form) => {
+    const submit = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
+    const status = form.querySelector<HTMLElement>("[data-contact-status]");
+    let startedAt = Date.now();
 
-        uniform vec2 uResolution;
-        uniform vec2 uPointer;
-        uniform float uTime;
-        uniform float uDark;
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-        vec3 palette(float value) {
-          vec3 blue = vec3(0.4078, 0.5255, 1.0);
-          vec3 violet = vec3(0.5608, 0.3843, 0.9373);
-          vec3 magenta = vec3(0.8627, 0.3490, 0.8471);
-          vec3 pink = vec3(1.0, 0.3725, 0.6);
-          vec3 orange = vec3(1.0, 0.4, 0.2667);
-          vec3 gold = vec3(1.0, 0.7333, 0.2706);
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
-          value = clamp(value, 0.0, 1.0);
-          if (value < 0.2) return mix(blue, violet, value / 0.2);
-          if (value < 0.4) return mix(violet, magenta, (value - 0.2) / 0.2);
-          if (value < 0.6) return mix(magenta, pink, (value - 0.4) / 0.2);
-          if (value < 0.8) return mix(pink, orange, (value - 0.6) / 0.2);
-          return mix(orange, gold, (value - 0.8) / 0.2);
-        }
+      if (!submit || !status) return;
 
-        float ribbonMask(float coordinate, float softness) {
-          float distanceFromCenter = abs(coordinate);
-          float body = 1.0 - smoothstep(0.76, 1.05, distanceFromCenter);
-          float glow = 1.0 - smoothstep(0.72, 1.38, distanceFromCenter);
-          return max(body, glow * softness);
-        }
+      submit.disabled = true;
+      submit.textContent = "Sending...";
+      form.setAttribute("aria-busy", "true");
+      status.dataset.state = "";
+      status.textContent = "";
 
-        float dither(vec2 position) {
-          return fract(52.9829189 * fract(dot(position, vec2(0.06711056, 0.00583715))));
-        }
-
-        void main() {
-          vec2 uv = gl_FragCoord.xy / uResolution;
-          uv.y = 1.0 - uv.y;
-
-          float time = uTime * 0.22;
-          float viewportAspect = uResolution.x / max(uResolution.y, 1.0);
-          float portrait = 1.0 - smoothstep(0.62, 0.95, viewportAspect);
-          float pointerInfluence = (uPointer.x - 0.5) * 0.055;
-          float primaryCenter = mix(0.59 + (uv.y * 0.46), 0.5 + (uv.y * 0.28), portrait)
-            + sin((uv.y * 3.7) + time) * 0.026
-            + sin((uv.y * 8.0) - (time * 0.62)) * 0.008
-            + pointerInfluence * (0.35 + uv.y);
-          float primaryWidth = (0.265
-            - (uv.y * 0.028)
-            + sin((uv.y * 3.1) - (time * 0.45)) * 0.016)
-            * mix(1.0, 1.62, portrait);
-          float primaryCoordinate = (uv.x - primaryCenter) / primaryWidth;
-          float primary = ribbonMask(primaryCoordinate, 0.35);
-
-          float secondaryCenter = primaryCenter + 0.18 + sin((uv.y * 4.8) + (time * 0.7)) * 0.018;
-          float secondaryCoordinate = (uv.x - secondaryCenter) / (primaryWidth * 0.7);
-          float secondary = ribbonMask(secondaryCoordinate, 0.2) * 0.42;
-
-          float colorPosition = (primaryCoordinate * 0.5) + 0.5
-            + sin((uv.y * 2.7) + (time * 0.5)) * 0.055;
-          vec3 primaryColor = palette(colorPosition);
-          vec3 secondaryColor = palette((secondaryCoordinate * 0.5) + 0.62);
-          float blend = clamp(secondary / max(primary + secondary, 0.001), 0.0, 1.0);
-          vec3 color = mix(primaryColor, secondaryColor, blend);
-
-          float broadLight = 0.985
-            + sin((primaryCoordinate * 5.0) + (uv.y * 6.0) - (time * 0.65)) * 0.015;
-          color *= broadLight;
-
-          float mask = clamp(max(primary, secondary), 0.0, 1.0);
-          float edgeLight = exp(-pow(primaryCoordinate * 1.8, 2.0)) * 0.08;
-          color += edgeLight;
-          color += (dither(gl_FragCoord.xy) - 0.5) / 255.0;
-          float alpha = mask * mix(0.76, 0.68, uDark);
-
-          gl_FragColor = vec4(color * alpha, alpha);
-        }
-      `;
-
-      const compileShader = (type: number, source: string) => {
-        const shader = gl.createShader(type);
-        if (!shader) return null;
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-          gl.deleteShader(shader);
-          return null;
-        }
-        return shader;
+      const payload = {
+        ...Object.fromEntries(new FormData(form).entries()),
+        startedAt: String(startedAt),
       };
 
-      const vertexShader = compileShader(gl.VERTEX_SHADER, vertexSource);
-      const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentSource);
-      const program = gl.createProgram();
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json().catch(() => ({}));
 
-      if (!vertexShader || !fragmentShader || !program) {
-        drawFallback();
-      } else {
-        gl.attachShader(program, vertexShader);
-        gl.attachShader(program, fragmentShader);
-        gl.linkProgram(program);
+        if (!response.ok) throw new Error(result.message || "Unable to send your message.");
 
-        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-          drawFallback();
-        } else {
-          const vertices = gl.createBuffer();
-          const positionLocation = gl.getAttribLocation(program, "aPosition");
-          const resolutionLocation = gl.getUniformLocation(program, "uResolution");
-          const pointerLocation = gl.getUniformLocation(program, "uPointer");
-          const timeLocation = gl.getUniformLocation(program, "uTime");
-          const darkLocation = gl.getUniformLocation(program, "uDark");
-          const pointer = { x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5 };
-          let frame = 0;
-
-          gl.bindBuffer(gl.ARRAY_BUFFER, vertices);
-          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-          gl.useProgram(program);
-          gl.enableVertexAttribArray(positionLocation);
-          gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-          gl.enable(gl.BLEND);
-          gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-
-          const resize = () => {
-            const bounds = canvas.getBoundingClientRect();
-            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-            const width = Math.max(1, Math.round(bounds.width * pixelRatio));
-            const height = Math.max(1, Math.round(bounds.height * pixelRatio));
-            if (canvas.width === width && canvas.height === height) return;
-            canvas.width = width;
-            canvas.height = height;
-            gl.viewport(0, 0, width, height);
-          };
-
-          const draw = (time = 0) => {
-            resize();
-            pointer.x += (pointer.targetX - pointer.x) * 0.035;
-            pointer.y += (pointer.targetY - pointer.y) * 0.035;
-            gl.clearColor(0, 0, 0, 0);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-            gl.uniform2f(pointerLocation, pointer.x, pointer.y);
-            gl.uniform1f(timeLocation, time * 0.001);
-            gl.uniform1f(darkLocation, document.documentElement.dataset.theme === "dark" ? 1 : 0);
-            gl.drawArrays(gl.TRIANGLES, 0, 3);
-          };
-
-          const animate = (time: number) => {
-            draw(time);
-            frame = window.requestAnimationFrame(animate);
-          };
-
-          const updateMotion = () => {
-            window.cancelAnimationFrame(frame);
-            frame = 0;
-            draw();
-            if (!reduceMotion.matches && !document.hidden) frame = window.requestAnimationFrame(animate);
-          };
-
-          const hero = canvas.closest<HTMLElement>(".home-hero");
-          hero?.addEventListener("pointermove", (event) => {
-            const bounds = hero.getBoundingClientRect();
-            pointer.targetX = (event.clientX - bounds.left) / bounds.width;
-            pointer.targetY = (event.clientY - bounds.top) / bounds.height;
-          }, { passive: true });
-          hero?.addEventListener("pointerleave", () => {
-            pointer.targetX = 0.5;
-            pointer.targetY = 0.5;
-          });
-
-          new ResizeObserver(resize).observe(canvas);
-          document.addEventListener("visibilitychange", updateMotion);
-          window.addEventListener("terminel-theme-change", () => draw());
-          reduceMotion.addEventListener("change", updateMotion);
-          resize();
-          updateMotion();
-        }
+        form.reset();
+        startedAt = Date.now();
+        status.dataset.state = "success";
+        status.textContent = result.message || "Thanks. Your message is on its way.";
+      } catch (error) {
+        status.dataset.state = "error";
+        status.textContent = error instanceof Error
+          ? error.message
+          : "Unable to send your message. Please try again.";
+      } finally {
+        submit.disabled = false;
+        submit.textContent = "Send Message";
+        form.removeAttribute("aria-busy");
       }
-    }
-  }
+    });
+  });
 </script>

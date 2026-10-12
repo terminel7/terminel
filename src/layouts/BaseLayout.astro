@@ -8,6 +8,7 @@ type Props = {
   description?: string;
   bodyClass?: string;
   ogImage?: string;
+  hideGlobalNavigation?: boolean;
 };
 
 const {
@@ -15,6 +16,7 @@ const {
   description = "Building brands and intelligent digital experiences that move hearts—and move the needle.",
   bodyClass,
   ogImage = "/images/work/streaming/thumbnail.webp",
+  hideGlobalNavigation = false,
 } = Astro.props;
 
 const siteOrigin = Astro.site ?? Astro.url.origin;
@@ -103,8 +105,8 @@ const ogImageUrl = new URL(ogImage, siteOrigin).toString();
   </head>
   <body class={bodyClass}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
-    <FloatingNav />
+    {!hideGlobalNavigation && <Header />}
+    {!hideGlobalNavigation && <FloatingNav />}
     <main id="main">
       <slot />
     </main>
