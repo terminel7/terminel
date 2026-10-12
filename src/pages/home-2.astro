@@ -12,40 +12,38 @@ const featuredProjects = projects
   .filter((project) => projectOrder.includes(project.slug))
   .sort((a, b) => projectOrder.indexOf(a.slug) - projectOrder.indexOf(b.slug));
 
-const heroFrames = [
-  "/images/work/action-sports/thumbnail.jpg",
-  "/images/work/apparel/thumbnail.webp",
-  "/images/work/auto-lending/thumbnail.webp",
-  "/images/Header_Image_4-1000.webp",
-  "/images/work/fintech/thumbnail.webp",
-  "/images/work/retail/thumbnail.webp",
-  "/images/work/streaming/thumbnail.webp",
-];
-
 const capabilities = [
   {
     number: "01",
     name: "Strategy",
     description: "Clarity before expression. Research, structure, and a focused point of view establish where the work should go and what it needs to accomplish.",
     items: ["Information Architecture", "Competitive Analysis", "Audience Segmentation + User Flows", "Brand + Digital Strategy", "UI/UX Strategy", "Multivariate Testing"],
+    image: "/images/work/fintech/image-03.webp",
+    alt: "A CU Direct publication presenting digital strategy and experience work.",
   },
   {
     number: "02",
     name: "Creative",
     description: "Ideas built to live in the real world. Direction and hands-on design connect every touchpoint, from an identity system to a campaign, product, or physical environment.",
     items: ["Web + Product Design", "Art + Creative Direction", "UX/UI Design", "Event Support + Collateral", "Design Systems", "Presentations", "Motion Graphics + Animation", "3D"],
+    image: "/images/work/retail/image-06.webp",
+    alt: "Hot Topic campaign photography and creative direction.",
   },
   {
     number: "03",
     name: "Branding",
     description: "Distinct identities with enough structure to stay coherent as they grow. Positioning, visual language, and practical systems make a brand easier to recognize and easier to use.",
     items: ["Logo + Identity", "Brand Standards + Evolutions", "Brand Audits", "Brand Positioning"],
+    image: "/images/work/auto-lending/image-01.webp",
+    alt: "CU Direct marketing style guide and brand system.",
   },
   {
     number: "04",
     name: "Development",
     description: "Digital experiences carried through to launch with thoughtful architecture, strong performance, and close attention to the original design intent.",
     items: ["Headless CMS", "Webflow", "AI Workflow Implementation", "Marketing Automation Integration", "Analytics + Reporting", "Localization + Regionalization"],
+    image: "/images/work/streaming/image-06.webp",
+    alt: "Responsive conference website screens across desktop layouts.",
   },
 ];
 ---
@@ -76,26 +74,27 @@ const capabilities = [
         <h1 id="concept-hero-title">Building brands and intelligent experiences that move hearts—and move the needle.</h1>
       </div>
 
-      <div class="concept-hero__gallery" aria-hidden="true">
-        {heroFrames.map((src, index) => (
-          <figure class="concept-hero__frame" style={`--frame-order: ${index}`}>
+      <a class="concept-hero__feature" href={sitePath("/work/streaming/")} aria-label="View the Streaming case study">
+        <figure class="concept-hero__feature-media">
+          <picture>
+            <source media="(max-width: 700px)" srcset={sitePath("/images/Header_Image_2-1000.webp")} />
             <img
-              src={sitePath(src)}
-              alt=""
-              width="900"
-              height="1125"
+              src={sitePath("/images/Header_Image_2-2200.webp")}
+              alt="RightNow Media website displayed on a desktop monitor."
+              width="2200"
+              height="1368"
               loading="eager"
               decoding="async"
-              fetchpriority={index === 3 ? "high" : "auto"}
+              fetchpriority="high"
             />
-          </figure>
-        ))}
-      </div>
-
-      <div class="concept-hero__footer">
-        <p>Over 15 years of creative guidance across strategy, design, technology, and the spaces between them.</p>
-        <a href="#work">Selected Work <span aria-hidden="true">↓</span></a>
-      </div>
+          </picture>
+        </figure>
+        <div class="concept-hero__feature-meta">
+          <span>Featured Work</span>
+          <span>Streaming / Digital Strategy</span>
+          <span>View Project <OutboundArrow /></span>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -156,6 +155,16 @@ const capabilities = [
               <span>{capability.number}</span>
               <h3>{capability.name}</h3>
             </div>
+            <figure class="concept-capability__media">
+              <img
+                src={sitePath(capability.image)}
+                alt={capability.alt}
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
             <div class="concept-capability__body">
               <p>{capability.description}</p>
               <ul>
