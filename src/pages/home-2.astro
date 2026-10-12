@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
 import OutboundArrow from "../components/OutboundArrow.astro";
+import ServicesShowcase from "../components/ServicesShowcase.astro";
 import { projects } from "../lib/projects";
 import { sitePath } from "../lib/paths";
 import "../styles/home-two-concept.css";
@@ -10,6 +11,16 @@ const projectOrder = ["streaming", "fintech", "action-sports", "auto-lending", "
 const featuredProjects = projects
   .filter((project) => projectOrder.includes(project.slug))
   .sort((a, b) => projectOrder.indexOf(a.slug) - projectOrder.indexOf(b.slug));
+
+const heroFrames = [
+  "/images/work/action-sports/thumbnail.jpg",
+  "/images/work/apparel/thumbnail.webp",
+  "/images/work/auto-lending/thumbnail.webp",
+  "/images/Header_Image_4-1000.webp",
+  "/images/work/fintech/thumbnail.webp",
+  "/images/work/retail/thumbnail.webp",
+  "/images/work/streaming/thumbnail.webp",
+];
 
 const capabilities = [
   {
@@ -59,24 +70,28 @@ const capabilities = [
   </header>
 
   <section class="concept-hero" id="top" aria-labelledby="concept-hero-title" data-concept-hero>
-    <div class="concept-hero__media" aria-hidden="true" data-concept-hero-media>
-      <img
-        src={sitePath("/images/Header_Image_3-2200.webp")}
-        srcset={`${sitePath("/images/Header_Image_3-1000.webp")} 1000w, ${sitePath("/images/Header_Image_3-2200.webp")} 2200w`}
-        sizes="100vw"
-        alt=""
-        width="2200"
-        height="1354"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </div>
-    <div class="concept-hero__shade" aria-hidden="true"></div>
     <div class="container concept-hero__content">
       <div class="concept-hero__title">
         <p class="eyebrow">Creative Direction / Design / Development</p>
         <h1 id="concept-hero-title">Building brands and intelligent experiences that move hearts—and move the needle.</h1>
       </div>
+
+      <div class="concept-hero__gallery" aria-hidden="true">
+        {heroFrames.map((src, index) => (
+          <figure class="concept-hero__frame" style={`--frame-order: ${index}`}>
+            <img
+              src={sitePath(src)}
+              alt=""
+              width="900"
+              height="1125"
+              loading="eager"
+              decoding="async"
+              fetchpriority={index === 3 ? "high" : "auto"}
+            />
+          </figure>
+        ))}
+      </div>
+
       <div class="concept-hero__footer">
         <p>Over 15 years of creative guidance across strategy, design, technology, and the spaces between them.</p>
         <a href="#work">Selected Work <span aria-hidden="true">↓</span></a>
@@ -124,7 +139,9 @@ const capabilities = [
     </div>
   </section>
 
-  <section class="concept-capabilities" id="capabilities" aria-labelledby="concept-capabilities-title">
+  <ServicesShowcase id="capabilities" />
+
+  <section class="concept-capabilities" aria-labelledby="concept-capabilities-title">
     <div class="container concept-capabilities__layout">
       <header class="concept-capabilities__intro">
         <p class="eyebrow">Capabilities</p>
@@ -196,8 +213,6 @@ const capabilities = [
 <script>
   const conceptHeader = document.querySelector<HTMLElement>("[data-concept-header]");
   const conceptHero = document.querySelector<HTMLElement>("[data-concept-hero]");
-  const conceptHeroMedia = document.querySelector<HTMLElement>("[data-concept-hero-media]");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   const updatePageMotion = () => {
     const scrollTop = window.scrollY;
@@ -207,9 +222,10 @@ const capabilities = [
       conceptHeader.dataset.scrolled = String(scrollTop > Math.max(80, heroHeight * 0.72));
     }
 
-    if (conceptHeroMedia && !reduceMotion.matches) {
-      const progress = Math.min(1, Math.max(0, scrollTop / Math.max(heroHeight, 1)));
-      conceptHeroMedia.style.setProperty("--hero-shift", `${progress * 5}%`);
+    if (scrollTop < heroHeight * 0.55) {
+      document.querySelectorAll<HTMLElement>("[data-section-link]").forEach((link) => {
+        link.removeAttribute("aria-current");
+      });
     }
   };
 
