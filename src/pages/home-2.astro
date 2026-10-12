@@ -12,6 +12,36 @@ const featuredProjects = projects
   .filter((project) => projectOrder.includes(project.slug))
   .sort((a, b) => projectOrder.indexOf(a.slug) - projectOrder.indexOf(b.slug));
 
+const heroColumns = [
+  [
+    "/images/work/streaming/image-02.webp",
+    "/images/work/retail/image-06.webp",
+    "/images/work/auto-lending/image-03.webp",
+  ],
+  [
+    "/images/work/fintech/image-04.webp",
+    "/images/work/apparel/image-01.webp",
+    "/images/work/action-sports/image-05.webp",
+  ],
+  [
+    "/images/Header_Image_4-1000.webp",
+    "/images/work/streaming/image-06.webp",
+    "/images/work/retail/image-09.webp",
+  ],
+  [
+    "/images/work/auto-lending/image-06.webp",
+    "/images/work/fintech/image-07.webp",
+    "/images/work/apparel/image-04.webp",
+  ],
+  [
+    "/images/work/action-sports/image-03.webp",
+    "/images/work/retail/gallery-02-03.jpeg",
+    "/images/work/streaming/gallery-01-04.webp",
+  ],
+];
+
+const heroWords = ["clarity.", "attention.", "connection.", "momentum.", "impact."];
+
 const capabilities = [
   {
     number: "01",
@@ -68,33 +98,61 @@ const capabilities = [
   </header>
 
   <section class="concept-hero" id="top" aria-labelledby="concept-hero-title" data-concept-hero>
+    <div class="concept-hero__collage" aria-hidden="true">
+      <div class="concept-hero__collage-track">
+        {heroColumns.map((column, columnIndex) => (
+          <div
+            class="concept-hero__column"
+            style={`--column-index: ${columnIndex}; --column-offset: ${columnIndex % 2}`}
+          >
+            {column.map((image, imageIndex) => (
+              <figure class="concept-hero__tile">
+                <img
+                  src={sitePath(image)}
+                  alt=""
+                  width="900"
+                  height="600"
+                  loading={imageIndex === 1 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </figure>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="concept-hero__veil" aria-hidden="true"></div>
+
     <div class="container concept-hero__content">
-      <div class="concept-hero__title">
-        <p class="eyebrow">Creative Direction / Design / Development</p>
-        <h1 id="concept-hero-title">Building brands and intelligent experiences that move hearts—and move the needle.</h1>
+      <p class="eyebrow concept-hero__eyebrow">Creative Direction / Design / Development</p>
+
+      <h1
+        id="concept-hero-title"
+        aria-label="Built for clarity, attention, connection, momentum, and impact."
+      >
+        <span aria-hidden="true">Built for</span>
+        <span class="concept-hero__word-window" aria-hidden="true">
+          <span class="concept-hero__words">
+            {heroWords.map((word, index) => (
+              <span class:list={{ "is-accent": index === heroWords.length - 1 }}>{word}</span>
+            ))}
+            <span>{heroWords[0]}</span>
+          </span>
+        </span>
+      </h1>
+
+      <div class="concept-hero__note">
+        <p>Strategy, creative direction, design, and development brought together to make brands clearer, experiences sharper, and ideas perform.</p>
+        <a href="#work">
+          <span>Explore Selected Work</span>
+          <OutboundArrow />
+        </a>
       </div>
 
-      <a class="concept-hero__feature" href={sitePath("/work/streaming/")} aria-label="View the Streaming case study">
-        <figure class="concept-hero__feature-media">
-          <picture>
-            <source media="(max-width: 700px)" srcset={sitePath("/images/Header_Image_2-1000.webp")} />
-            <img
-              src={sitePath("/images/Header_Image_2-2200.webp")}
-              alt="RightNow Media website displayed on a desktop monitor."
-              width="2200"
-              height="1368"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-            />
-          </picture>
-        </figure>
-        <div class="concept-hero__feature-meta">
-          <span>Featured Work</span>
-          <span>Streaming / Digital Strategy</span>
-          <span>View Project <OutboundArrow /></span>
-        </div>
-      </a>
+      <div class="concept-hero__scroll" aria-hidden="true">
+        <span></span>
+        <span>Scroll to explore</span>
+      </div>
     </div>
   </section>
 
