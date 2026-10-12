@@ -5,7 +5,6 @@ export function mountPortfolioReel(root: HTMLElement) {
   const images = [...root.querySelectorAll<HTMLImageElement>("[data-reel-image]")];
   const captions = [...root.querySelectorAll<HTMLElement>("[data-reel-caption]")];
   const controls = root.querySelector<HTMLElement>("[data-reel-controls]")!;
-  const counter = root.querySelector<HTMLElement>("[data-reel-count]")!;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const abort = new AbortController();
   const options = { signal: abort.signal };
@@ -39,7 +38,6 @@ export function mountPortfolioReel(root: HTMLElement) {
       void activeCaption.offsetWidth;
       activeCaption.setAttribute("data-entering", "");
     }
-    counter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(images.length).padStart(2, "0")}`;
   }
   function render() {
     const next = nextIndex();
