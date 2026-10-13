@@ -132,14 +132,17 @@ const capabilities = [
       <h1
         id="concept-hero-title"
         class="built-h1-lockup"
-        aria-label="Built for clarity, attention, relevance, momentum, identity, experience, growth, action, transformation, and lasting impact."
+        aria-label="Fueling clarity, attention, relevance, momentum, identity, experience, growth, action, transformation, and lasting impact."
       >
-        <span class="built-h1 h1" aria-hidden="true">Built for</span>
-        <span class="built-h1 h1 this hidden" aria-hidden="true">this.</span>
+        <span class="built-h1 h1" aria-hidden="true">fueling</span>
+        <span class="built-h1-final-slot" aria-hidden="true">
+          <span class="built-h1 hidden">this.</span>
+          <span class="built-h1 this built-h1-settled" data-settled-word>lasting impact.</span>
+        </span>
       </h1>
 
       <div class="built-hero-list" aria-hidden="true">
-        <span class="built-h1 hidden">Built for</span>
+        <span class="built-h1 hidden">fueling</span>
         <div class="built-hero-list-wrap">
           <div class="built-h1-list-items">
             {heroWordGroups.map((group, groupIndex) => (
@@ -166,11 +169,7 @@ const capabilities = [
 
     <div class="built-header-content container">
       <div class="built-header-txt-block">
-        <p>
-          Projects are rarely short on possibility. The real work is finding the clearest idea, then carrying it through strategy, creative direction, design, and development without losing the thread.
-          <br /><br />
-          <strong>Built to hold attention.<br />Built to create impact.</strong>
-        </p>
+        <p>Exceptional taste, design principles, an understanding of human behavior, and the judgment to apply them across strategy, design, and development.</p>
         <div class="built-cta-block">
           <a class="built-cta built-cta--primary" href="#work">Explore Selected Work</a>
           <a class="built-cta built-cta--secondary" href="#capabilities">View Capabilities</a>
@@ -312,6 +311,19 @@ const capabilities = [
     const listItems = conceptHero.querySelectorAll<HTMLElement>(".built-h1.list-item");
     const speakerImages = conceptHero.querySelectorAll<HTMLElement>(".built-hero-speaker");
     const textBlock = conceptHero.querySelector<HTMLElement>(".built-header-txt-block");
+    const heroList = conceptHero.querySelector<HTMLElement>(".built-hero-list");
+    const settledWord = conceptHero.querySelector<HTMLElement>("[data-settled-word]");
+    const settledLockup = conceptHero.querySelector<HTMLElement>(".built-h1-lockup");
+    const settledAnchor = settledLockup?.querySelector<HTMLElement>(":scope > .built-h1");
+    const introStorageKey = "terminel-home-2-intro-seen";
+    let hasSeenIntro = false;
+    let heroIsSettled = false;
+
+    try {
+      hasSeenIntro = window.sessionStorage.getItem(introStorageKey) === "true";
+    } catch {
+      hasSeenIntro = false;
+    }
 
     const animatedElements = [
       ...initialLockup,
@@ -322,12 +334,43 @@ const capabilities = [
 
     gsap.set(animatedElements, { visibility: "visible" });
 
-    if (reducedMotion) {
-      gsap.set(conceptHero.querySelector(".built-hero-list"), { display: "none" });
+    const positionSettledLockup = () => {
+      if (!settledLockup || !settledAnchor || !settledWord) return;
+
+      gsap.set(settledLockup, { x: 0 });
+      const gap = Number.parseFloat(window.getComputedStyle(settledLockup).columnGap) || 0;
+      const finalWidth = settledAnchor.getBoundingClientRect().width
+        + gap
+        + settledWord.getBoundingClientRect().width;
+      const centeredLeft = (window.innerWidth - finalWidth) / 2;
+      const currentLeft = settledLockup.getBoundingClientRect().left;
+
+      gsap.set(settledLockup, { x: centeredLeft - currentLeft });
+    };
+
+    const showSettledHero = () => {
+      heroIsSettled = true;
+      conceptHero.dataset.introSettled = "true";
+      gsap.set(heroList, { display: "none" });
       gsap.set(animatedElements, { clearProps: "transform,opacity" });
-      gsap.set(conceptHero.querySelector(".built-h1.h1.this"), { opacity: 1 });
+      gsap.set(settledWord, { autoAlpha: 1 });
+      positionSettledLockup();
+    };
+
+    window.addEventListener("resize", () => {
+      if (heroIsSettled) positionSettledLockup();
+    }, { passive: true });
+
+    if (reducedMotion || hasSeenIntro) {
+      showSettledHero();
     } else {
-      const intro = gsap.timeline();
+      try {
+        window.sessionStorage.setItem(introStorageKey, "true");
+      } catch {
+        // Storage can be unavailable in privacy-restricted contexts.
+      }
+
+      const intro = gsap.timeline({ onComplete: showSettledHero });
 
       intro.from(initialLockup, {
         opacity: 0,
@@ -374,6 +417,8 @@ const capabilities = [
         stagger: { each: 0.25 },
         ease: "power3.in",
       }, 0.52);
+
+      intro.timeScale(1.35);
     }
   }
 
