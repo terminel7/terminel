@@ -217,22 +217,6 @@ html[data-theme="dark"] .home-two-concept-page {
   font-size: inherit;
 }
 
-.built-h1-final-slot {
-  position: relative;
-  display: inline-block;
-  line-height: 1.1;
-}
-
-.built-h1-settled {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: max-content;
-  opacity: 0;
-  visibility: hidden;
-  white-space: nowrap;
-}
-
 .built-hero-list {
   position: absolute;
   display: flex;
@@ -611,10 +595,6 @@ html[data-theme="dark"] .home-two-concept-page {
     font-size: 50px;
   }
 
-  .concept-hero[data-intro-settled="true"] .built-header-list {
-    font-size: 40px;
-  }
-
   .built-header-section {
     height: 100dvh;
     min-height: 720px;
@@ -733,7 +713,6 @@ html[data-theme="dark"] .home-two-concept-page {
   .concept-header ul { gap: 10px; }
   .concept-header nav a { font-size: 11px; }
   .built-header-list { font-size: 46px; }
-  .concept-hero[data-intro-settled="true"] .built-header-list { font-size: 33px; }
   .built-header-txt-block { font-size: 15px; }
   .built-cta { padding-inline: 14px; font-size: 12px; }
 }

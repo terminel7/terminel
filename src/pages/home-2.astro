@@ -43,7 +43,7 @@ const heroColumns = [
 const heroWordGroups = [
   ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
   ["transformation.", "attention.", "relevance.", "momentum.", "lasting impact.", "identity.", "experience.", "growth.", "action."],
-  ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
+  ["clarity.", "attention.", "relevance.", "momentum.", "lasting impact.", "identity.", "experience.", "growth.", "action."],
 ];
 
 const capabilities = [
@@ -135,10 +135,7 @@ const capabilities = [
         aria-label="Fueling clarity, attention, relevance, momentum, identity, experience, growth, action, transformation, and lasting impact."
       >
         <span class="built-h1 h1" aria-hidden="true">fueling</span>
-        <span class="built-h1-final-slot" aria-hidden="true">
-          <span class="built-h1 hidden">this.</span>
-          <span class="built-h1 this built-h1-settled" data-settled-word>lasting impact.</span>
-        </span>
+        <span class="built-h1 h1 this hidden" aria-hidden="true">this.</span>
       </h1>
 
       <div class="built-hero-list" aria-hidden="true">
@@ -311,16 +308,11 @@ const capabilities = [
     const listItems = conceptHero.querySelectorAll<HTMLElement>(".built-h1.list-item");
     const speakerImages = conceptHero.querySelectorAll<HTMLElement>(".built-hero-speaker");
     const textBlock = conceptHero.querySelector<HTMLElement>(".built-header-txt-block");
-    const heroList = conceptHero.querySelector<HTMLElement>(".built-hero-list");
-    const settledWord = conceptHero.querySelector<HTMLElement>("[data-settled-word]");
-    const settledLockup = conceptHero.querySelector<HTMLElement>(".built-h1-lockup");
-    const settledAnchor = settledLockup?.querySelector<HTMLElement>(":scope > .built-h1");
     const introStorageKey = "terminel-home-2-intro-seen";
     let hasSeenIntro = false;
-    let heroIsSettled = false;
 
     try {
-      hasSeenIntro = window.sessionStorage.getItem(introStorageKey) === "true";
+      hasSeenIntro = window.localStorage.getItem(introStorageKey) === "true";
     } catch {
       hasSeenIntro = false;
     }
@@ -334,91 +326,64 @@ const capabilities = [
 
     gsap.set(animatedElements, { visibility: "visible" });
 
-    const positionSettledLockup = () => {
-      if (!settledLockup || !settledAnchor || !settledWord) return;
+    const intro = gsap.timeline({ paused: true });
 
-      gsap.set(settledLockup, { x: 0 });
-      const gap = Number.parseFloat(window.getComputedStyle(settledLockup).columnGap) || 0;
-      const finalWidth = settledAnchor.getBoundingClientRect().width
-        + gap
-        + settledWord.getBoundingClientRect().width;
-      const centeredLeft = (window.innerWidth - finalWidth) / 2;
-      const currentLeft = settledLockup.getBoundingClientRect().left;
+    intro.from(initialLockup, {
+      opacity: 0,
+      duration: 0.75,
+      stagger: { each: 0.05, ease: "power1.out", from: "start" },
+      ease: "power3.in",
+    }, 0);
 
-      gsap.set(settledLockup, { x: centeredLeft - currentLeft });
-    };
+    intro.from(listItems, {
+      opacity: 0,
+      xPercent: 40,
+      duration: 1.32,
+      stagger: { each: 0.05, from: "start" },
+      ease: "expo.out",
+    }, 1.45);
 
-    const showSettledHero = () => {
-      heroIsSettled = true;
-      conceptHero.dataset.introSettled = "true";
-      gsap.set(heroList, { display: "none" });
-      gsap.set(animatedElements, { clearProps: "transform,opacity" });
-      gsap.set(settledWord, { autoAlpha: 1 });
-      positionSettledLockup();
-    };
+    intro.from(listItems, {
+      yPercent: 900,
+      duration: 2.82,
+    }, 0);
 
-    window.addEventListener("resize", () => {
-      if (heroIsSettled) positionSettledLockup();
-    }, { passive: true });
+    intro.fromTo(listItems, {
+      yPercent: 900,
+    }, {
+      yPercent: -900,
+      duration: 8.16,
+      stagger: { each: 0.03 },
+      ease: "power4.inOut",
+    }, 2.76);
+
+    intro.fromTo(textBlock, {
+      opacity: 0,
+    }, {
+      opacity: 1,
+      duration: 1.31,
+      ease: "power3.in",
+    }, 2.59);
+
+    intro.fromTo(speakerImages, {
+      opacity: 0,
+    }, {
+      opacity: 1,
+      duration: 2.93,
+      stagger: { each: 0.25 },
+      ease: "power3.in",
+    }, 0.52);
 
     if (reducedMotion || hasSeenIntro) {
-      showSettledHero();
+      intro.progress(1).pause();
     } else {
       try {
-        window.sessionStorage.setItem(introStorageKey, "true");
+        window.localStorage.setItem(introStorageKey, "true");
       } catch {
         // Storage can be unavailable in privacy-restricted contexts.
       }
 
-      const intro = gsap.timeline({ onComplete: showSettledHero });
-
-      intro.from(initialLockup, {
-        opacity: 0,
-        duration: 0.75,
-        stagger: { each: 0.05, ease: "power1.out", from: "start" },
-        ease: "power3.in",
-      }, 0);
-
-      intro.from(listItems, {
-        opacity: 0,
-        xPercent: 40,
-        duration: 1.32,
-        stagger: { each: 0.05, from: "start" },
-        ease: "expo.out",
-      }, 1.45);
-
-      intro.from(listItems, {
-        yPercent: 900,
-        duration: 2.82,
-      }, 0);
-
-      intro.fromTo(listItems, {
-        yPercent: 900,
-      }, {
-        yPercent: -900,
-        duration: 8.16,
-        stagger: { each: 0.03 },
-        ease: "power4.inOut",
-      }, 2.76);
-
-      intro.fromTo(textBlock, {
-        opacity: 0,
-      }, {
-        opacity: 1,
-        duration: 1.31,
-        ease: "power3.in",
-      }, 2.59);
-
-      intro.fromTo(speakerImages, {
-        opacity: 0,
-      }, {
-        opacity: 1,
-        duration: 2.93,
-        stagger: { each: 0.25 },
-        ease: "power3.in",
-      }, 0.52);
-
-      intro.timeScale(1.35);
+      intro.timeScale(1.35).play();
     }
   }
 
