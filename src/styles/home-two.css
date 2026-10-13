@@ -38,7 +38,7 @@
   align-items: end;
   gap: clamp(48px, 6vw, 100px);
   padding-top: 180px;
-  padding-bottom: 34px;
+  padding-bottom: 60px;
 }
 .portfolio-reel__intro { max-width: 1030px; transform: translate3d(0, var(--reel-intro-y), 0); will-change: transform; }
 .portfolio-reel .eyebrow { margin-bottom: 22px; color: #fff; text-shadow: 0 1px 16px rgb(0 0 0 / 44%); }
@@ -61,7 +61,7 @@
 .portfolio-reel__controls button:hover { background: #fff; color: #111; }
 .portfolio-reel :focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
 .portfolio-reel__controls[hidden], .portfolio-reel [data-reel-caption][hidden] { display: none; }
-.home-two-work { padding-top: 32px; }
+.home-two-work { padding-top: 60px; }
 .home-two-work .section-heading { margin-bottom: 48px; }
 @keyframes reel-word-enter {
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -70,7 +70,7 @@
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 @media (max-width: 1180px) {
-  .portfolio-reel__content { display: block; padding-top: 230px; padding-bottom: 28px; }
+  .portfolio-reel__content { display: block; padding-top: 230px; padding-bottom: 60px; }
   .portfolio-reel h1 { font-size: 52px; }
   .portfolio-reel__intro { max-width: 850px; }
   .portfolio-reel__footer { display: flex; justify-content: space-between; gap: 32px; margin-top: 36px; }
@@ -79,14 +79,14 @@
 @media (max-width: 700px) {
   .portfolio-reel__image { object-position: var(--mobile-position); }
   .portfolio-reel__word.mobile-hidden-word { display: none; }
-  .portfolio-reel__content { padding-top: 230px; padding-bottom: 22px; }
+  .portfolio-reel__content { padding-top: 230px; padding-bottom: 60px; }
   .portfolio-reel h1 { font-size: 36px; max-width: 540px; }
   .portfolio-reel .eyebrow { font-size: 10px; margin-bottom: 18px; }
-  .portfolio-reel__footer { margin-top: 28px; gap: 16px; flex-wrap: wrap; }
+  .portfolio-reel__footer { display: none; }
   .portfolio-reel__captions { min-height: 96px; width: 100%; }
   .portfolio-reel__controls { width: 100%; justify-content: flex-end; }
   .portfolio-reel__description { font-size: 13px; max-width: 360px; }
-  .home-two-work { padding-top: 28px; }
+  .home-two-work { padding-top: 60px; }
   .home-two-work .section-heading { margin-bottom: 32px; }
 }
 @media (max-width: 360px) {
@@ -101,7 +101,7 @@
   .portfolio-reel__footer { margin-top: 28px; }
 }
 @media (max-height: 700px) and (max-width: 700px) {
-  .portfolio-reel__content { padding-top: 112px; padding-bottom: 16px; }
+  .portfolio-reel__content { padding-top: 112px; padding-bottom: 60px; }
   .portfolio-reel h1 { font-size: 30px; }
   .portfolio-reel__footer { margin-top: 20px; gap: 8px; }
   .portfolio-reel__captions { min-height: 106px; }

@@ -6,7 +6,8 @@ export function mountPortfolioReel(root: HTMLElement) {
   const captions = [...root.querySelectorAll<HTMLElement>("[data-reel-caption]")];
   const controls = root.querySelector<HTMLElement>("[data-reel-controls]")!;
   const support = root.querySelector<HTMLElement>("[data-reel-support]")!;
-  const headline = root.querySelector<HTMLElement>("h1")!;
+  const eyebrow = root.querySelector<HTMLElement>(".eyebrow")!;
+  const stage = root.querySelector<HTMLElement>("[data-reel-stage]")!;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const abort = new AbortController();
   const options = { signal: abort.signal };
@@ -36,16 +37,26 @@ export function mountPortfolioReel(root: HTMLElement) {
   }
 
   function renderReveal(progress: number) {
+    const mobile = window.innerWidth < 700;
     const reveal = reducedMotion.matches
       ? Number(progress > 0.08)
       : ease((progress - 0.04) / 0.54);
     const overlay = reducedMotion.matches
       ? reveal
       : ease((progress - 0.08) / 0.5);
-    const supporting = reducedMotion.matches
+    const supporting = mobile
+      ? 0
+      : reducedMotion.matches
       ? reveal
       : ease((progress - 0.2) / 0.48);
-    const introDistance = (headline.offsetHeight * 0.55) + (window.innerWidth < 700 ? 26 : 34);
+    const currentIntroY = Number.parseFloat(
+      getComputedStyle(root).getPropertyValue("--reel-intro-y"),
+    ) || 0;
+    const baseEyebrowBottom = eyebrow.getBoundingClientRect().bottom - currentIntroY;
+    const introDistance = Math.max(
+      0,
+      stage.getBoundingClientRect().bottom - 60 - baseEyebrowBottom,
+    );
 
     root.style.setProperty("--reel-overlay-opacity", String(overlay));
     root.style.setProperty("--reel-intro-y", `${introDistance * (1 - reveal)}px`);
@@ -53,7 +64,7 @@ export function mountPortfolioReel(root: HTMLElement) {
     root.style.setProperty("--reel-support-y", `${28 * (1 - supporting)}px`);
     root.dataset.reelRevealed = progress > 0.13 ? "true" : "false";
 
-    const interactive = supporting > 0.45;
+    const interactive = !mobile && supporting > 0.45;
     if (interactive !== supportInteractive) {
       supportInteractive = interactive;
       support.toggleAttribute("inert", !interactive);
@@ -165,6 +176,7 @@ export function mountPortfolioReel(root: HTMLElement) {
   revealTarget = readRevealProgress();
   revealCurrent = revealTarget;
   renderReveal(revealCurrent);
+  document.fonts.ready.then(() => { if (!disposed) requestReveal(); });
   render();
   sync();
   document.addEventListener("astro:before-swap", () => {
