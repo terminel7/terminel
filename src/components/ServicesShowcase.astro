@@ -1,5 +1,6 @@
 ---
 import { sitePath } from "../lib/paths";
+import { capabilityShowcaseArt } from "../lib/capability-art";
 
 interface Props {
   id?: string;
@@ -7,24 +8,6 @@ interface Props {
 
 const { id = "capabilities" } = Astro.props;
 
-// Interior case-study artwork keeps this sequence distinct from the homepage thumbnails.
-const showcaseArt = [
-  { src: "/images/work/streaming/image-02.webp", flow: "down", row: 0, column: -2 },
-  { src: "/images/work/retail/gallery-02-02.webp", flow: "down", row: 0, column: 0, center: "upper" },
-  { src: "/images/work/action-sports/image-04.webp", flow: "down", row: 0, column: 2 },
-  { src: "/images/work/fintech/gallery-02-04.webp", flow: "down", row: 1, column: -2 },
-  { src: "/images/work/apparel/image-05.webp", flow: "down", row: 1, column: 0, center: "lower" },
-  { src: "/images/work/auto-lending/image-06.webp", flow: "down", row: 1, column: 2 },
-  { src: "/images/work/private-equity/gallery-01-02.webp", flow: "down", row: 2, column: -2, leading: true },
-  { src: "/images/work/action-sports/gallery-01-03.webp", flow: "down", row: 2, column: 0, leading: true },
-  { src: "/images/work/fintech/image-07.webp", flow: "down", row: 2, column: 2, leading: true },
-  { src: "/images/work/streaming/gallery-01-02.webp", flow: "up", row: 0, column: -1, leading: true },
-  { src: "/images/work/apparel/gallery-02-03.webp", flow: "up", row: 0, column: 1, leading: true },
-  { src: "/images/work/retail/image-05.webp", flow: "up", row: 1, column: -1 },
-  { src: "/images/work/auto-lending/gallery-01-03.webp", flow: "up", row: 1, column: 1 },
-  { src: "/images/work/private-equity/hero.webp", flow: "up", row: 2, column: -1 },
-  { src: "/images/work/fintech/image-03.webp", flow: "up", row: 2, column: 1 },
-];
 ---
 
 <section class="services-showcase" id={id} data-services-showcase aria-labelledby={`${id}-showcase-title`}>
@@ -36,7 +19,7 @@ const showcaseArt = [
 
     <div class="services-showcase__art" aria-hidden="true">
       <div class="services-showcase__grid" data-showcase-grid>
-        {showcaseArt.map((image, index) => (
+        {capabilityShowcaseArt.map((image, index) => (
           <figure
             class="services-showcase__tile"
             data-showcase-tile

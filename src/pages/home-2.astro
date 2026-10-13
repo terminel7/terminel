@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
 import OutboundArrow from "../components/OutboundArrow.astro";
 import ServicesShowcase from "../components/ServicesShowcase.astro";
+import { capabilityFeatureArt } from "../lib/capability-art";
 import { projects } from "../lib/projects";
 import { sitePath } from "../lib/paths";
 import "../styles/home-two-concept.css";
@@ -52,32 +53,32 @@ const capabilities = [
     name: "Strategy",
     description: "Clarity before expression. Research, structure, and a focused point of view establish where the work should go and what it needs to accomplish.",
     items: ["Information Architecture", "Competitive Analysis", "Audience Segmentation + User Flows", "Brand + Digital Strategy", "UI/UX Strategy", "Multivariate Testing"],
-    image: "/images/work/fintech/image-03.webp",
-    alt: "A CU Direct publication presenting digital strategy and experience work.",
+    image: capabilityFeatureArt.strategy,
+    alt: "Abstract arrangement of glass, paper, and an orange line.",
   },
   {
     number: "02",
     name: "Creative",
     description: "Ideas built to live in the real world. Direction and hands-on design connect every touchpoint, from an identity system to a campaign, product, or physical environment.",
     items: ["Web + Product Design", "Art + Creative Direction", "UX/UI Design", "Event Support + Collateral", "Design Systems", "Presentations", "Motion Graphics + Animation", "3D"],
-    image: "/images/work/retail/image-06.webp",
-    alt: "Hot Topic campaign photography and creative direction.",
+    image: capabilityFeatureArt.creative,
+    alt: "Abstract red and blue textiles moving through frosted glass.",
   },
   {
     number: "03",
     name: "Branding",
     description: "Distinct identities with enough structure to stay coherent as they grow. Positioning, visual language, and practical systems make a brand easier to recognize and easier to use.",
     items: ["Logo + Identity", "Brand Standards + Evolutions", "Brand Audits", "Brand Positioning"],
-    image: "/images/work/auto-lending/image-01.webp",
-    alt: "CU Direct marketing style guide and brand system.",
+    image: capabilityFeatureArt.branding,
+    alt: "Abstract paper forms with a bold orange circle and black monolith.",
   },
   {
     number: "04",
     name: "Development",
     description: "Digital experiences carried through to launch with thoughtful architecture, strong performance, and close attention to the original design intent.",
     items: ["Headless CMS", "Webflow", "AI Workflow Implementation", "Marketing Automation Integration", "Analytics + Reporting", "Localization + Regionalization"],
-    image: "/images/work/streaming/image-06.webp",
-    alt: "Responsive conference website screens across desktop layouts.",
+    image: capabilityFeatureArt.development,
+    alt: "Abstract system of smoked glass, dark metal, and orange light.",
   },
 ];
 ---

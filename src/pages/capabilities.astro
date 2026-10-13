@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactGradient from "../components/ContactGradient.astro";
 import Footer from "../components/Footer.astro";
-import { sitePath } from "../lib/paths";
+import ServicesShowcase from "../components/ServicesShowcase.astro";
 
 const services = [
   {
@@ -31,25 +31,6 @@ const services = [
   },
 ];
 
-// Three rows of three move down while three rows of two move up between them.
-// All artwork is taken from inside the case studies rather than homepage thumbnails.
-const showcaseArt = [
-  { src: "/images/work/streaming/image-02.webp", flow: "down", row: 0, column: -2 },
-  { src: "/images/work/retail/gallery-02-02.webp", flow: "down", row: 0, column: 0, center: "upper" },
-  { src: "/images/work/action-sports/image-04.webp", flow: "down", row: 0, column: 2 },
-  { src: "/images/work/fintech/gallery-02-04.webp", flow: "down", row: 1, column: -2 },
-  { src: "/images/work/apparel/image-05.webp", flow: "down", row: 1, column: 0, center: "lower" },
-  { src: "/images/work/auto-lending/image-06.webp", flow: "down", row: 1, column: 2 },
-  { src: "/images/work/private-equity/gallery-01-02.webp", flow: "down", row: 2, column: -2, leading: true },
-  { src: "/images/work/action-sports/gallery-01-03.webp", flow: "down", row: 2, column: 0, leading: true },
-  { src: "/images/work/fintech/image-07.webp", flow: "down", row: 2, column: 2, leading: true },
-  { src: "/images/work/streaming/gallery-01-02.webp", flow: "up", row: 0, column: -1, leading: true },
-  { src: "/images/work/apparel/gallery-02-03.webp", flow: "up", row: 0, column: 1, leading: true },
-  { src: "/images/work/retail/image-05.webp", flow: "up", row: 1, column: -1 },
-  { src: "/images/work/auto-lending/gallery-01-03.webp", flow: "up", row: 1, column: 1 },
-  { src: "/images/work/private-equity/hero.webp", flow: "up", row: 2, column: -1 },
-  { src: "/images/work/fintech/image-03.webp", flow: "up", row: 2, column: 1 },
-];
 ---
 
 <BaseLayout
@@ -67,46 +48,7 @@ const showcaseArt = [
     </div>
   </section>
 
-  <section class="services-showcase" data-services-showcase aria-labelledby="services-showcase-title">
-    <div class="services-showcase__sticky">
-      <div class="services-showcase__prompt" data-showcase-prompt>
-        <h2 class="services-showcase__title" id="services-showcase-title">Creative &amp; Marketing</h2>
-        <p class="services-showcase__lede">Combining expertise in marketing, design, technology, and optimization into one powerful package.</p>
-      </div>
-
-      <div class="services-showcase__art" aria-hidden="true">
-        <div class="services-showcase__grid" data-showcase-grid>
-          {showcaseArt.map((image, index) => (
-            <figure
-              class="services-showcase__tile"
-              data-showcase-tile
-              data-flow={image.flow}
-              data-row={image.row}
-              data-column={image.column}
-              data-leading={image.leading ? "true" : undefined}
-              data-center={image.center}
-            >
-              <img
-                src={sitePath(image.src)}
-                alt=""
-                width="800"
-                height="1024"
-                loading="eager"
-                decoding="async"
-                fetchpriority={index < 4 ? "high" : "auto"}
-                draggable="false"
-              />
-            </figure>
-          ))}
-        </div>
-      </div>
-
-      <p class="services-showcase__result" data-showcase-result>
-        Expertise<br />across<br />industries,<br />audiences,<br />and mediums.
-      </p>
-      <span class="services-showcase__cue" aria-hidden="true">↓</span>
-    </div>
-  </section>
+  <ServicesShowcase id="services-showcase" />
 
   <div class="services-list">
     {services.map((service) => (
@@ -129,144 +71,3 @@ const showcaseArt = [
 
   <Footer />
 </BaseLayout>
-
-<script>
-  const showcase = document.querySelector<HTMLElement>("[data-services-showcase]");
-
-  if (showcase) {
-    const prompt = showcase.querySelector<HTMLElement>("[data-showcase-prompt]");
-    const result = showcase.querySelector<HTMLElement>("[data-showcase-result]");
-    const cue = showcase.querySelector<HTMLElement>(".services-showcase__cue");
-    const grid = showcase.querySelector<HTMLElement>("[data-showcase-grid]");
-    const tiles = Array.from(showcase.querySelectorAll<HTMLElement>("[data-showcase-tile]"));
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let currentProgress = 0;
-    let targetProgress = 0;
-    let frame = 0;
-
-    const clamp = (value: number) => Math.min(1, Math.max(0, value));
-    const mix = (from: number, to: number, amount: number) => from + ((to - from) * amount);
-    const smooth = (value: number) => {
-      const amount = clamp(value);
-      return amount * amount * amount * ((amount * ((amount * 6) - 15)) + 10);
-    };
-
-    const phase = (progress: number, start: number, end: number) => (
-      smooth((progress - start) / (end - start))
-    );
-
-    const render = (progress: number) => {
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-      const mobile = viewportWidth < 700;
-      const tablet = viewportWidth < 1000;
-      const tileWidth = mobile
-        ? Math.min(104, Math.max(86, viewportWidth * 0.235))
-        : tablet
-          ? Math.min(190, Math.max(148, viewportWidth * 0.18))
-          : Math.min(282, Math.max(232, viewportWidth * 0.16));
-      const tileHeight = tileWidth * 1.28;
-      const columnStep = tileWidth * (mobile ? 1.18 : 1.2);
-      const initialRowStep = tileHeight * (mobile ? 2.05 : tablet ? 2.16 : 2.28);
-      const settledRowStep = tileHeight * (mobile ? 1.2 : 1.18);
-      const baseScale = mobile ? 0.98 : 0.94;
-      const offscreenCenter = (viewportHeight / (2 * baseScale)) + tileHeight;
-      const entryTravel = offscreenCenter + (initialRowStep * 1.5);
-      const entry = phase(progress, 0.07, 0.55);
-      const compression = phase(progress, 0.2, 0.66);
-      const leadingExit = phase(progress, 0.34, 0.58);
-      const zoom = phase(progress, 0.28, 0.88);
-      const split = phase(progress, 0.68, 0.95);
-      const finalScale = mobile ? 2.06 : tablet ? 1.64 : 1.48;
-      const gridScale = mix(baseScale, finalScale, zoom);
-      const rowStep = mix(initialRowStep, settledRowStep, compression);
-      const leadingExtra = Math.max(0, offscreenCenter - (settledRowStep * 1.5));
-      const splitDistance = tileHeight * (mobile ? 0.72 : 0.64);
-
-      if (grid) {
-        grid.style.setProperty("--tile-width", `${tileWidth}px`);
-        grid.style.setProperty("--tile-height", `${tileHeight}px`);
-        grid.style.setProperty("--grid-scale", String(gridScale));
-      }
-
-      if (prompt) {
-        const promptProgress = phase(progress, 0.05, 0.2);
-        prompt.style.opacity = String(1 - promptProgress);
-        prompt.style.transform = `translateY(${-28 * promptProgress}px)`;
-      }
-
-      if (cue) cue.style.opacity = String(0.55 * (1 - phase(progress, 0.01, 0.11)));
-
-      tiles.forEach((tile) => {
-        const flow = tile.dataset.flow === "up" ? "up" : "down";
-        const row = Number(tile.dataset.row ?? 0);
-        const column = Number(tile.dataset.column ?? 0);
-        const finalRow = flow === "down" ? row - 0.5 : row - 1.5;
-        const entryOffset = flow === "down" ? -entryTravel : entryTravel;
-        let tileY = (finalRow * rowStep) + (entryOffset * (1 - entry));
-
-        if (tile.dataset.leading === "true") {
-          tileY += (flow === "down" ? leadingExtra : -leadingExtra) * leadingExit;
-        }
-
-        if (tile.dataset.center === "upper") tileY -= splitDistance * split;
-        if (tile.dataset.center === "lower") tileY += splitDistance * split;
-
-        tile.style.setProperty("--tile-x", `${column * columnStep}px`);
-        tile.style.setProperty("--tile-y", `${tileY}px`);
-        tile.style.setProperty("--tile-opacity", "1");
-      });
-
-      if (result) {
-        const resultProgress = phase(progress, 0.85, 0.97);
-        result.style.opacity = String(resultProgress);
-        result.style.setProperty("--result-y", `${20 * (1 - resultProgress)}px`);
-      }
-    };
-
-    const readProgress = () => {
-      const distance = Math.max(showcase.offsetHeight - window.innerHeight, 1);
-      return clamp(-showcase.getBoundingClientRect().top / distance);
-    };
-
-    let lastFrameTime = performance.now();
-
-    const animate = (time: number) => {
-      const difference = targetProgress - currentProgress;
-      const delta = Math.min(Math.max((time - lastFrameTime) / 1000, 1 / 120), 0.05);
-      const damping = 1 - Math.exp(-delta * 6.5);
-      lastFrameTime = time;
-      currentProgress = Math.abs(difference) < 0.0005
-        ? targetProgress
-        : currentProgress + (difference * damping);
-      render(currentProgress);
-
-      if (currentProgress !== targetProgress) {
-        frame = window.requestAnimationFrame(animate);
-      } else {
-        frame = 0;
-      }
-    };
-
-    const requestRender = () => {
-      targetProgress = reduceMotion.matches ? 1 : readProgress();
-      if (!frame) {
-        lastFrameTime = performance.now();
-        frame = window.requestAnimationFrame(animate);
-      }
-    };
-
-    const handleResize = () => {
-      targetProgress = reduceMotion.matches ? 1 : readProgress();
-      currentProgress = targetProgress;
-      render(currentProgress);
-    };
-
-    targetProgress = reduceMotion.matches ? 1 : readProgress();
-    currentProgress = targetProgress;
-    render(currentProgress);
-    window.addEventListener("scroll", requestRender, { passive: true });
-    window.addEventListener("resize", handleResize);
-    reduceMotion.addEventListener("change", handleResize);
-  }
-</script>
