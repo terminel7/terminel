@@ -43,7 +43,7 @@ const heroColumns = [
 const heroWordGroups = [
   ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
   ["transformation.", "attention.", "relevance.", "momentum.", "lasting impact.", "identity.", "experience.", "growth.", "action."],
-  ["clarity.", "attention.", "relevance.", "momentum.", "lasting impact.", "identity.", "experience.", "growth.", "action."],
+  ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
 ];
 
 const capabilities = [
@@ -150,7 +150,7 @@ const capabilities = [
                       "built-h1": true,
                       "list-item": !(groupIndex === 0 && wordIndex === 4),
                       h1: groupIndex === 0 && wordIndex === 4,
-                      this: (groupIndex === 0 || groupIndex === 2) && wordIndex === 4,
+                      this: (groupIndex === 0 || groupIndex === 1) && wordIndex === 4,
                     }}
                   >
                     {word}
@@ -351,8 +351,8 @@ const capabilities = [
     intro.fromTo(listItems, {
       yPercent: 900,
     }, {
-      yPercent: -900,
-      duration: 8.16,
+      yPercent: 0,
+      duration: 4.08,
       stagger: { each: 0.03 },
       ease: "power4.inOut",
     }, 2.76);
