@@ -40,7 +40,11 @@ const heroColumns = [
   ],
 ];
 
-const heroWords = ["clarity.", "attention.", "connection.", "momentum.", "impact."];
+const heroWordGroups = [
+  ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
+  ["transformation.", "attention.", "relevance.", "momentum.", "lasting impact.", "identity.", "experience.", "growth.", "action."],
+  ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
+];
 
 const capabilities = [
   {
@@ -97,61 +101,80 @@ const capabilities = [
     </div>
   </header>
 
-  <section class="concept-hero" id="top" aria-labelledby="concept-hero-title" data-concept-hero>
-    <div class="concept-hero__collage" aria-hidden="true">
-      <div class="concept-hero__collage-track">
-        {heroColumns.map((column, columnIndex) => (
-          <div
-            class="concept-hero__column"
-            style={`--column-index: ${columnIndex}; --column-offset: ${columnIndex % 2}`}
-          >
-            {column.map((image, imageIndex) => (
-              <figure class="concept-hero__tile">
-                <img
-                  src={sitePath(image)}
-                  alt=""
-                  width="900"
-                  height="600"
-                  loading={imageIndex === 1 ? "eager" : "lazy"}
-                  decoding="async"
-                />
-              </figure>
+  <section
+    class="concept-hero built-header-section"
+    id="top"
+    aria-labelledby="concept-hero-title"
+    data-concept-hero
+    data-built-hero
+  >
+    <div class="built-hero-speaker-container" aria-hidden="true">
+      <div class="built-hero-speaker-block">
+        {heroColumns.map((column) => (
+          <div class="built-hero-speaker-column">
+            {column.map((image) => (
+              <img
+                class="built-hero-speaker"
+                src={sitePath(image)}
+                alt=""
+                width="211"
+                height="362"
+                loading="eager"
+                decoding="async"
+              />
             ))}
           </div>
         ))}
       </div>
     </div>
-    <div class="concept-hero__veil" aria-hidden="true"></div>
 
-    <div class="container concept-hero__content">
-      <p class="eyebrow concept-hero__eyebrow">Creative Direction / Design / Development</p>
-
+    <div class="built-header-list">
       <h1
         id="concept-hero-title"
-        aria-label="Built for clarity, attention, connection, momentum, and impact."
+        class="built-h1-lockup"
+        aria-label="Built for clarity, attention, relevance, momentum, identity, experience, growth, action, transformation, and lasting impact."
       >
-        <span aria-hidden="true">Built for</span>
-        <span class="concept-hero__word-window" aria-hidden="true">
-          <span class="concept-hero__words">
-            {heroWords.map((word, index) => (
-              <span class:list={{ "is-accent": index === heroWords.length - 1 }}>{word}</span>
-            ))}
-            <span>{heroWords[0]}</span>
-          </span>
-        </span>
+        <span class="built-h1 h1" aria-hidden="true">Built for</span>
+        <span class="built-h1 h1 this hidden" aria-hidden="true">this.</span>
       </h1>
 
-      <div class="concept-hero__note">
-        <p>Strategy, creative direction, design, and development brought together to make brands clearer, experiences sharper, and ideas perform.</p>
-        <a href="#work">
-          <span>Explore Selected Work</span>
-          <OutboundArrow />
-        </a>
+      <div class="built-hero-list" aria-hidden="true">
+        <span class="built-h1 hidden">Built for</span>
+        <div class="built-hero-list-wrap">
+          <div class="built-h1-list-items">
+            {heroWordGroups.map((group, groupIndex) => (
+              <div>
+                {group.map((word, wordIndex) => (
+                  <div
+                    class:list={{
+                      "built-h1": true,
+                      "list-item": !(groupIndex === 0 && wordIndex === 4),
+                      h1: groupIndex === 0 && wordIndex === 4,
+                      this: (groupIndex === 0 || groupIndex === 2) && wordIndex === 4,
+                    }}
+                  >
+                    {word}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <span class="built-h1 hidden">this.</span>
+        </div>
       </div>
+    </div>
 
-      <div class="concept-hero__scroll" aria-hidden="true">
-        <span></span>
-        <span>Scroll to explore</span>
+    <div class="built-header-content container">
+      <div class="built-header-txt-block">
+        <p>
+          Projects are rarely short on possibility. The real work is finding the clearest idea, then carrying it through strategy, creative direction, design, and development without losing the thread.
+          <br /><br />
+          <strong>Built to hold attention.<br />Built to create impact.</strong>
+        </p>
+        <div class="built-cta-block">
+          <a class="built-cta built-cta--primary" href="#work">Explore Selected Work</a>
+          <a class="built-cta built-cta--secondary" href="#capabilities">View Capabilities</a>
+        </div>
       </div>
     </div>
   </section>
@@ -278,8 +301,81 @@ const capabilities = [
 </BaseLayout>
 
 <script>
+  import { gsap } from "gsap";
+
   const conceptHeader = document.querySelector<HTMLElement>("[data-concept-header]");
   const conceptHero = document.querySelector<HTMLElement>("[data-concept-hero]");
+
+  if (conceptHero) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const initialLockup = conceptHero.querySelectorAll<HTMLElement>(".built-h1.h1");
+    const listItems = conceptHero.querySelectorAll<HTMLElement>(".built-h1.list-item");
+    const speakerImages = conceptHero.querySelectorAll<HTMLElement>(".built-hero-speaker");
+    const textBlock = conceptHero.querySelector<HTMLElement>(".built-header-txt-block");
+
+    const animatedElements = [
+      ...initialLockup,
+      ...listItems,
+      ...speakerImages,
+      ...(textBlock ? [textBlock] : []),
+    ];
+
+    gsap.set(animatedElements, { visibility: "visible" });
+
+    if (reducedMotion) {
+      gsap.set(conceptHero.querySelector(".built-hero-list"), { display: "none" });
+      gsap.set(animatedElements, { clearProps: "transform,opacity" });
+      gsap.set(conceptHero.querySelector(".built-h1.h1.this"), { opacity: 1 });
+    } else {
+      const intro = gsap.timeline();
+
+      intro.from(initialLockup, {
+        opacity: 0,
+        duration: 0.75,
+        stagger: { each: 0.05, ease: "power1.out", from: "start" },
+        ease: "power3.in",
+      }, 0);
+
+      intro.from(listItems, {
+        opacity: 0,
+        xPercent: 40,
+        duration: 1.32,
+        stagger: { each: 0.05, from: "start" },
+        ease: "expo.out",
+      }, 1.45);
+
+      intro.from(listItems, {
+        yPercent: 900,
+        duration: 2.82,
+      }, 0);
+
+      intro.fromTo(listItems, {
+        yPercent: 900,
+      }, {
+        yPercent: -900,
+        duration: 8.16,
+        stagger: { each: 0.03 },
+        ease: "power4.inOut",
+      }, 2.76);
+
+      intro.fromTo(textBlock, {
+        opacity: 0,
+      }, {
+        opacity: 1,
+        duration: 1.31,
+        ease: "power3.in",
+      }, 2.59);
+
+      intro.fromTo(speakerImages, {
+        opacity: 0,
+      }, {
+        opacity: 1,
+        duration: 2.93,
+        stagger: { each: 0.25 },
+        ease: "power3.in",
+      }, 0.52);
+    }
+  }
 
   const updatePageMotion = () => {
     const scrollTop = window.scrollY;
