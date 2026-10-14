@@ -29,7 +29,12 @@ html[data-theme="dark"] .home-two-concept-page {
   border-bottom: 1px solid transparent;
   background: transparent;
   color: var(--built-hero-text);
-  transition: color 260ms ease, background-color 260ms ease, border-color 260ms ease;
+  opacity: 1;
+  transition: color 260ms ease, background-color 260ms ease, border-color 260ms ease, opacity 280ms ease;
+}
+
+.concept-header[data-fonts-ready="false"] {
+  opacity: 0;
 }
 
 .concept-header[data-scrolled="true"] {
@@ -164,6 +169,8 @@ html[data-theme="dark"] .home-two-concept-page {
   overflow: hidden;
   pointer-events: none;
   font-size: 110px;
+  opacity: 1;
+  transition: opacity 280ms ease;
   -webkit-mask-image: linear-gradient(
     to bottom,
     transparent 0,
@@ -247,6 +254,13 @@ html[data-theme="dark"] .home-two-concept-page {
   height: 100%;
   margin-top: 0;
   font-size: 110px;
+  opacity: 1;
+  transition: opacity 280ms ease;
+}
+
+.concept-hero[data-fonts-ready="false"] .built-header-list,
+.concept-hero[data-fonts-ready="false"] .built-header-content {
+  opacity: 0;
 }
 
 .built-header-txt-block {
@@ -282,6 +296,7 @@ html[data-theme="dark"] .home-two-concept-page {
   min-height: 44px;
   padding: 10px 18px;
   border: 1px solid var(--built-hero-line);
+  border-radius: 999px;
   color: var(--built-hero-text);
   font-size: 13px;
   line-height: 1;
@@ -555,6 +570,10 @@ html[data-theme="dark"] .home-two-concept-page {
   color: var(--ink);
 }
 
+.home-two-concept-page button {
+  border-radius: 999px;
+}
+
 @media (max-width: 1180px) {
   .concept-section-intro h2 { font-size: 50px; }
   .concept-capabilities__intro h2 { font-size: 46px; }
@@ -719,6 +738,8 @@ html[data-theme="dark"] .home-two-concept-page {
 
 @media (prefers-reduced-motion: reduce) {
   .concept-header,
+  .built-header-list,
+  .built-header-content,
   .concept-header nav a::after,
   .built-hero-speaker-block,
   .built-h1,

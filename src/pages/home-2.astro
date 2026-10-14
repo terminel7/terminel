@@ -89,7 +89,7 @@ const capabilities = [
   description="Creative direction, design, strategy, and development across brands and digital experiences."
   hideGlobalNavigation
 >
-  <header class="concept-header" data-concept-header data-scrolled="false">
+  <header class="concept-header" data-concept-header data-fonts-ready="false" data-scrolled="false">
     <div class="container concept-header__inner">
       <a class="concept-header__wordmark" href="#top" aria-label="Angelo Terminel, back to top">Angelo Terminel</a>
       <nav aria-label="One-page navigation">
@@ -108,6 +108,7 @@ const capabilities = [
     aria-labelledby="concept-hero-title"
     data-concept-hero
     data-built-hero
+    data-fonts-ready="false"
   >
     <div class="built-hero-speaker-container" aria-hidden="true">
       <div class="built-hero-speaker-block">
@@ -135,12 +136,12 @@ const capabilities = [
         class="built-h1-lockup"
         aria-label="Fueling clarity, attention, relevance, momentum, identity, experience, growth, action, transformation, and lasting impact."
       >
-        <span class="built-h1 h1" aria-hidden="true">fueling</span>
+        <span class="built-h1 h1" aria-hidden="true">Fueling</span>
         <span class="built-h1 h1 this hidden" aria-hidden="true">this.</span>
       </h1>
 
       <div class="built-hero-list" aria-hidden="true">
-        <span class="built-h1 hidden">fueling</span>
+        <span class="built-h1 hidden">Fueling</span>
         <div class="built-hero-list-wrap">
           <div class="built-h1-list-items">
             {heroWordGroups.map((group, groupIndex) => (
@@ -303,7 +304,16 @@ const capabilities = [
   const conceptHeader = document.querySelector<HTMLElement>("[data-concept-header]");
   const conceptHero = document.querySelector<HTMLElement>("[data-concept-hero]");
 
-  if (conceptHero) {
+  const initializeHero = async () => {
+    if ("fonts" in document) {
+      await document.fonts.ready;
+    }
+
+    conceptHeader?.setAttribute("data-fonts-ready", "true");
+    conceptHero?.setAttribute("data-fonts-ready", "true");
+
+    if (!conceptHero) return;
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const initialLockup = conceptHero.querySelectorAll<HTMLElement>(".built-h1.h1");
     const listItems = conceptHero.querySelectorAll<HTMLElement>(".built-h1.list-item");
@@ -386,7 +396,9 @@ const capabilities = [
 
       intro.timeScale(1.35).play();
     }
-  }
+  };
+
+  void initializeHero();
 
   const updatePageMotion = () => {
     const scrollTop = window.scrollY;
