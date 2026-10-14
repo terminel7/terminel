@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactGradient from "../components/ContactGradient.astro";
+import BuiltHero from "../components/BuiltHero.astro";
 import Footer from "../components/Footer.astro";
 import ServicesShowcase from "../components/ServicesShowcase.astro";
+import "../styles/home-two-concept.css";
 
 const services = [
   {
@@ -34,19 +35,11 @@ const services = [
 ---
 
 <BaseLayout
-  bodyClass="gradient-header-page"
+  bodyClass="gradient-header-page home-two-concept-page capabilities-page"
   title="Capabilities | Angelo Terminel"
   description="Strategy, creative, branding, and development for brands and digital experiences."
 >
-  <section class="page-intro services-intro section">
-    <div class="services-intro__media" aria-hidden="true">
-      <ContactGradient variant="services" />
-    </div>
-    <div class="container editorial-intro">
-      <h1 class="eyebrow">Capabilities</h1>
-      <p>Brimming with creativity, strategy, and an unwavering commitment to making sure the work performs.</p>
-    </div>
-  </section>
+  <BuiltHero storageKey="terminel-capabilities-hero-intro-seen" />
 
   <ServicesShowcase id="services-showcase" />
 

@@ -22,73 +22,6 @@ html[data-theme="dark"] .home-two-concept-page {
   scroll-margin-top: 78px;
 }
 
-.concept-header {
-  position: fixed;
-  z-index: 50;
-  inset: 0 0 auto;
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  color: var(--built-hero-text);
-  opacity: 1;
-  transition: color 260ms ease, background-color 260ms ease, border-color 260ms ease, opacity 280ms ease;
-}
-
-.concept-header[data-fonts-ready="false"] {
-  opacity: 0;
-}
-
-.concept-header[data-scrolled="true"] {
-  border-bottom-color: var(--line);
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.concept-header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 78px;
-}
-
-.concept-header__wordmark {
-  font-size: 17px;
-  font-weight: 500;
-}
-
-.concept-header ul {
-  display: flex;
-  align-items: center;
-  gap: 34px;
-  list-style: none;
-}
-
-.concept-header a {
-  position: relative;
-  text-decoration: none;
-}
-
-.concept-header nav a {
-  padding-block: 10px;
-  font-size: 14px;
-}
-
-.concept-header nav a::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 4px;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 220ms ease;
-}
-
-.concept-header nav a:hover::after,
-.concept-header nav a[aria-current="location"]::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
 .concept-hero {
   position: static;
   height: 100svh;
@@ -656,10 +589,6 @@ html[data-theme="dark"] .home-two-concept-page {
   }
 
   .home-two-concept-page section[id] { scroll-margin-top: 66px; }
-  .concept-header__inner { min-height: 66px; }
-  .concept-header__wordmark { font-size: 14px; }
-  .concept-header ul { gap: 15px; }
-  .concept-header nav a { font-size: 12px; }
 
   .built-header-list {
     --startfade: 30vh;
@@ -729,18 +658,14 @@ html[data-theme="dark"] .home-two-concept-page {
 }
 
 @media (max-width: 390px) {
-  .concept-header ul { gap: 10px; }
-  .concept-header nav a { font-size: 11px; }
   .built-header-list { font-size: 46px; }
   .built-header-txt-block { font-size: 15px; }
   .built-cta { padding-inline: 14px; font-size: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .concept-header,
   .built-header-list,
   .built-header-content,
-  .concept-header nav a::after,
   .built-hero-speaker-block,
   .built-h1,
   .built-header-txt-block,

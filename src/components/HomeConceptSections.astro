@@ -1,0 +1,222 @@
+---
+import OutboundArrow from "./OutboundArrow.astro";
+import ServicesShowcase from "./ServicesShowcase.astro";
+import { capabilityFeatureArt } from "../lib/capability-art";
+import { projects } from "../lib/projects";
+import { sitePath } from "../lib/paths";
+
+const projectOrder = ["streaming", "fintech", "action-sports", "auto-lending", "retail", "apparel"];
+const featuredProjects = projects
+  .filter((project) => projectOrder.includes(project.slug))
+  .sort((a, b) => projectOrder.indexOf(a.slug) - projectOrder.indexOf(b.slug));
+
+const capabilities = [
+  {
+    number: "01",
+    name: "Strategy",
+    description: "Clarity before expression. Research, structure, and a focused point of view establish where the work should go and what it needs to accomplish.",
+    items: ["Information Architecture", "Competitive Analysis", "Audience Segmentation + User Flows", "Brand + Digital Strategy", "UI/UX Strategy", "Multivariate Testing"],
+    image: capabilityFeatureArt.strategy,
+    alt: "Abstract arrangement of glass, paper, and an orange line.",
+  },
+  {
+    number: "02",
+    name: "Creative",
+    description: "Ideas built to live in the real world. Direction and hands-on design connect every touchpoint, from an identity system to a campaign, product, or physical environment.",
+    items: ["Web + Product Design", "Art + Creative Direction", "UX/UI Design", "Event Support + Collateral", "Design Systems", "Presentations", "Motion Graphics + Animation", "3D"],
+    image: capabilityFeatureArt.creative,
+    alt: "Abstract red and blue textiles moving through frosted glass.",
+  },
+  {
+    number: "03",
+    name: "Branding",
+    description: "Distinct identities with enough structure to stay coherent as they grow. Positioning, visual language, and practical systems make a brand easier to recognize and easier to use.",
+    items: ["Logo + Identity", "Brand Standards + Evolutions", "Brand Audits", "Brand Positioning"],
+    image: capabilityFeatureArt.branding,
+    alt: "Abstract paper forms with a bold orange circle and black monolith.",
+  },
+  {
+    number: "04",
+    name: "Development",
+    description: "Digital experiences carried through to launch with thoughtful architecture, strong performance, and close attention to the original design intent.",
+    items: ["Headless CMS", "Webflow", "AI Workflow Implementation", "Marketing Automation Integration", "Analytics + Reporting", "Localization + Regionalization"],
+    image: capabilityFeatureArt.development,
+    alt: "Abstract system of smoked glass, dark metal, and orange light.",
+  },
+];
+---
+
+<section class="concept-work" id="work" aria-labelledby="concept-work-title">
+  <div class="container">
+    <header class="concept-section-intro">
+      <p class="eyebrow">Selected Work</p>
+      <div>
+        <h2 id="concept-work-title">A collection shaped across industries, audiences, and mediums.</h2>
+        <p>Brand systems, websites, campaigns, events, and products brought together by a clear idea and careful execution.</p>
+      </div>
+    </header>
+
+    <div class="concept-work__grid">
+      {featuredProjects.map((project, index) => (
+        <article class="concept-work-card" data-reveal>
+          <a href={sitePath(`/work/${project.slug}/`)}>
+            <figure class="concept-work-card__media">
+              <img
+                src={sitePath(project.thumbnail)}
+                alt=""
+                loading={index < 2 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </figure>
+            <div class="concept-work-card__content">
+              <span class="concept-work-card__number">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <p class="concept-work-card__industry">{project.name}</p>
+                <h3>{project.title}</h3>
+                <ul aria-label="Services">
+                  {project.services.map((service) => <li>{service}</li>)}
+                </ul>
+              </div>
+              <OutboundArrow className="concept-work-card__arrow" />
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<ServicesShowcase id="capabilities" />
+
+<section class="concept-capabilities" aria-labelledby="concept-capabilities-title">
+  <div class="container concept-capabilities__layout">
+    <header class="concept-capabilities__intro">
+      <p class="eyebrow">Capabilities</p>
+      <h2 id="concept-capabilities-title">A connected practice from first question to final expression.</h2>
+      <p>Disciplines overlap by design, creating continuity from the thinking behind the work to the details that make it perform.</p>
+    </header>
+
+    <div class="concept-capabilities__list">
+      {capabilities.map((capability) => (
+        <article class="concept-capability" data-reveal>
+          <div class="concept-capability__heading">
+            <span>{capability.number}</span>
+            <h3>{capability.name}</h3>
+          </div>
+          <figure class="concept-capability__media">
+            <img
+              src={sitePath(capability.image)}
+              alt={capability.alt}
+              width="1600"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div class="concept-capability__body">
+            <p>{capability.description}</p>
+            <ul>
+              {capability.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="concept-contact" id="contact" aria-labelledby="concept-contact-title">
+  <div class="container concept-contact__layout">
+    <header class="concept-contact__intro">
+      <p class="eyebrow">Contact</p>
+      <h2 id="concept-contact-title">Start with a conversation.</h2>
+      <p>Share what is taking shape, what needs to change, or where the next move still feels unclear.</p>
+    </header>
+
+    <form class="contact-form concept-contact__form" action="/api/contact" method="post" data-contact-form novalidate>
+      <div class="contact-form__row">
+        <div class="contact-form__field">
+          <label for="home-name">Name</label>
+          <input id="home-name" name="name" type="text" autocomplete="name" maxlength="100" required />
+        </div>
+        <div class="contact-form__field">
+          <label for="home-email">Email</label>
+          <input id="home-email" name="email" type="email" autocomplete="email" maxlength="254" required />
+        </div>
+      </div>
+      <div class="contact-form__field">
+        <label for="home-subject">Subject</label>
+        <input id="home-subject" name="subject" type="text" maxlength="160" required />
+      </div>
+      <div class="contact-form__field">
+        <label for="home-message">Message</label>
+        <textarea id="home-message" name="message" rows="6" maxlength="5000" required></textarea>
+      </div>
+      <div class="contact-form__trap" aria-hidden="true">
+        <label for="home-company">Company website</label>
+        <input id="home-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <div class="contact-form__footer">
+        <button type="submit" data-contact-submit>Send Message</button>
+        <p class="contact-form__status" role="status" aria-live="polite" data-contact-status></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-contact-form]");
+
+  forms.forEach((form) => {
+    const submit = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
+    const status = form.querySelector<HTMLElement>("[data-contact-status]");
+    let startedAt = Date.now();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!submit || !status) return;
+
+      submit.disabled = true;
+      submit.textContent = "Sending...";
+      form.setAttribute("aria-busy", "true");
+      status.dataset.state = "";
+      status.textContent = "";
+
+      const payload = {
+        ...Object.fromEntries(new FormData(form).entries()),
+        startedAt: String(startedAt),
+      };
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) throw new Error(result.message || "Unable to send your message.");
+
+        form.reset();
+        startedAt = Date.now();
+        status.dataset.state = "success";
+        status.textContent = result.message || "Thanks. Your message is on its way.";
+      } catch (error) {
+        status.dataset.state = "error";
+        status.textContent = error instanceof Error
+          ? error.message
+          : "Unable to send your message. Please try again.";
+      } finally {
+        submit.disabled = false;
+        submit.textContent = "Send Message";
+        form.removeAttribute("aria-busy");
+      }
+    });
+  });
+</script>

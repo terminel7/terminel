@@ -1,0 +1,217 @@
+---
+import { sitePath } from "../lib/paths";
+
+interface Props {
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  storageKey?: string;
+}
+
+const {
+  primaryHref = "/#work",
+  primaryLabel = "Explore Selected Work",
+  secondaryHref = "/contact/",
+  secondaryLabel = "Start a Conversation",
+  storageKey = "terminel-built-hero-intro-seen",
+} = Astro.props;
+
+const heroColumns = [
+  [
+    "/images/home-two-header-abstract/column-01-row-01.webp",
+    "/images/home-two-header-abstract/column-01-row-02.webp",
+    "/images/home-two-header-abstract/column-01-row-03.webp",
+  ],
+  [
+    "/images/home-two-header-abstract/column-02-row-01.webp",
+    "/images/home-two-header-abstract/column-02-row-02.webp",
+    "/images/home-two-header-abstract/column-02-row-03.webp",
+  ],
+  [
+    "/images/home-two-header-abstract/column-03-row-01.webp",
+    "/images/home-two-header-abstract/column-03-row-02.webp",
+    "/images/home-two-header-abstract/column-03-row-03.webp",
+  ],
+  [
+    "/images/home-two-header-abstract/column-04-row-01.webp",
+    "/images/home-two-header-abstract/column-04-row-02.webp",
+    "/images/home-two-header-abstract/column-04-row-03.webp",
+  ],
+  [
+    "/images/home-two-header-abstract/column-05-row-01.webp",
+    "/images/home-two-header-abstract/column-05-row-02.webp",
+    "/images/home-two-header-abstract/column-05-row-03.webp",
+  ],
+];
+
+const heroWordGroups = [
+  ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
+  ["transformation.", "attention.", "relevance.", "momentum.", "lasting impact.", "identity.", "experience.", "growth.", "action."],
+  ["clarity.", "attention.", "relevance.", "momentum.", "impact.", "identity.", "experience.", "growth.", "action."],
+];
+---
+
+<section
+  class="concept-hero built-header-section"
+  aria-labelledby="built-hero-title"
+  data-built-hero
+  data-fonts-ready="false"
+  data-storage-key={storageKey}
+>
+  <div class="built-hero-speaker-container" aria-hidden="true">
+    <div class="built-hero-speaker-block">
+      {heroColumns.map((column) => (
+        <div class="built-hero-speaker-column">
+          {column.map((image) => (
+            <img
+              class="built-hero-speaker"
+              src={sitePath(image)}
+              alt=""
+              width="211"
+              height="362"
+              loading="eager"
+              decoding="async"
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="built-header-list">
+    <h1
+      id="built-hero-title"
+      class="built-h1-lockup"
+      aria-label="Fueling clarity, attention, relevance, momentum, identity, experience, growth, action, transformation, and lasting impact."
+    >
+      <span class="built-h1 h1" aria-hidden="true">Fueling</span>
+      <span class="built-h1 h1 this hidden" aria-hidden="true">this.</span>
+    </h1>
+
+    <div class="built-hero-list" aria-hidden="true">
+      <span class="built-h1 hidden">Fueling</span>
+      <div class="built-hero-list-wrap">
+        <div class="built-h1-list-items">
+          {heroWordGroups.map((group, groupIndex) => (
+            <div>
+              {group.map((word, wordIndex) => (
+                <div
+                  class:list={{
+                    "built-h1": true,
+                    "list-item": !(groupIndex === 0 && wordIndex === 4),
+                    h1: groupIndex === 0 && wordIndex === 4,
+                    this: (groupIndex === 0 || groupIndex === 1) && wordIndex === 4,
+                  }}
+                >
+                  {word}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <span class="built-h1 hidden">this.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="built-header-content container">
+    <div class="built-header-txt-block">
+      <p>Exceptional taste, design principles, an understanding of human behavior, and the judgment to apply them across strategy, design, and development.</p>
+      <div class="built-cta-block">
+        <a class="built-cta built-cta--primary" href={sitePath(primaryHref)}>{primaryLabel}</a>
+        <a class="built-cta built-cta--secondary" href={sitePath(secondaryHref)}>{secondaryLabel}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  const builtHero = document.querySelector<HTMLElement>("[data-built-hero]");
+
+  const initializeBuiltHero = async () => {
+    if ("fonts" in document) await document.fonts.ready;
+
+    builtHero?.setAttribute("data-fonts-ready", "true");
+    if (!builtHero) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const initialLockup = builtHero.querySelectorAll<HTMLElement>(".built-h1.h1");
+    const listItems = builtHero.querySelectorAll<HTMLElement>(".built-h1.list-item");
+    const speakerImages = builtHero.querySelectorAll<HTMLElement>(".built-hero-speaker");
+    const textBlock = builtHero.querySelector<HTMLElement>(".built-header-txt-block");
+    const introStorageKey = builtHero.dataset.storageKey ?? "terminel-built-hero-intro-seen";
+    let hasSeenIntro = false;
+
+    try {
+      hasSeenIntro = window.localStorage.getItem(introStorageKey) === "true";
+    } catch {
+      hasSeenIntro = false;
+    }
+
+    const animatedElements = [
+      ...initialLockup,
+      ...listItems,
+      ...speakerImages,
+      ...(textBlock ? [textBlock] : []),
+    ];
+
+    gsap.set(animatedElements, { visibility: "visible" });
+
+    const intro = gsap.timeline({ paused: true });
+
+    intro.from(initialLockup, {
+      opacity: 0,
+      duration: 0.75,
+      stagger: { each: 0.05, ease: "power1.out", from: "start" },
+      ease: "power3.in",
+    }, 0);
+
+    intro.from(listItems, {
+      opacity: 0,
+      xPercent: 40,
+      duration: 1.32,
+      stagger: { each: 0.05, from: "start" },
+      ease: "expo.out",
+    }, 1.45);
+
+    intro.from(listItems, { yPercent: 900, duration: 2.82 }, 0);
+
+    intro.fromTo(listItems, { yPercent: 900 }, {
+      yPercent: 0,
+      duration: 4.08,
+      stagger: { each: 0.03 },
+      ease: "power4.inOut",
+    }, 2.76);
+
+    intro.fromTo(textBlock, { opacity: 0 }, {
+      opacity: 1,
+      duration: 1.31,
+      ease: "power3.in",
+    }, 2.59);
+
+    intro.fromTo(speakerImages, { opacity: 0 }, {
+      opacity: 1,
+      duration: 2.93,
+      stagger: { each: 0.25 },
+      ease: "power3.in",
+    }, 0.52);
+
+    if (reducedMotion || hasSeenIntro) {
+      intro.progress(1).pause();
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(introStorageKey, "true");
+    } catch {
+      // Storage can be unavailable in privacy-restricted contexts.
+    }
+
+    intro.timeScale(1.35).play();
+  };
+
+  void initializeBuiltHero();
+</script>
