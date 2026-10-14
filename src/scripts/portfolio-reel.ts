@@ -52,10 +52,13 @@ export function mountPortfolioReel(root: HTMLElement) {
     const currentIntroY = Number.parseFloat(
       getComputedStyle(root).getPropertyValue("--reel-intro-y"),
     ) || 0;
+    const initialEyebrowBottom = Number.parseFloat(
+      getComputedStyle(root).getPropertyValue("--reel-initial-eyebrow-bottom"),
+    ) || 30;
     const baseEyebrowBottom = eyebrow.getBoundingClientRect().bottom - currentIntroY;
     const introDistance = Math.max(
       0,
-      stage.getBoundingClientRect().bottom - 60 - baseEyebrowBottom,
+      stage.getBoundingClientRect().bottom - initialEyebrowBottom - baseEyebrowBottom,
     );
 
     root.style.setProperty("--reel-overlay-opacity", String(overlay));

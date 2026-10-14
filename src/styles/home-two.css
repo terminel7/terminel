@@ -1,6 +1,7 @@
 /* The production homepage hero uses a pinned frame and a short scroll-led reveal. */
 .home-two-page .site-header { position: absolute; top: 0; inset-inline: 0; background: transparent; color: #fff; text-shadow: 0 1px 18px rgb(0 0 0 / 32%); }
 .portfolio-reel {
+  --reel-initial-eyebrow-bottom: 30px;
   --reel-overlay-opacity: 0;
   --reel-intro-y: 150px;
   --reel-support-opacity: 0;
