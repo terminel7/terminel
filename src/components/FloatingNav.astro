@@ -1,16 +1,32 @@
 ---
 import { sitePath } from "../lib/paths";
 
+type NavLink = {
+  href: string;
+  label: string;
+};
+
+type Props = {
+  links?: NavLink[];
+  revealAfterScroll?: boolean;
+};
+
 const currentPath = Astro.url.pathname;
-const links = [
+const defaultLinks = [
   { href: "/#work", label: "Work" },
   { href: "/capabilities/", label: "Capabilities" },
   { href: "/contact/", label: "Contact" },
 ];
+const {
+  links = defaultLinks,
+  revealAfterScroll = false,
+} = Astro.props;
 
 const isCurrent = (href: string) => href === "/#work"
   ? currentPath === sitePath("/") || currentPath.includes(sitePath("/work/"))
   : currentPath.includes(sitePath(href));
+
+const linkHref = (href: string) => href.startsWith("#") ? href : sitePath(href);
 ---
 
 <div
@@ -18,6 +34,7 @@ const isCurrent = (href: string) => href === "/#work"
   data-floating-nav
   data-visible="false"
   data-open="false"
+  data-reveal-after-scroll={revealAfterScroll ? "true" : undefined}
 >
   <div class="floating-nav__surface">
     <button
@@ -46,8 +63,8 @@ const isCurrent = (href: string) => href === "/#work"
         {links.map((link) => (
           <li>
             <a
-              href={sitePath(link.href)}
-              aria-current={isCurrent(link.href) ? "page" : undefined}
+              href={linkHref(link.href)}
+              aria-current={!link.href.startsWith("#") && isCurrent(link.href) ? "page" : undefined}
             >
               {link.label}
             </a>
@@ -62,7 +79,7 @@ const isCurrent = (href: string) => href === "/#work"
   const floatingNav = document.querySelector<HTMLElement>("[data-floating-nav]");
   const siteHeader = document.querySelector<HTMLElement>(".site-header");
 
-  if (floatingNav && siteHeader) {
+  if (floatingNav) {
     const toggle = floatingNav.querySelector<HTMLButtonElement>("[data-floating-nav-toggle]");
     const panel = floatingNav.querySelector<HTMLElement>("[data-floating-nav-panel]");
     const links = Array.from(floatingNav.querySelectorAll<HTMLAnchorElement>("a"));
@@ -98,11 +115,19 @@ const isCurrent = (href: string) => href === "/#work"
       if (event.key === "Escape" && isOpen) setOpen(false, true);
     });
 
-    const headerObserver = new IntersectionObserver(
-      ([entry]) => setVisible(!entry.isIntersecting),
-      { threshold: 0 },
-    );
+    if (floatingNav.dataset.revealAfterScroll === "true") {
+      const revealOffset = 96;
+      const updateScrollVisibility = () => setVisible(window.scrollY > revealOffset);
 
-    headerObserver.observe(siteHeader);
+      updateScrollVisibility();
+      window.addEventListener("scroll", updateScrollVisibility, { passive: true });
+    } else if (siteHeader) {
+      const headerObserver = new IntersectionObserver(
+        ([entry]) => setVisible(!entry.isIntersecting),
+        { threshold: 0 },
+      );
+
+      headerObserver.observe(siteHeader);
+    }
   }
 </script>

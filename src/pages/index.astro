@@ -1,13 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
+import FloatingNav from "../components/FloatingNav.astro";
 import HomeConceptSections from "../components/HomeConceptSections.astro";
 import PortfolioReel from "../components/home-two/PortfolioReel.astro";
 import "../styles/home-two.css";
 import "../styles/home-two-concept.css";
 ---
 
-<BaseLayout bodyClass="home-two-page home-two-concept-page">
+<BaseLayout bodyClass="home-two-page home-two-concept-page" hideGlobalNavigation>
+  <FloatingNav
+    revealAfterScroll
+    links={[
+      { href: "#work", label: "Work" },
+      { href: "#capabilities", label: "Capabilities" },
+      { href: "#contact", label: "Contact" },
+    ]}
+  />
   <PortfolioReel />
   <HomeConceptSections />
   <Footer />
