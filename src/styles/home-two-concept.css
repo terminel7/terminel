@@ -361,7 +361,7 @@ html[data-theme="dark"] .home-two-concept-page {
 .concept-capabilities__intro h2 {
   max-width: 500px;
   font-family: var(--serif);
-  font-size: 58px;
+  font-size: 35px;
   font-weight: 400;
   line-height: 1.08;
 }
@@ -485,7 +485,6 @@ html[data-theme="dark"] .home-two-concept-page {
 }
 
 @media (max-width: 1180px) {
-  .concept-capabilities__intro h2 { font-size: 46px; }
   .concept-contact__intro h2 { font-size: 58px; }
 }
 
@@ -613,7 +612,6 @@ html[data-theme="dark"] .home-two-concept-page {
   .concept-capabilities { padding-block: 96px 110px; }
   .concept-capabilities__layout { gap: 70px; }
   .concept-capabilities .eyebrow { margin-bottom: 22px; }
-  .concept-capabilities__intro h2 { font-size: 39px; }
   .concept-capabilities__intro > p:last-child { margin-top: 22px; font-size: 15px; }
   .concept-capability { padding-block: 24px 64px; }
   .concept-capability__heading { margin-bottom: 22px; }
