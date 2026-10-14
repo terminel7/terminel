@@ -1,6 +1,11 @@
 ---
 import { sitePath } from "../lib/paths";
 
+type Props = {
+  hideNavigation?: boolean;
+};
+
+const { hideNavigation = false } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 const links = [
@@ -17,19 +22,21 @@ const isCurrent = (href: string) => href === "/#work"
 <header class="site-header" id="top">
   <div class="container site-header__inner">
     <a class="wordmark" href={sitePath("/")} aria-label="Angelo Terminel home">Angelo Terminel</a>
-    <nav aria-label="Primary navigation">
-      <ul class="site-nav">
-        {links.map((link) => (
-          <li>
-            <a
-              href={sitePath(link.href)}
-              aria-current={isCurrent(link.href) ? "page" : undefined}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    {!hideNavigation && (
+      <nav aria-label="Primary navigation">
+        <ul class="site-nav">
+          {links.map((link) => (
+            <li>
+              <a
+                href={sitePath(link.href)}
+                aria-current={isCurrent(link.href) ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
   </div>
 </header>

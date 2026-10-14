@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
 import FloatingNav from "../components/FloatingNav.astro";
+import Header from "../components/Header.astro";
 import HomeConceptSections from "../components/HomeConceptSections.astro";
 import PortfolioReel from "../components/home-two/PortfolioReel.astro";
 import "../styles/home-two.css";
@@ -9,6 +10,7 @@ import "../styles/home-two-concept.css";
 ---
 
 <BaseLayout bodyClass="home-two-page home-two-concept-page" hideGlobalNavigation>
+  <Header hideNavigation />
   <FloatingNav
     revealAfterScroll
     links={[
