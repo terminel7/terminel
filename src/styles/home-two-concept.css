@@ -386,13 +386,15 @@ html[data-theme="dark"] .home-two-concept-page {
 .concept-capability__heading {
   display: flex;
   gap: 18px;
-  align-items: baseline;
+  align-items: flex-start;
   margin-bottom: 30px;
 }
 
 .concept-capability__heading span {
+  padding-top: 0.4em;
   color: var(--accent);
   font-size: 12px;
+  line-height: 1;
 }
 
 .concept-capability h3 {
