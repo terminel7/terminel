@@ -391,7 +391,7 @@ html[data-theme="dark"] .home-two-concept-page {
 }
 
 .concept-capability__heading span {
-  padding-top: 0.4em;
+  padding-top: 1em;
   color: var(--accent);
   font-size: 12px;
   line-height: 1;
@@ -617,6 +617,7 @@ html[data-theme="dark"] .home-two-concept-page {
   .concept-capabilities__intro > p:last-child { margin-top: 22px; font-size: 15px; }
   .concept-capability { padding-block: 24px 64px; }
   .concept-capability__heading { margin-bottom: 22px; }
+  .concept-capability__heading span { padding-top: 0.8em; }
   .concept-capability h3 { font-size: 28px; }
   .concept-capability__media { margin-bottom: 24px; }
   .concept-capability__body { grid-template-columns: 1fr; gap: 26px; }
