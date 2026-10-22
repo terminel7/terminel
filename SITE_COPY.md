@@ -54,7 +54,7 @@ The project names and service labels shown in the homepage cards are listed unde
 ### Page introduction
 
 - Capabilities
-- Brimming with creativity, strategy, and an unwavering commitment to making sure the work performs.
+- Brimming with creativity, technical expertise, and an unwavering commitment to strategy.
 
 ### Animated showcase
 
