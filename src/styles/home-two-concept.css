@@ -361,7 +361,7 @@ html[data-theme="dark"] .home-two-concept-page {
 .concept-capabilities__intro h2 {
   max-width: 500px;
   font-family: var(--serif);
-  font-size: 38px;
+  font-size: 50px;
   font-weight: 400;
   line-height: 1.08;
 }
@@ -398,7 +398,7 @@ html[data-theme="dark"] .home-two-concept-page {
 }
 
 .concept-capability h3 {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 400;
 }
 
@@ -614,11 +614,12 @@ html[data-theme="dark"] .home-two-concept-page {
   .concept-capabilities { padding-block: 96px 110px; }
   .concept-capabilities__layout { gap: 70px; }
   .concept-capabilities .eyebrow { margin-bottom: 22px; }
+  .concept-capabilities__intro h2 { font-size: 38px; }
   .concept-capabilities__intro > p:last-child { margin-top: 22px; font-size: 15px; }
   .concept-capability { padding-block: 24px 64px; }
   .concept-capability__heading { margin-bottom: 22px; }
   .concept-capability__heading span { padding-top: 0.8em; }
-  .concept-capability h3 { font-size: 28px; }
+  .concept-capability h3 { font-size: 32px; }
   .concept-capability__media { margin-bottom: 24px; }
   .concept-capability__body { grid-template-columns: 1fr; gap: 26px; }
   .concept-capability__body > p { font-size: 16px; }
