@@ -27,7 +27,6 @@ export const capabilityShowcaseArt: readonly CapabilityShowcaseArt[] = [
 
 export const capabilityFeatureArt = {
   strategy: "/images/capabilities-abstract/16-strategy-pathways.webp",
-  creative: "/images/capabilities-abstract/17-creative-folds.webp",
-  branding: "/images/capabilities-abstract/18-brand-symbols.webp",
+  creative: "/images/capabilities-abstract/18-brand-symbols.webp",
   development: "/images/capabilities-abstract/19-development-network.webp",
 } as const;

@@ -1,6 +1,6 @@
 # Capabilities abstract art
 
-These images supply the scrolling image sequence on `/` and `/capabilities/`, plus the four sticky capability images on `/`.
+These images supply the scrolling image sequence on `/` and `/capabilities/`, plus the three sticky capability images on `/`.
 
 Replace a file in place to update that image without changing code. Keep the filename and use a high-quality `.webp` image at least 1200px on its longest edge. Portrait images work best; the site crops them with `object-fit: cover`.
 
@@ -20,8 +20,8 @@ Replace a file in place to update that image without changing code. Keep the fil
 - `14-magnetic-field.webp` - Animation tile
 - `15-liquid-chrome.webp` - Animation tile
 - `16-strategy-pathways.webp` - Strategy feature image
-- `17-creative-folds.webp` - Creative feature image
-- `18-brand-symbols.webp` - Branding feature image
+- `17-creative-folds.webp` - Alternate Creative feature image
+- `18-brand-symbols.webp` - Creative feature image
 - `19-development-network.webp` - Development feature image
 
 Every visible slot uses a unique image. The exact animation order and feature mapping live in `src/lib/capability-art.ts`.
